@@ -11,7 +11,7 @@ email: skagedal@gmail.com
 description: > # this means to ignore newlines until "baseurl:"
   Thoughts on iOS development.
 baseurl: "" # the subpath of your site, e.g. /blog
-url: "http://skagedal.github.io" # the base hostname & protocol for your site
+url: "http://blog.skagedal.tech" # the base hostname & protocol for your site
 twitter_username: skagedal
 github_username:  skagedal
 
