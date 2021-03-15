@@ -45,7 +45,7 @@ JAVA_HOME=/Library/Java/JavaVirtualMachines/graalvm-ce-java11-21.0.0/Contents/Ho
 
 The program now runs fast! (0.04 s.) At least on a second start up.
 
-Now, even more sadly, compiling this simple "Hello, World" program takes a whopping 2 minutes 30 seconds. I am guessing this is because it also compiles all the dependencies, and was hoping that subsequent runs would be faster. They were, but only because the weren't doing anything. If I change something in the program, and ran `./gradlew nativeImage` again, the changes are not picked up. I had to do `./gradlew clean nativeImage`, which takes all that time to run again. 
+Bud, sadly (again), compiling this simple "Hello, World" program takes a whopping 2 minutes 30 seconds. I am guessing this is because it also compiles all the dependencies, and was hoping that subsequent runs would be faster. They were, but only because the weren't doing anything. If I change something in the program, and ran `./gradlew nativeImage` again, the changes are not picked up. I had to do `./gradlew clean nativeImage`, which takes all that time to run again. 
 
 I might play some more with all of this and see what I can find. Preliminary lessons learned however is that Java might not be the best environment to write neat command line apps with. 
 
