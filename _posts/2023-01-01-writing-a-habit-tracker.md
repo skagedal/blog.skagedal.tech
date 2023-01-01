@@ -7,30 +7,34 @@ It's a new year and, as such, the time to try to form new habits. The time to fa
 
 So – me and my wife agreed, inspired by my friend Linda, to set the goal of spending at least 30 minutes outside every day. This sounds, to me, like a very good habit to form. Fresh air and sunlight is really nice itself, but it could also be a way to sneak in some much-needed exercise. Staying physically active is something I absolutely know for sure makes me happier as a person, yet I struggle to maintain the habit. So let's try with this instead. 
 
-Then the question inevitably arises: which app should I use on my phone to track this habit? If you're not tracking your wellness efforts digitally, and share your progress with your social network, does it even happen?
+Then the question inevitably arises: which app should I use on my phone to track this habit? If you're not tracking your wellness efforts digitally, sharing your progress with your social network, are you even doing anything?
 
-I am really ambivalent when it comes to "quantified self" style self-tracking. There's a part in me that enjoys the idea of seeing measurable results. Then there's a part that really just wants to scale down on all reliance on digital tools. Throw away my smart phone and get a Nokia 3310. 
+Honestly, I am a biy ambivalent when it comes to this "quantified self" style self-tracking. There's a part in me that enjoys the idea of seeing measurable results. Then there's a part that really just wants to scale down on all reliance on digital tools. Throw away my smart phone and get a Nokia 3310. 
 
-But then there's the side of me who really enjoys programming, and starting up small projects every now and then. And this kind of small "productivity" tools are perfect to get an excuse to toy around with some technology, and get the feeling that you're "doing something". 
+But then there's the side of me who really enjoys programming, and starting up small projects every now and then. And this kind of small "productivity" tools are perfect as an excuse to toy around with some technology, and get the feeling that you're "doing something". 
 
-So, here we go. I want to do this by writing a backend service in Java with Spring Boot using PostgreSQL, because that's some stuff I want to toy around with more. And I'm going to sort of start backwards – with the deployment. Because it ain't no fun if you can't start using your stuff from almost day one. 
+So, here we go. I want to do start this off by writing a backend service in Java with Spring Boot using PostgreSQL, because that's some stuff I want to toy around with more. And I'm going to sort of start backwards – with the deployment.   
 
-I'm gonna set it up on my Digital Ocean machine that also serves this blog. Let's install PostgreSQL.
+I'm gonna set things up on my Digital Ocean Ubuntu machine that also serves this blog. Let's begin with installing PostgreSQL.
 
 ## Installing PostgreSQL
+
+The way to complete a task like "installing PostgreSQL on my Ubuntu machine" is to google for "PostgreSQL ubuntu" and finding a nice Digital Ocean guide [like this one](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart). I'll basically just be repeating the steps from that guide here, sorry if it's a bit boring, but it also serves as a bit of documentation / record-keeping for myself, if for some reason I'll have to redo this. (And no, I'm not going to automate this. Not now.) 
+
+So, here we go:
 
 ```shell
 $ sudo apt update
 $ sudo apt install postgresql postgresql-contrib
 ```
 
-And making sure the service is started using:
+And then I make sure the service is started using:
 
 ```shell
 $ sudo systemctl start postgresql.service
 ```
 
-I am following [this guide](https://www.digitalocean.com/community/tutorials/how-to-install-postgresql-on-ubuntu-20-04-quickstart), and also use the method described there to become the default `postgres` user and start a shell:
+I also use the method described in that guide to become the default `postgres` user and start a shell:
 
 ```shell
 $ sudo -i -u postgres
@@ -82,7 +86,7 @@ Oh, and we also needed to create a database for this user.
 $  sudo -u postgres createdb hahabit
 ```
 
-And now we can connect to our new database by just doing `sudo -u hahabit psql`. Very nice. And we could set up schemas and stuff. But I don't want to do it that way, I want to set up the schemas with Flyway migrations. Which I want to run from within the Java app. So let's set up Java.
+And now we can connect to our new database by just doing `sudo -u hahabit psql`. Very nice. And then we could set up our database schemas and stuff. But I don't want to do it that way, I want to set up the schemas with Flyway migrations. Which I want to run from within the Java app. So let's set up Java.
 
 ## Installing Java
 
