@@ -39,13 +39,14 @@ We should probably have at least three tables:
 
 I'm really making this up as I go. I've mostly used MySQL in the past couple of years, last time I used PostgreSQL was many years ago, when I wrote a little blogging software. (Many blogs ago.) So I'm a bit unsure about what the best types to use in PostgreSQL is, and what I should use as the primary key and so on. I should probably sit down and read [the manual](https://www.postgresql.org/docs/), but not right now. Let's ask [ChatGPT](https://chat.openai.com/chat) instead, that's more fun.
 
----
-### My prompt
+My prompt:
 > help me write a postgresql statement that creates a table for users.
-### ChatGPT's response
-To create a table in PostgreSQL, you can use the `CREATE TABLE` statement. Here is an example of how you might create a users table:
 
-```postgresql
+ChatGPT's response:
+
+> To create a table in PostgreSQL, you can use the `CREATE TABLE` statement. Here is an example of how you might create a users table:
+> 
+> ```sql
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR (50) NOT NULL,
@@ -54,20 +55,18 @@ CREATE TABLE users (
     created_on TIMESTAMP NOT NULL,
     last_login TIMESTAMP
 );
-
 ```
-This will create a table with the following columns:
-
-* `id`: This column is of type serial and is the primary key of the table. It will automatically increment for each new row that is inserted into the table.
-* `username`: This column is of type VARCHAR and can store a string with a maximum length of 50 characters. The NOT NULL constraint means that this column must have a value in every row of the table.
-* `password`: This column is also of type VARCHAR and has a maximum length of 50 characters. It also has a NOT NULL constraint.
-* `email`: This column is of type VARCHAR with a maximum length of 355 characters. It also has a UNIQUE constraint, which means that no two rows in the table can have the same value for this column. It also has a NOT NULL constraint.
-* `created_on`: This column is of type TIMESTAMP and stores a date and time. It has a NOT NULL constraint.
-* `last_login`: This column is also of type TIMESTAMP and stores a date and time. It does not have a NOT NULL constraint, so it is possible to have a NULL value in this column.
-
-I hope this helps! Let me know if you have any questions or need further clarification.
-
-----
+>
+> This will create a table with the following columns:
+> 
+> * `id`: This column is of type serial and is the primary key of the table. It will automatically increment for each new row that is inserted into the table.
+> * `username`: This column is of type VARCHAR and can store a string with a maximum length of 50 characters. The NOT NULL constraint means that this column must have a value in every row of the table.
+> * `password`: This column is also of type VARCHAR and has a maximum length of 50 characters. It also has a NOT NULL constraint.
+> * `email`: This column is of type VARCHAR with a maximum length of 355 characters. It also has a UNIQUE constraint, which means that no two rows in the table can have the same value for this column. It also has a NOT NULL constraint.
+> * `created_on`: This column is of type TIMESTAMP and stores a date and time. It has a NOT NULL constraint.
+> * `last_login`: This column is also of type TIMESTAMP and stores a date and time. It does not have a NOT NULL constraint, so it is possible to have a NULL value in this column.
+> 
+> I hope this helps! Let me know if you have any questions or need further clarification.
 
 Thank you, ChatGPT! That looks great. I think I'm going to simplify it perhaps a little bit and let `email` and `username` be the same field. And `created_on` should be called `created_at`, and I don't think we need `last_login`. 
 

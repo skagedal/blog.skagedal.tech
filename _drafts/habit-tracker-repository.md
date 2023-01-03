@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Writing a habit tracker, part 5: A repository
+title:  "Writing a habit tracker, part 5: A repository"
 ---
 
 Continuing on the habit tracker. Yesterday we set up a schema for users, and we asked ChatGPT on how to create that schema. That was fun. Let's continue on that path.
