@@ -9,7 +9,7 @@ So – me and my wife agreed, inspired by my friend Linda, to set the goal of sp
 
 Then the question inevitably arises: which app should I use on my phone to track this habit? If you're not tracking your wellness efforts digitally, sharing your progress with your social network, are you even doing anything?
 
-Honestly, I am a biy ambivalent when it comes to this "quantified self" style self-tracking. There's a part in me that enjoys the idea of seeing measurable results. Then there's a part that really just wants to scale down on all reliance on digital tools. Throw away my smart phone and get a Nokia 3310. 
+Honestly, I am a bit ambivalent when it comes to this "quantified self" style self-tracking. There's a part in me that enjoys the idea of seeing measurable results. Then there's a part that really just wants to scale down on all reliance on digital tools. Throw away my smart phone and get a Nokia 3310. 
 
 But then there's the side of me who really enjoys programming, and starting up small projects every now and then. And this kind of small "productivity" tools are perfect as an excuse to toy around with some technology, and get the feeling that you're "doing something". 
 
@@ -126,3 +126,5 @@ OpenJDK 64-Bit Server VM Temurin-19.0.1+10 (build 19.0.1+10, mixed mode, sharing
 Yes, it is working! Now, it's time to create a little Java app using Spring Boot. But that's for tomorrow.
 
 Oh, and yes, I did spend more than 30 minutes outside today, snowboarding the wonderful slopes of Hamra, Tänndalen. And I wrote a blog post! 
+
+_[Continue reading part two.](/2023/01/02/habit-tracker-part-two-spring-boot.html)_

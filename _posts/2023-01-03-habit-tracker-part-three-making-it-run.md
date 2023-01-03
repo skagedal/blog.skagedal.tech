@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 3: Setting up Testcontainers"
 ---
 
-Here is part three of my little series on writing a habit tracker in Java with Spring Boot. In the first part, I set up some infrastructure on my server, and in the second part I created a skeleton app in Spring Boot. 
+Here is part three of my little series on writing a habit tracker in Java with Spring Boot. In the [first part](/2023/01/01/writing-a-habit-tracker.html), I set up some infrastructure on my server, and in the [second part](/2023/01/02/habit-tracker-part-two-spring-boot.html) I created a skeleton app in Spring Boot. 
 
 Now I'd like to just make this skeleton app work! Success criteria is to successfully do nothing.  
 
@@ -108,9 +108,9 @@ Here I make use of the fact that the `DynamicPropertyRegistry::add` method takes
 Yes! It works! The `contextLoads` test is now green, and we can see stuff like this in logs:
 
 ```
-2023-01-02T22:33:35.634+01:00  INFO 53766 --- [           main] o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:49171/hahabit (PostgreSQL 12.12)
-2023-01-02T22:33:35.672+01:00  INFO 53766 --- [           main] o.f.core.internal.command.DbValidate     : Successfully validated 0 migrations (execution time 00:00.016s)
-2023-01-02T22:33:35.672+01:00  WARN 53766 --- [           main] o.f.core.internal.command.DbValidate     : No migrations found. Are your locations set up correctly?
+INFO o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:49171/hahabit (PostgreSQL 12.12)
+INFO o.f.core.internal.command.DbValidate     : Successfully validated 0 migrations (execution time 00:00.016s)
+WARN o.f.core.internal.command.DbValidate     : No migrations found. Are your locations set up correctly?
 
 ```
 

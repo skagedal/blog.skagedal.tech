@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 2: A skeleton Spring Boot app"
 ---
 
-Welcome to part 2 of my blog series, "writing a habit tracker"! 
+Welcome to part two of my blog series on writing a habit tracker! In [part one](/2023/01/01/writing-a-habit-tracker.html), I described the project and set up some tools on my server where I eventually hope to deploy this. Today I'll create a skeleton Spring Boot app.  
 
 ## Creating a Spring Boot app
 
@@ -26,3 +26,5 @@ Then it's the dependencies section. I'm going with the following as a start:
 Great, now we just press "Generate" and have ourselves a little skeleton app! But does it run...?
 
 That'll be the cliffhanger for today's post – today I'm going to sit all day in a car, driving home from the ski resort. But I expect to pause somewhere to charge the car, and then I hope to get my 30 minutes of outdoors.  
+
+_[Continue reading part three.](/2023/01/03/habit-tracker-part-three-making-it-run.html)_
