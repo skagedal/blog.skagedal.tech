@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Writing a habit tracker, part 4: Adding some schema"
+title:  "Writing a habit tracker, part 4: Functionality and schema"
 ---
 
-Part 3 of my habit tracker series ended with successfully getting these log messages from running the service in the test suite:
+[Part 3](/2023/01/03/habit-tracker-part-three-making-it-run.html) of my habit tracker series ended with successfully getting these log messages from running the service in the test suite:
 
 ```
 INFO o.f.c.i.database.base.BaseDatabaseType   : Database: jdbc:postgresql://localhost:49171/hahabit (PostgreSQL 12.12)
