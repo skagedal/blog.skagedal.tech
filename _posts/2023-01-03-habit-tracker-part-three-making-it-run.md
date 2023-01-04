@@ -115,3 +115,5 @@ WARN o.f.core.internal.command.DbValidate     : No migrations found. Are your lo
 ```
 
 Nice. 
+
+_[Continue reading part four.](/2023/01/04/habit-tracker-functionality-and-first-migration.html)_
