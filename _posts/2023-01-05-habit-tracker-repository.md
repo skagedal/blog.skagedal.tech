@@ -208,4 +208,6 @@ Now, we can just need to kill the running container to quickly reset the databas
 6b9c23a760c5
 ```
 
-Now I can run the test! And again! And again! 
+Now I can run the test! And again! And again!
+
+_[Continue reading part six.](/2023/01/06/habit-tracker-records-and-other-improvements.html)_

@@ -87,3 +87,5 @@ INFO o.f.core.internal.command.DbMigrate      : Successfully applied 1 migration
 ```
 
 Cool! Let's try to write a Spring Data repository next.  
+
+_[Continue reading part five.](/2023/01/05/habit-tracker-repository.html)_
