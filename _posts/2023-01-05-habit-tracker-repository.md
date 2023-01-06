@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 5: A repository"
 ---
 
-Continuing on the habit tracker. Yesterday we set up a schema for users, and we asked ChatGPT on how to create that schema. That was fun. Let's continue on that path.
+Continuing on the habit tracker. [Yesterday](/2023/01/04/habit-tracker-functionality-and-first-migration.html) we set up a schema for users, and we asked ChatGPT on how to create that schema. That was fun. Let's continue on that path.
 
 So, in the same conversation as where I asked it to create the schema for me, I asked:
 
@@ -11,16 +11,16 @@ So, in the same conversation as where I asked it to create the schema for me, I 
 
 ChatGPT answered:
 
-----
-To use a Spring Data JDBC repository to read data from a users table in a PostgreSQL database, you will need to create a few different components:
-
-A model class to represent the data in each row of the users table. This class should have fields for each column in the table, and should also have appropriate getters and setters for these fields.
-
-A Spring Data JDBC repository interface to define the database queries you want to use. You can use this interface to define methods like findAll(), findById(), and save() to read and write data from the users table.
-
-A configuration class to enable the Spring Data JDBC repository. This class should use the @EnableJdbcRepositories annotation and specify the package containing your repository interface.
-
-Here's an example of what these components might look like:
+> To use a Spring Data JDBC repository to read data from a users table in a PostgreSQL database, you will need to create a few different components:
+>
+> A model class to represent the data in each row of the users table. This class should have fields for each column in the table, and should also have appropriate getters and setters for these fields.
+>
+> A Spring Data JDBC repository interface to define the database queries you want to use. You can use this interface to define methods like findAll(), findById(), and save() to read and write data from the users table.
+>
+> A configuration class to enable the Spring Data JDBC repository. This class should use the @EnableJdbcRepositories annotation and specify the package containing your repository interface.
+>
+> Here's an example of what these components might look like:
+>
 
 ```java
 // Model class for a user
@@ -46,12 +46,10 @@ public interface UserRepository extends CrudRepository<User, Long> {
 public class RepositoryConfig {
   // Additional configuration goes here
 }
-
 ```
 
-Once you have these components in place, you can use the UserRepository interface in your application code to read and write data from the users table.
+> Once you have these components in place, you can use the UserRepository interface in your application code to read and write data from the users table.
 
-----
 Again, thank you ChatGPT! Do I really need that extra bit of configuration though? I'm gonna try just adding the repository.
 
 I'd really like the `User` class to be a `record` – the new thing from Java 14, an immutable data type with accessors and default implementation of things like `hashCode` and `equals`. But I doubt Spring Data supports that. Let's try it later perhaps. For now, I'll go with a simple `User` class, that with the modifications I did to the GPT-suggested schema looks like this:
@@ -88,7 +86,7 @@ class HahabitApplicationTests {
 }
 ```
 
-(Ugh, I sort of already regret decision to go with email-as-username. It feels ugly. But not gonna change it right now.)
+(Ugh, I sort of already regret decision to go with email-as-username. It feels ugly somehow. But not gonna change it right now.)
 
 It fails with an error:
 
@@ -201,7 +199,7 @@ class HahabitApplicationTests {
 }
 ```
 
-Now, we just need to kill the running container. Going to our trusty shell:
+Now, we can just need to kill the running container to quickly reset the database state. Going to our trusty shell:
 
 ```shell
 > docker ps | grep postgres
