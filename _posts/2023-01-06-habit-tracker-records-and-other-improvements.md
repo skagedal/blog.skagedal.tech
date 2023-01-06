@@ -97,4 +97,5 @@ public interface HabitRepository extends CrudRepository<Habit, Long> {
 ```
 
 I also changed my `users` schema similarly. Normally, this would of course have to be done by adding a new migration that somehow changes the schema, but we haven't deployed anything yet so can just mess around freely.  
- 
+
+Let's continue tomorrow with the `completions` table.
