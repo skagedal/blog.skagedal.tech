@@ -22,4 +22,6 @@ You might think that it's duplication to have both `date` and `created_at`, but 
 
 I also debated a bit with myself whether I want to have that `UNIQUE` constraint. I do want to enforce that logic – these should be daily habit, and you should only be able to achieve each habit once every day. Either it's achieved or not. But we could have enforced that constraint in application logic instead. I guess there are pros and cons to both approaches. But for now, I'm going with this.
 
-So, I created an AchievementRepository as well, and I think this is going to be it for the store layer for now! 
+So, I created an AchievementRepository as well, and I think this is going to be it for the store layer for now!
+
+_[Continue reading part eight.](/2023/01/08/habit-tracker-serving-some-web.html)_
