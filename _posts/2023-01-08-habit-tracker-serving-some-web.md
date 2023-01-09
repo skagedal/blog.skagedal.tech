@@ -86,3 +86,5 @@ Then refresh the Gradle sync in my IDE (which happens to be IntelliJ IDEA) and r
 Yepsidoodle, now the `localhost.se:8080` page shows the unprotected "home" template, with a link to the likewise unprotected "hello" template. 
 
 In tomorrow's episode, I think we will... add Spring Security back again!  
+
+_[Continue reading part nine.](/2023/01/09/habit-tracker-securing-things.html)_
