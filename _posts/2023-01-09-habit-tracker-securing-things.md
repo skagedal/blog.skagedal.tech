@@ -182,4 +182,6 @@ Interestingly, I don't get a session ID cookie back now. If you look back to the
 Set-Cookie: JSESSIONID=A0A8B589732A7DDE0CBDBA58A6901218; Path=/; HttpOnly
 ```
 
-But not now, when authenticated. I wonder why. Oh well. 
+But not now, when authenticated. I wonder why. Oh well.
+
+_[Continue reading part ten.](/2023/01/10/habit-tracker-securing-things-2.html)_
