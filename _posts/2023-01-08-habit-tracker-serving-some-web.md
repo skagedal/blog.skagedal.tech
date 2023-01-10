@@ -52,7 +52,7 @@ services:
       - '5432:5432'
 ```
 
-The reason I'm using PostgreSQL version 12.12, by the way – both here and in the Testcontainers setup – is that that's the version that got installed by doing `apt install postgres` on my Ubuntu machine. Doing development against the same version seems generally a good diea. 
+The reason I'm using PostgreSQL version 12.12, by the way – both here and in the Testcontainers setup – is that that's the version that got installed by doing `apt install postgres` on my Ubuntu machine. Doing development against the same version seems generally a good idea. 
 
 And then I start it by just running:
 
