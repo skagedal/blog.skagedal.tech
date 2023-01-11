@@ -57,4 +57,6 @@ And ALSO, doesn't it suck to just have the username as primary key? So now, in m
 
 But despite all this, I think I'll go with the schema suggested by Spring Security, as modified by people on Stack Overflow. I'll probably change my mind later, maybe we'll do OAuth at some point, but for now [here](https://github.com/skagedal/hahabit/commit/4cf93f322a560b7cea88ebe37929108e6011fb29) is the commit that finishes off the Spring Security integration for now! I also added a migration to add a default `admin`, and it will be up to Future Me to change that password in production ones it goes out!
 
-Tomorrow, I think we'll look more at Spring MVC and Thymeleaf. 
+Tomorrow, I think we'll look more at Spring MVC and Thymeleaf.
+
+_[Continue reading part eleven.](/2023/01/11/habit-tracker-the-habits-page.html)_
