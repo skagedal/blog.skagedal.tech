@@ -73,7 +73,7 @@ Hmmm.
 
 Before we get to this problem that appears to happen when we use _decimal_ floating point math, we have to talk a bit about _binary_ floating point. Binary floating point is the kind that we generally use, with types that programming languages typically call _float_ and _double_. 
 
-These can be kind of difficult to really wrap your head around.  We can write things like `let foo: Double = 0.1` all day long, and the compiler will be happy, and the number will print as "0.1" – so it iss easy to forget that we can't actually represent that value as a binary floating point number. Just think about how the number 1/3 can't be represented in decimal notation – no finite sequence of 0.33333... will ever reach the value – and you can imagine how not all decimal quotients are representable in binary.  
+These can be kind of difficult to really wrap your head around.  We can write things like `let foo: Double = 0.1` all day long, and the compiler will be happy, and the number will print as "0.1" – so it is easy to forget that we can't actually represent that value as a binary floating point number. Just think about how the number 1/3 can't be represented in decimal notation – no finite sequence of 0.33333... will ever reach the value – and you can imagine how not all decimal quotients are representable in binary.  
 
 Now, the whole point of a type like `Decimal` is to overcome this problem. With a `Decimal`, you can precisely represent both 0.1 and 3.133.
 

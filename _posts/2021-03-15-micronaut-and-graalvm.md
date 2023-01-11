@@ -23,7 +23,7 @@ Creating my app with:
 mn create-cli-app --jdk=11 --build=gradle --inplace --lang=kotlin --test=junit another-micronaut-test
 ```
 
-Sadlly, the "Hello World" style app that's createdc with this still takes far too much time to execute to be usable for command line apps. Around 1.1 second on my machine. So, I went further down the rabbit hole and installed GraalVM.
+Sadlly, the "Hello World" style app that's created with this still takes far too much time to execute to be usable for command line apps. Around 1.1 second on my machine. So, I went further down the rabbit hole and installed GraalVM.
 
 ```shell
 brew install --cask graalvm/tap/graalvm-ce-java11
