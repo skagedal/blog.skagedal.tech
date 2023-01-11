@@ -61,4 +61,4 @@ I _like_ the idea of validating HTML, and Thymeleaf does provide us with an alte
 
 But anyway. The page still looks the same when we run the app. We haven't yet hooked up our actual model with the template. 
 
-But I will let that wait for tomorrow.
+But I will let that wait for tomorrow. This is too much to take in for one day. HTML stands for Hypertext Markup Language and was created by Tim Berners–Lee in 1989, and then all kinds of crazy things happened. Ok, bye.  
