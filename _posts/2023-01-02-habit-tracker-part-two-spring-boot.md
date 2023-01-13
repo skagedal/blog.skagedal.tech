@@ -11,7 +11,7 @@ Allright! So let's create a Spring Boot app for the backend of my habit tracker.
 I'm going to [Spring Initializr](https://start.spring.io/), and this is my basic setup: 
 
 * Gradle (Groovy) as the build system, since that's what I'm used to.
-* Java 19 as implementation language. (Some day I will write my thoughts about the relative merits of Java and Kotlin, but not today.)
+* Java 19 as implementation language. (Some day I will write my thoughts about the relative merits of Java and Kotlin, but not today[^1].)
 * Packaging it as a Jar because what is even a "War"?!
 
 Then it's the dependencies section. I'm going with the following as a start:
@@ -28,3 +28,6 @@ Great, now we just press "Generate" and have ourselves a little skeleton app! Bu
 That'll be the cliffhanger for today's post – today I'm going to sit all day in a car, driving home from the ski resort. But I expect to pause somewhere to charge the car, and then I hope to get my 30 minutes of outdoors.  
 
 _[Continue reading part three.](/2023/01/03/habit-tracker-part-three-making-it-run.html)_
+
+### Notes
+[^1]: I realized I did write something along the lines of what I had in mind here back in 2020, [read here](/2020/06/27/new-words.html)! 

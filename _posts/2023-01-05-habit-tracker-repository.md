@@ -52,7 +52,7 @@ public class RepositoryConfig {
 
 Again, thank you ChatGPT! Do I really need that extra bit of configuration though? I'm gonna try just adding the repository.
 
-I'd really like the `User` class to be a `record` – the new thing from Java 14, an immutable data type with accessors and default implementation of things like `hashCode` and `equals`. But I doubt Spring Data supports that. Let's try it later perhaps. For now, I'll go with a simple `User` class, that with the modifications I did to the GPT-suggested schema looks like this:
+I'd really like the `User` class to be a `record` – the new thing from Java 14, an immutable data type with accessors and default implementation of things like `hashCode` and `equals`. But I doubt Spring Data supports that[^1]. Let's try it later perhaps. For now, I'll go with a simple `User` class, that with the modifications I did to the GPT-suggested schema looks like this:
 
 ```java
 public class User {
@@ -211,3 +211,7 @@ Now, we can just need to kill the running container to quickly reset the databas
 Now I can run the test! And again! And again!
 
 _[Continue reading part six.](/2023/01/06/habit-tracker-records-and-other-improvements.html)_
+
+### Notes
+
+[^1]: I was wrong, it does! See [next post](/2023/01/06/habit-tracker-records-and-other-improvements.html). 
