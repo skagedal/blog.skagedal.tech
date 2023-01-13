@@ -37,5 +37,5 @@ The thing with this kind of system is that... now you gotta learn some new littl
 
 I always feel in those situations that, like, I already have a programming language, it's a pretty nice programming language, why can't I just use that? I know how `if` statements work and _lots_ of other cool things! We could of course totally put HTML together in code instead. That can get rather tedious as well, though, unless the programming language has a flexible syntax model. In Kotlin, for example, it's nice to create custom DSLs
 
-Maybe discuss: https://j2html.com/
+Maybe discuss: https://j2html.com/ (vs this: https://github.com/benjiman/java-html-dsl2 - interesting with the $ )
 https://github.com/kotlin/kotlinx.html
