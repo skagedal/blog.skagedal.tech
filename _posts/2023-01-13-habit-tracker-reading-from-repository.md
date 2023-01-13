@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 13: Reading habits from the repository"
 ---
 
-In the last post I wrote a `HabitsController` that put some static data in a model Map that gets inserted into our HTML page. Now I want to actually use the `HabitController` (whoa, inconsistent use of singular/plural in my class names here) that I created in [part six](/2023/01/06/habit-tracker-records-and-other-improvements.html).
+In the [last post](/2023/01/12/habit-tracker-making-habits-page-work.html) I wrote a `HabitsController` that put some static data in a model Map that gets inserted into our HTML page. Now I want to actually use the `HabitRepository` (whoa, inconsistent use of singular/plural in my class names here) that I created in [part six](/2023/01/06/habit-tracker-records-and-other-improvements.html).
 
 Easy, just inject it the controller. At the very core of Spring is a Dependency Injection framework, which can even be used as a standalone thing (I explored it briefly [here](https://blog.skagedal.tech/2021/03/15/micronaut-and-graalvm.html)).  The least-amount-of-typing way is by using the `@Autowired` annotation (as I did [earlier](https://blog.skagedal.tech/2023/01/05/habit-tracker-repository.html) in test suite):
 
@@ -36,7 +36,7 @@ public class HabitsController {
 }
 ```
 
-This gives us the compile-time guarantee that when we have a `HabitsController`, it always has a habit repository. (Well, it could still be `null` if that's what we gave the constructor – I want to discuss this in some later post on what we could do to guard against that – but it protects against some common error patterns.) And it doesn't change during the lifetime of the controller. I find that just generally preferring `final` and immutability-by-default makes code simpler to reason about and protects against some common bugs. 
+This gives us the compile-time guarantee that when we have a `HabitsController`, it always has a habit repository. (Well, it could still be `null` if that's what we gave the constructor – I want to discuss this in some later post on what we could do to guard against that – but it protects against some common mistakes.) And it doesn't change during the lifetime of the controller. I find that just generally preferring `final` and immutability-by-default makes code simpler to reason about and protects against some common bugs. 
 
 So that's what we do. And then we want to use our HabitRepository to list the habits of a specific user. Since the field in the `habits` table that connects it to a user is called `owned_by`, we just add this to the `HabitRepository` interface:
 
