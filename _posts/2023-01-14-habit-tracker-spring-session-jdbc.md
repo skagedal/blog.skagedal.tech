@@ -47,3 +47,5 @@ So, maybe in the future if my habit tracker gets, like, _hundreds_ of monthly ac
 ALTER TABLE SPRING_SESSION SET UNLOGGED;
 ALTER TABLE SPRING_SESSION_ATTRIBUTES SET UNLOGGED;
 ```
+
+Allright everyone, check back in for tomorrow's episode of Simon writes a Habit Tracker!

@@ -91,3 +91,5 @@ I now have an interface where I can list the habit I committed to – and have s
 </figure>
 
 NICE.
+
+_[Continue reading part fourteen.](/2023/01/14/habit-tracker-spring-session-jdbc.html)_
