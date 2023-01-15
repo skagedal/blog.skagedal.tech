@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 15: Adding a new habit"
 ---
 
-In part 13, we implemented the listing of our habits from the database. But we can't yet add any new habits. There's an "Add" button there, but it doesn't do anything. Let's make it do something. 
+In [part 13](/2023/01/13/habit-tracker-reading-from-repository.html), we implemented the listing of our habits from the database. But we can't yet add any new habits. There's an "Add" button there, but it doesn't do anything. Let's make it do something. 
 
 The common thing to do these days is to have a REST API that you post things to. That however requires Javascript on the web page, and I'm trying to not have that yet, for simplicity. Good old forms are still legal, let's use those! We already have, actually – the login form. We [removed](https://github.com/skagedal/hahabit/commit/e8960e3ba06fcff9c4ca46d564317a81538f4366) the custom one and replaced it with the default Spring Boot one, but we could take inspiration from it on how to build a Thymeleaf-enabled form. Let's do it like:
 
@@ -44,7 +44,7 @@ Cool, that works! I type "Very good habit" in the text field, press "Add", and m
 Add a habit: Habit[id=null, ownedBy=null, description=Very good habit, createdAt=null]
 ```
 
-There's a lot of `null` in there. I don't feel so good about that. I've already accepted that some of those (`id` and `createdAt`) will sometimes be `null` because of the way Spring Data works – to create a new `Habit`, we let those things be null, we save it and then it gets created in the database. (Interesting side note: when we use `repository.save(habit)`, we get a new object returned, and that will have the `id`, but not the `createdAt` filled in. How does it even get the id...? Must investigate some time.) But if I have a language where I could properly annotate things as nullable or not, then I would want as few things as possible to be nullable. 
+There's a lot of `null` in there. I don't feel so good about that. I've already accepted that some of those (`id` and `createdAt`) will sometimes be `null` because of the way Spring Data works – to create a new `Habit`, we let those things be null, we save it and then it gets created in the database[^1]. But if I have a language where I could properly annotate things as nullable or not, then I would want as few things as possible to be nullable. 
 
 Let's explore some alternatives. One thing I could think of is that there might be some annotation we could add somewhere so that the authenticated user name somehow gets injected in the `ownedBy` field. If anyone knows of a way, let me know. I could also just do this:
 
@@ -80,7 +80,7 @@ This also works, and then I can create my `Habit` model with the right user – 
 
 We can now type a habit name, press "Add", load the "habits" page again and boom, there it is! Yay! 
 
-Obviously, we want it to just show up. Can we perhaps just return a `ModelAndView`, just like with the `getHabits` handler?
+Obviously, we shouldn't have to reload anything – it should just show up. Can we perhaps just return a `ModelAndView`, just like with the `getHabits` handler?
 
 ```java
     @PostMapping("/habits")
@@ -112,3 +112,7 @@ There is a potential problem here I thought I should mention. So, first we save 
 There are various ways around this, one of which I guess would be to use something like Spring Data JPA instead, which if I understand the passage I quoted [in part six](/2023/01/06/habit-tracker-records-and-other-improvements.html) of this series handles this kind of stuff for us, at the cost of some more conceptual complexity.
 
 For now, I am very happy with just using my single PostgreSQL server for this "this could have been a text file" use case, and am going to leave it at that. 
+
+### Notes
+
+[^1]: As a side node – when we use `repository.save(habit)`, we get a new object returned, and that will have the `id`, but not the `createdAt` filled in. How does it even get the id...? I should investigate that at some point. 

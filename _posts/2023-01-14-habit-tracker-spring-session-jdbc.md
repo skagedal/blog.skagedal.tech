@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 14: Storing sessions"
 ---
 
-Readers who pay close attention will remember that in [part three](/2023/01/03/habit-tracker-part-three-making-it-run.html), I wrote:
+Before I continue on the habit management, I want to fix a little annoyance. Readers who pay close attention will remember that in [part three](/2023/01/03/habit-tracker-part-three-making-it-run.html), I wrote:
 
 > I’m going to start with getting the test suite work, because that’s where I want to work most of the time.
 
@@ -49,3 +49,5 @@ ALTER TABLE SPRING_SESSION_ATTRIBUTES SET UNLOGGED;
 ```
 
 Allright everyone, check back in for tomorrow's episode of Simon writes a Habit Tracker!
+
+_[Continue reading part fourteen.](/2023/01/15/habit-tracker-add-new-habit.html)_
