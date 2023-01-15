@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Writing a habit tracker, part 16: Achieving some habits"
+title:  "Writing a habit tracker, part 16: Listing your achievements"
 ---
 
-There are more things we could do regarding the management of our list habits, like deleting and editing them, and handling errors, but I'm eager to get going with the part where we actually _achieve_ (as we called it, if you remember) our daily habits!  
+There are more things we could do regarding the management of our list habits, like deleting and editing them, and handling errors, but I'm eager to soon get going with the part where we actually _achieve_ (as we called it, if you remember) our daily habits!  
 
-This is going to be the main "home" screen of app, as it is what you will do most often. It'll say the current date, to just kind of clarify what day we are "achieving", and list your habits and, if they have not been achieved, present a way to achieve them, and if not, show some kind of green checkmark or something. 
+This is going to be in the main "home" screen of app, as it is what you will do most often. It'll say the current date, to just kind of clarify what day we are "achieving", and list your habits and, if they have not been achieved, present a way to achieve them, and if not, show some kind of green checkmark or something. 
 
 So we need to figure out how to render HTML elements conditionally with Thymeleaf. Let's deal with that first, before we add any buttons or anything. [Baeldung tells us](https://www.baeldung.com/spring-thymeleaf-conditionals) that we can use the `th:if` and `th:unless` tags. So let's try this as the `home.html` template:
 
@@ -39,7 +39,7 @@ I always feel in those situations that, like, I already have a programming langu
 
 We could of course totally put HTML together in code instead. That can get rather tedious as well, though, but there are libraries that help. [j2html](https://j2html.com/) looks pretty nice. It has a functional interface, which is nice in some ways, but often I feel that a imperative, "DSL" syntax like the ones you can do in languages like Kotlin or Swift work better for building documents and UI:s. Although I got to say that [kotlinx.html](https://github.com/kotlin/kotlinx.html) looks kind of ugly. [This approach](https://github.com/benjiman/java-html-dsl2) in Java with lambdas everywhere is interesting, also I was not aware that you could use `$` as a variable name in Java! 
 
-Honestly though, the best approach for this of problem, combining readability, flexibility and (looking for a word - the state of something being igennkännbart?) is probably when you can truly mix the host programming language with the markup. PHP got this (and only this) right, and I find this aspect of [React](https://reactjs.org/) (with JSX) to work really well.
+Honestly though, the best approach for this of problem, combining readability, flexibility and recognizability is probably when you can truly mix the host programming language with the markup. PHP got this (and only this) right, and I find this aspect of [React](https://reactjs.org/) (with JSX) to work really well.
 
 But this is fine! This will be fine. Nothing wrong with learning a little language. I like languages. 
 
