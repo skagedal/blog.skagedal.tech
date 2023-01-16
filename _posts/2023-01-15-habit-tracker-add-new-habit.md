@@ -115,4 +115,6 @@ For now, I am very happy with just using my single PostgreSQL server for this "t
 
 ### Notes
 
-[^1]: As a side node – when we use `repository.save(habit)`, we get a new object returned, and that will have the `id`, but not the `createdAt` filled in. How does it even get the id...? I should investigate that at some point. 
+[^1]: As a side node – when we use `repository.save(habit)`, we get a new object returned, and that will have the `id`, but not the `createdAt` filled in. How does it even get the id...? I should investigate that at some point.
+
+_[Continue reading part sixteen.](/2023/01/16/habit-tracker-listing-your-achievements.html)_

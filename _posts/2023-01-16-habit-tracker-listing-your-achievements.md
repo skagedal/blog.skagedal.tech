@@ -3,9 +3,9 @@ layout: post
 title:  "Writing a habit tracker, part 16: Listing your achievements"
 ---
 
-There are more things we could do regarding the management of our list habits, like deleting and editing them, and handling errors, but I'm eager to soon get going with the part where we actually _achieve_ (as we called it, if you remember) our daily habits!  
+This is part sixteen of my Habit Tracker series, which started [here](/2023/01/01/writing-a-habit-tracker.html). I parts [eleven](/2023/01/11/habit-tracker-the-habits-page.html), [twelve](/2023/01/12/habit-tracker-making-habits-page-work.html), [thirteen](/2023/01/13/habit-tracker-reading-from-repository.html) and [fifteen](/2023/01/15/habit-tracker-add-new-habit.html) we worked on the page where we can list our habits and add new ones. There are more things we could do regarding this management, like deleting and editing habits, and handling errors, but I'm eager to soon get going with the part where we actually _achieve_ (as we called it, if you remember from [part seven](/2023/01/07/habit-tracker-achievements.html)) our daily habits!  
 
-This is going to be in the main "home" screen of app, as it is what you will do most often. It'll say the current date, to just kind of clarify what day we are "achieving", and list your habits and, if they have not been achieved, present a way to achieve them, and if not, show some kind of green checkmark or something. 
+This is going to be in the main "home" screen of app, as it is what you will do most often. It'll show the current date, to just kind of clarify what day we are "achieving". It will list your habits and, if they have been achieved for this day, display a green checkmark. If not, present a way to achieve them. 
 
 So we need to figure out how to render HTML elements conditionally with Thymeleaf. Let's deal with that first, before we add any buttons or anything. [Baeldung tells us](https://www.baeldung.com/spring-thymeleaf-conditionals) that we can use the `th:if` and `th:unless` tags. So let's try this as the `home.html` template:
 
@@ -33,7 +33,7 @@ So we need to figure out how to render HTML elements conditionally with Thymelea
 
 The achieved habits get a ✅, the unachieved get a 😐. 
 
-The thing with this kind of system is that... now you gotta learn some new little programming language. Or several. There's the "language" of which th-tags you can use and how, then there's the language of those expressions within `${ ... }`, which for the [Spring-dialect of Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.1/thymeleafspring.html) are "SpEL" (Spring Expression Language, we'll meet this one again) expressions, while for non-Spring-integrated Thymeleaf are [OGML](https://commons.apache.org/proper/commons-ognl/language-guide.html) expressions.  
+The thing with this kind of system is that... now you gotta learn some new little programming language. Or several. There's the "language" of which th-tags you can use and how, then there's the language of those expressions within `${ ... }`, which for the [Spring-dialect of Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.1/thymeleafspring.html) are "SpEL" (Spring Expression Language, we'll meet this one again) expressions, while for non-Spring-integrated Thymeleaf they are [OGML](https://commons.apache.org/proper/commons-ognl/language-guide.html) expressions.  
 
 I always feel in those situations that, like, I already have a programming language, it's a pretty nice programming language, why can't I just use that? I know how `if` statements work and _lots_ of other cool things! 
 
@@ -41,7 +41,7 @@ We could of course totally put HTML together in code instead. That can get rathe
 
 Honestly though, the best approach for this of problem, combining readability, flexibility and recognizability is probably when you can truly mix the host programming language with the markup. PHP got this (and only this) right, and I find this aspect of [React](https://reactjs.org/) (with JSX) to work really well.
 
-But this is fine! This will be fine. Nothing wrong with learning a little language. I like languages. 
+But, hey, this is fine! This will be fine. Nothing wrong with learning a new little language. I like languages. 
 
 So. Anyway. Let's now hook up some model data to this. Now we don't just want the `Habit`, we want the habit with achievement data for a specific date. Let's call that `HabitForDate` and model it like this:
 
@@ -81,6 +81,6 @@ public class HomeController {
 
 Yes – very nice, the "Eat breakfast" habit shows up as having been achieved, but I haven't showered yet. Nice.
 
-Also, I'm now removing the `MvcConfig` class where we did programmatic setup of some view controllers, as they all now have their own `@Controller`-annotated class. And as we now also the home view to be protected, we're mostly reverting back to the default Spring Security setup. Nice.
+Also, I'm now removing the `MvcConfig` class where we did programmatic setup of some view controllers, as they all now have their own `@Controller`-annotated class. And as we now also the home view to be protected, we're mostly reverting back to the default Spring Security setup. [Like this.](https://github.com/skagedal/hahabit/commit/1ff145cd4cea5804830a25270877d79d0460501e) Nice.
 
 Let's read from the repository tomorrow. 
