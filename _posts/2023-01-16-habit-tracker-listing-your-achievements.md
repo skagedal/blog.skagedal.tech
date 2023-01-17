@@ -83,4 +83,6 @@ Yes – very nice, the "Eat breakfast" habit shows up as having been achieved, b
 
 Also, I'm now removing the `MvcConfig` class where we did programmatic setup of some view controllers, as they all now have their own `@Controller`-annotated class. And as we now also the home view to be protected, we're mostly reverting back to the default Spring Security setup. [Like this.](https://github.com/skagedal/hahabit/commit/1ff145cd4cea5804830a25270877d79d0460501e) Nice.
 
-Let's read from the repository tomorrow. 
+Let's read from the repository tomorrow.
+
+_[Continue reading part seventeen.](/2023/01/17/habit-tracker-reading-habits-for-date.html)_

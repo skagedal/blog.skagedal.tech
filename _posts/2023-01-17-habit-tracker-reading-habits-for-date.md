@@ -3,6 +3,8 @@ layout: post
 title:  "Writing a habit tracker, part 17: Reading achievement data"
 ---
 
+Let's continue the work from [part sixteen](/2023/01/16/habit-tracker-listing-your-achievements.html) of the habit tracker series – listing our daily achievements.
+
 For each habit, on a certain date, we want to find the achievements for it. Since we can't add achievements yet, let's prepare some test data by going into the database and executing:
 
 ```sql
@@ -99,7 +101,7 @@ FROM habits habit
 WHERE habit.owned_by = 'the-user';
 ```
 
-Is this better? It seems that it's still, conceptually, N+1 selects – but there's only one round trip to the database, so in that sense it's better, and as we give it as a single job to the database it also at least has a chance ot somehow optimize it. So, uhm, probably. 
+Is this better? It seems that it's still, conceptually, N+1 selects – but there's only one round trip to the database, so in that sense it's better, and as we give it as a single job to the database it also at least has a chance to somehow optimize it. So, uhm, probably. 
 
 Either way, I'm curious about how to make Spring Data JDBC execute this query. I'm getting it to work by putting this in `HabitRepository`:
 
@@ -122,8 +124,10 @@ public interface HabitRepository extends CrudRepository<Habit, Long> {
 }
 ```
 
-We have to help out a little bit by telling it what parameters in the query should be replaced by with arguments to the methods, using the `@Param` annotations. Apparently, according to error log message that shows when you don't include those, you can also "use the javac flag -parameters", but that feels unneccessary; I'd rather keep it simple. 
+We have to help out a little bit by telling it what parameters in the query should be replaced by with arguments to the methods, using the `@Param` annotations. Apparently, according to error log message that shows when you don't include those, you can also "use the javac flag -parameters", but messing with compile flags feels unneccessary; I'd rather keep it simple. 
 
 So, here we go again with another language-in-the-language, in this case SQL. No one is escaping SQL, so that's fine – at least we have multiline strings in Java now. Similarly to our discussion before, we could consider options for building SQL queries with type-safe, compile checked Java code – I'm curious to play with [jOOQ](https://www.jooq.org/) at some point. But not today. 
+
+At least Java's got multiline strings now! Cause for celebration!
 
 I'll just go with this for now, although it feels like I'm not really doing things how they're meant to be done (for one thing, it's a bit odd that this method is placed in the `HabitRepository` when it has nothing to do with the generic types used in this repository). But whatever, it works. 
