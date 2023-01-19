@@ -40,7 +40,7 @@ testClasses - Assembles test classes.
 <more output...>
 ```
 
-The `bootJar` task looks like our friend. (I do not know what an OCI image is.) So, let's run it:
+The `bootJar` task looks like our friend. (Remember, we're not doing container deployment, if so the `bootBuildImage` would be the thing. An OCI image is mostly the same as a Docker image, as far as I understand.) So, let's run it:
 
 ```shell
 $ ./gradlew clean bootJar
@@ -76,7 +76,7 @@ tasks.withType(JavaCompile).configureEach {
 
 I confirmed that it works by briefly commenting out that `findbugs` dependency. 
 
-Cool, so we can now build a jar with `./gradlew bootJar`. It gets placed in `build/libs/hahabit-0.0.1-SNAPSHOT.jar`. Can we run it?
+Cool, so we can now build a jar with `./gradlew bootJar`. It gets placed in `build/libs/hahabit-0.0.1-SNAPSHOT.jar`. A nice little 27 MB JAR. Can we run it?
 
 ```shell
 $ java -jar build/libs/hahabit-0.0.1-SNAPSHOT.jar

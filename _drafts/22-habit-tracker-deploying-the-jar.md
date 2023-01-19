@@ -4,28 +4,35 @@ title:  "Writing a habit tracker, part 21: Uploading that JAR"
 ---
 In the previous post, we build a JAR file! It was big! Now we want to upload it to the server. 
 
-But I think we're ready to try to upload that guy to the server! 
+I'd like to upload this to the Unix account[^1] that we created for this purpose in part one, the one that force me to decide on a name for this project, and then I chose the name `hahabit`. Good times. 
+
+I use `ssh` authentication exclusively to log in to this server, because that's what security people say is the thing to do. So I need to generate a key pair and upload the public key to my account, and keep the private key somewhere super safe. I do this with `ssh-keygen` and then upload it to my server with `scp`:
 
 ```shell
-$ scp build/libs/hahabit-0.0.1-SNAPSHOT.jar simon@skagedal.tech:hahabit/
+$ ssh-keygen -f hahabit-key
+Generating public/private rsa key pair.
+<other stuff from ssh-keygen>
+$ scp hahabit-key.pub simon@skagedal.tech:
+hahabit-key.pub                                                                  100%  586    16.3KB/s   00:00 
 ```
 
-That uploads the 27 MB JAR file (because of course a trivial little Java server app should be 27 MB) to my account, in a directory I created before. Great, can we run it?
+And then I log in to my server as `simon`, change user to `hahabit` with the `su` command and the password I gave it, and copy the `hahabit-key.pub` to `~/.ssh/authorized_keys`. 
+
+Now I can log in to my server using `ssh hahabit@skagedal.tech -i hahabit-key`! This means I can upload files to it as well. So, let's put it all together so far with a little deploy script:
 
 ```shell
-$ ssh simon@skagedal.tech
-<welcome to ubuntu etc>
-$ cd hahabit
-$ java -jar hahabit-0.0.1-SNAPSHOT.jar
-2023-01-15T16:38:27.770Z  INFO 873558 --- [           main] t.skagedal.hahabit.HahabitApplication    : Starting HahabitApplication using Java 19.0.1 with PID 873558 (/home/simon/hahabit/hahabit-0.0.1-SNAPSHOT.jar started by simon in /home/simon/hahabit)
-<lots of logs>
-2023-01-15T16:38:35.518Z ERROR 873558 --- [           main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Exception during pool initialization.
+#!/usr/bin/env bash
 
-org.postgresql.util.PSQLException: FATAL: password authentication failed for user "postgres"
+# Exit on errors
+set -e
+
+echo 👋 Building JAR with Java 19...
+export JAVA_HOME=$(/usr/libexec/java_home -v 19)
+./gradlew clean bootJar
+
+echo
+echo 👋 Uploading JAR to skagedal.tech...
+scp -i ~/.ssh/hahabit-key build/libs/hahabit-0.0.1-SNAPSHOT.jar hahabit@skagedal.tech:
 ```
 
-Ah, right - it's configured to run things like on my local machine, trying to get into PostgreSQL with a simple password. Back in the [first blog post](/2023/01/01/writing-a-habit-tracker.html) of the series, where I set up PostgreSQL, I noted that:
-
-> Apparently, Postgres’ default user management system is coupled to the user authentication system on the system. This seems nice enough for our purposes – I plan to just run everything on this machine, not deal with any Docker stuff.
-> 
-> 
+[^1]: Yes, I know, my server is running Linux – or if you're so inclined, GNU/Linux – which is not "Unix", but I think that if I write "Unix account", most people will directly understand what I mean. Is that ok with you? 

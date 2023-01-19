@@ -37,10 +37,7 @@ public class HomeController {
 }
 ```
 
-Actually, I guess instead of sending the hidden fields, I could have done this in a slightly more REST-like fashion by putting these as path parameters. Turns out the syntax to set those [in Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#link-urls) is a bit finicky, I have to do this:
-
-
-I want to register this POST to an endpoint of its own, which I called just `/achieve` because I felt this wouldn't be a REST:y API anyway, with the form content-type and everything – but now that I think of it, I would have expected this to work: 
+Actually, I guess instead of sending the hidden fields, I could have done this in a slightly more REST-like fashion by putting these as path parameters. Turns out the syntax to set those [in Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#link-urls) is a bit finicky – I would have expected this to work: 
 
 ```html
         <form th:unless="${habit.achieved}" th:action="@{/habit/${habit.habitId}/${date}/achieve">
