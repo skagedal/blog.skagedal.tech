@@ -91,3 +91,5 @@ I'm adding this to the bottom of the page as well to just kind of remind me of t
 ```html
     <p>Timezone ID: <span th:text="${zoneId}">Unknown</span></p>
 ```
+
+_[Continue reading part nineteen.](/2023/01/18/habit-tracker-getting-the-users-date.html)_

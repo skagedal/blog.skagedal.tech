@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing a habit tracker, part 19: A button to achieve a habit"
 ---
-Now, finally, let's add the actual button you can push to mark a habit as having been achieved.
+In [part eighteen](/2023/01/18/habit-tracker-getting-the-users-date.html), we figured out what date it is, to know what daily achievements to show and act on. Now, finally, let's add the actual button you can push to mark a habit as having been achieved.
 
 In the `home.html` template, we build our habits list like this instead:
 
@@ -40,17 +40,20 @@ public class HomeController {
 Actually, I guess instead of sending the hidden fields, I could have done this in a slightly more REST-like fashion by putting these as path parameters. Turns out the syntax to set those [in Thymeleaf](https://www.thymeleaf.org/doc/tutorials/3.0/usingthymeleaf.html#link-urls) is a bit finicky – I would have expected this to work: 
 
 ```html
-        <form th:unless="${habit.achieved}" th:action="@{/habit/${habit.habitId}/${date}/achieve">
-            <input type="submit" th:value="${habit.description}"
-        </form>
+    <form th:unless="${habit.achieved}" th:action="@{/habit/${habit.habitId}/${date}/achieve">
+        <input type="submit" th:value="${habit.description}"
+    </form>
 ```
+
+(Disregard the syntax highlighter doing something weird with that `</`, I don't know why it does that.)
+
 
 But no, I have to go like this:
 
 ```html
-        <form th:unless="${habit.achieved}" th:action="@{/habit/{habitId}/{date}/achieve(habitId=${habit.habitId},date=${date})}" method="post">
-            <input type="submit" th:value="${habit.description}">
-        </form>
+    <form th:unless="${habit.achieved}" th:action="@{/habit/{habitId}/{date}/achieve(habitId=${habit.habitId},date=${date})}" method="post">
+        <input type="submit" th:value="${habit.description}">
+    </form>
 ```
 
 Oh well. Still kinda nice I guess, and the handler works just the same, just have to change the mapping a little bit:
@@ -75,7 +78,9 @@ The way I send this redirect is by returning `View` directly, which happens to b
 > 
 > A better option is using the prefix redirect:. The redirect view name is injected into the controller like any other logical view name. The controller is not even aware that redirection is happening.
 
-Hmmm. In my view, this controller is absolutely totally without-a-doubt coupled to the Spring API. We're already importing five other classes from `org.springframework` – and that's fine, I want to be coupled to the Spring framework because I want it to do specific, cool things for me.  There is little use in pretending that it's not and assuming that if I instead return a String with the value `redirect:/`, I am somehow not relying on some specific Spring functionality. (Maybe I'm making a fool of myself here, maybe there is a Very Defined Standard For Specifying Redirects As Strings that hundreds of other web frameworks also comply to, if so please let me know.) (Also, there are of course layers in the app that you could and should write in a non-Spring-coupled way; I do think that's a great idea.)
+Hmmm. In my view, this controller is absolutely totally without-a-doubt coupled to the Spring API. We're already importing five other classes from `org.springframework` – and that's fine, I want to be coupled to the Spring framework because I want it to do specific, cool things for me.  There is little use in pretending that it's not and assuming that if I instead return a String with the value `redirect:/`, I am somehow not relying on some specific Spring functionality. 
+
+(Maybe I'm making a fool of myself here, maybe there is a Very Defined Standard For Specifying Redirects As Strings that hundreds of other web frameworks also comply to, if so please let me know.) (Also, there are of course layers in the app that you could and should write in a non-framework-coupled way; I do think that's a great idea.)
 
 And regarding the second point, about "knowing from start" that it will be a redirect – well no, you don't have to return that concrete type, you can return `View` like I did. But also, changing the return types of these request handlers seems like it should be pretty cheap? The framework is calling them for me through reflection; I don't expect to be referencing them myself – not even from the test suite, I think those tests should call it via the API. We'll get back to that. 
 
