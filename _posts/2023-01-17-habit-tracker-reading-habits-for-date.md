@@ -131,3 +131,5 @@ So, here we go again with another language-in-the-language, in this case SQL. No
 At least Java's got multiline strings now! Cause for celebration!
 
 I'll just go with this for now, although it feels like I'm not really doing things how they're meant to be done (for one thing, it's a bit odd that this method is placed in the `HabitRepository` when it has nothing to do with the generic types used in this repository). But whatever, it works. 
+
+_[Continue reading part eighteen.](/2023/01/18/habit-tracker-getting-the-users-date.html)_
