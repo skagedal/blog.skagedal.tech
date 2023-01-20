@@ -94,4 +94,6 @@ But I could of course sort of perhaps identify the feeling that it would be a bi
     }
 ```
 
-Sure, let's do that. I'm fine with that. That also helps if we want to add some query parameters or such to the redirect URL, instead of using that _ghastly_ method that Baeldung also uses here and that I ranted about in [part twelve](/2023/01/12/habit-tracker-making-habits-page-work.html), where you get some kind of Model object as input to the handler and then call setters on that. It's just really, really weird.   
+Sure, let's do that. I'm fine with that. That also helps if we want to add some query parameters or such to the redirect URL, instead of using that _ghastly_ method that Baeldung also uses here and that I ranted about in [part twelve](/2023/01/12/habit-tracker-making-habits-page-work.html), where you get some kind of Model object as input to the handler and then call setters on that. It's just really, really weird.
+
+_[Continue reading part twenty.](/2023/01/20/habit-tracker-storing-the-achievement.html)_
