@@ -4,6 +4,8 @@ title:  "Writing a habit tracker, part 21: Uploading that JAR"
 ---
 In the previous post, we build a JAR file! It was big! Now we want to upload it to the server. 
 
+It would be really cool if our app was continuously deployed on each push to Github. But, patience you must have, young padawan. First, how to deploy manually, you must learn. Later, automate it you can. (Is that what Yoda would say? Or would it be like "First, learn how to deploy manually, you must"?)
+
 I'd like to upload this to the Unix account[^1] that we created for this purpose in part one, the one that force me to decide on a name for this project, and then I chose the name `hahabit`. Good times. 
 
 I use `ssh` authentication exclusively to log in to this server, because that's what security people say is the thing to do. So I need to generate a key pair and upload the public key to my account, and keep the private key somewhere super safe. I do this with `ssh-keygen` and then upload it to my server with `scp`:

@@ -44,13 +44,21 @@ And it runs! It connects to the database and runs some migrations! And then serv
 
 This reminds me that I have to change the admin password that I set up with a migration in [part ten](/2023/01/10/habit-tracker-securing-things-2.html). Better do that before I forget, and suddenly make this thing available from the outside. And then blog about it. 
 
-To generate a new password, I again use my password manager. Then it needs to be encrypted in the format that Spring likes it. I use the `spring` command line tool for this, which I have installed on my Mac:
+To generate a new password, I again use my password manager. Then it needs to be encrypted in the format that Spring likes it. I can use the `spring` command line tool for this, which I have installed on my Mac:
 
 ```shell
 $ spring encodepassword myverysafepassword
 ```
 
-(I obviously remove this from my shell history afterwards, since I am a very security-conscious person. It would be nice if `spring encodepassword` also had a mode that asked for the password interactively, rather than as a command line argument.)  
+A common piece of security advice here is that you shouldn't type passwords into your command line prompt like that, since they will get saved in clear text in your command line history. We could easily remove it from the shell history afterwards, but it would have been nice if `spring encodepassword` also had a mode that asked for the password interactively, rather than as a command line argument. We can create one, though, like this:
+
+```shell
+$ spring encodepassword "$(</dev/stdin)"
+myverysecretpassword
+{bcrypt}$2a$10$d0RejpvVQRFerqm6X7oPj.zzM2CX8fL/nRs8naHSj9uy/ggtW9j7.
+```
+
+(That's me typing `myverysecretpassword`, then pressing exactly the return key and then Ctrl-D to terminate the standard input stream. The Spring tool outputs the bcrypted password.)
 
 Then I update the password by going into the `psql` console, again as the `hahabit` Postgres user, and execute:
 ```sql
