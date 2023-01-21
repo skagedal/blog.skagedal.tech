@@ -2,13 +2,11 @@
 layout: post
 title:  "Writing a habit tracker, part 21: Building a JAR"
 ---
-You know what? We have a habit tracker now! As of the previous post, I can definitely track some habits! But only with the server running on my own machine. That's not how I want it. I want it accessible from [FidoNet](https://en.wikipedia.org/wiki/FidoNet). Or, allright, the Internet. 
-
-It would be really cool if our app was continuously deployed on each push to Github. But, patience you must have, young padawan. First, how to deploy manually, you must learn. Later, automate it you can. (Is that what Yoda would say? Or would it be like "First, learn how to deploy manually, you must"?)
+You know what? We have a habit tracker now! As of the [previous post](/2023/01/20/habit-tracker-storing-the-achievement.html), I can definitely track some habits! But only with the server running on my own machine. That's not how I want it. I want it accessible from [FidoNet](https://en.wikipedia.org/wiki/FidoNet). Or, allright, the Internet. 
 
 So, we're going to deploy things to the Ubuntu machine we installed some software on [in part one](/2023/01/01/writing-a-habit-tracker.html), and the thing we're going to deploy is going to be a JAR file, as we discussed [in part two](https://blog.skagedal.tech/2023/01/02/habit-tracker-part-two-spring-boot.html). It's going to be not just a simple JAR file, but a _fat_ JAR file – one that includes all the dependencies, like all of the Spring code. 
 
-Spring Boot gives us some tools to do that, wrapped in its Gradle plugin (or Mavin plugin, if that's what you're using). We can check it out like this:
+Spring Boot gives us some tools to do that, wrapped in its Gradle plugin (or Maven plugin, if that's what you're using). We can check it out like this:
 
 ```shell
 $ ./gradlew tasks
@@ -55,7 +53,7 @@ BUILD SUCCESSFUL in 953ms
 $
 ```
 
-What's that warning? I hate warnings. I haven't used any `When.MAYBE`. I found this [Github issue](https://github.com/spring-projects/spring-framework/issues/25095), and apparently this happens when you have `@Nullable` annotations and you do not include a dependency to `com.google.code.findbugs:jsr305:3.0.2`. I only have one such annotation, and it's really just there as a piece of documentation, but I want to rather improve on my null-safety situation than going the other direction. So let's add that dependency in my `build.gradle` dependencies section:
+I like "successful", but what's that warning? I hate warnings. I haven't used any `When.MAYBE`. I found this [Github issue](https://github.com/spring-projects/spring-framework/issues/25095), and apparently this is a bug happens when you have `@Nullable` annotations and you do not include a dependency to `com.google.code.findbugs:jsr305:3.0.2`. I only have one such annotation, and it's really just there as a piece of documentation, but I want to rather improve on my null-safety situation than going the other direction. So let's add that dependency in my `build.gradle` dependencies section:
 
 ```groovy
 dependencies {
@@ -76,9 +74,9 @@ tasks.withType(JavaCompile).configureEach {
 
 I confirmed that it works by briefly commenting out that `findbugs` dependency. 
 
-Cool, so we can now build a jar with `./gradlew bootJar`. It gets placed in `build/libs/hahabit-0.0.1-SNAPSHOT.jar`. A nice little 27 MB JAR. Can we run it?
+Cool, so we can now build a jar with `./gradlew bootJar`. It gets placed in `build/libs/hahabit-0.0.1-SNAPSHOT.jar`. A nice little 27 MB JAR. Would neatly fit on the hard disk of the first machine with such a unit I ever owned, which if I remember correctly was 30 MB. Anyway. Can we run it? Yes, with the Gungan command: `java -jar JAR`:
 
-```shell
+```
 $ java -jar build/libs/hahabit-0.0.1-SNAPSHOT.jar
 
   .   ____          _            __ _ _
@@ -107,4 +105,4 @@ And then thanking myself. Now that my attention has been freed up – are there 
 
 It seems like this is an instance of [this bug](https://github.com/spring-projects/spring-framework/issues/29612#issuecomment-1333705627) and I should be able to just ignore it. Annoying though.
 
-But I think we're ready to try to upload that guy to the server! Let's do that in next post! 
+But I think we're ready to try to upload that little guy to the server! Let's do that in next post! 

@@ -96,6 +96,8 @@ public class HomeController {
 
 Which seems to work well, but honestly this stuff should reeeally have some automated tests around it. I promise, later. Later, folks!
 
+_[Continue reading part twenty-one.](/2023/01/21/habit-tracker-building-a-jar.html)_
+
 ### Notes
 
-[^1]: Java bonus question: why did I add that `if (true)` to the code, instead of just throwing the exception?  
+[^1]: Java study question for the reader: why did I add that `if (true)` to the code, instead of just throwing the exception?  
