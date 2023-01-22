@@ -242,3 +242,5 @@ $ curl -v https://hahabit.skagedal.tech
 Nice! It expires in 90 days or so, and certbot will automatically renew it. 
 
 What did certbot actually do? 
+
+It changed my nginx conf file for the hahabit.skagedal.tech site. 
