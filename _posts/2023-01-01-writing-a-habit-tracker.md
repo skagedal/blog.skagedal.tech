@@ -78,7 +78,7 @@ Enter the new value, or press ENTER for the default
 Is the information correct? [Y/n]
 ```
 
-That's such a funny old unix thing, that you have to even get the question about "Work Phone" to set up a user. 
+That's such a funny old unix thing, that you have to even get the question about "Work Phone" to set up a user.[^1]
 
 Oh, and we also needed to create a database for this user.
 
@@ -128,3 +128,7 @@ Yes, it is working! Now, it's time to create a little Java app using Spring Boot
 Oh, and yes, I did spend more than 30 minutes outside today, snowboarding the wonderful slopes of Hamra, Tänndalen. And I wrote a blog post! 
 
 _[Continue reading part two.](/2023/01/02/habit-tracker-part-two-spring-boot.html)_
+
+### Notes
+
+[^1]: But see [part twenty-two](/2023/01/22/habit-tracker-deploying-the-jar.html) for a better way!

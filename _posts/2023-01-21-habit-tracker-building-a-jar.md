@@ -106,3 +106,5 @@ And then thanking myself. Now that my attention has been freed up – are there 
 It seems like this is an instance of [this bug](https://github.com/spring-projects/spring-framework/issues/29612#issuecomment-1333705627) and I should be able to just ignore it. Annoying though.
 
 But I think we're ready to try to upload that little guy to the server! Let's do that in next post! 
+
+_[Continue reading part twenty-two.](/2023/01/22/habit-tracker-deploying-the-jar.html)_
