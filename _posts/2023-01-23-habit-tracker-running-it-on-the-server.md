@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing a habit tracker, part 23: Running it on the server"
 ---
-Great, can we run it?
+We [built a JAR](/2023/01/21/habit-tracker-building-a-jar.html) and we [uploaded it](/2023/01/22/habit-tracker-deploying-the-jar.html) to the server! Great, can we run it?
 
 ```shell
 $ ssh hahabit@skagedal.tech
@@ -26,13 +26,13 @@ However, my great colleague Christopher Gunning noted in a Slack thread:
 > 
 > As such I don’t think that authentication strategy will work when connecting using TCP. It’s possible that you can from Java configure it to connect using the Unix-domain socket but I don’t know how that would work.
 
-I think Gunning is right. It does seem that it should almost be possible, I found for example [this post](https://www.morling.dev/blog/talking-to-postgres-through-java-16-unix-domain-socket-channels/) from Gunnar Morling where he discusses this topic and attempts to connect via the native support for Unix sockets that Java gained in Java 16, but not quite succeeding. 
+I think Gunning is right. It does seem that it should almost be possible, I found for example [this post](https://www.morling.dev/blog/talking-to-postgres-through-java-16-unix-domain-socket-channels/) from Gunnar Morling where he discusses this topic and attempts to connect via the native support for Unix sockets that Java gained in Java 16, but not quite succeeding. Could be a thing to play around with, but not really worth it – I don't really need the extra performance or security benefits, so just going with the common option will be best.   
 
 So let's set a password for `hahabit`, the Postgres user. I enter Postgres with `sudo -u postgres psql` and there I enter `\password hahabit`. It asks me for a new password. I, in turn, ask my password manager to generate a nice, safe password for me. It complies with my request. I give the new password to Postgres.
 
 Cool, now we just need to configure the Spring data source! Previously, I did so by editing the `application.properties` file. Those settings, used for my local development setup, are now bundled into the JAR that I have deployed here on my server. 
 
-I could try to somehow make those properties match the configuration here on my production server. There's the profiles thing I could use. But I'd rather keep the configuration external to the JAR. For one thing, the password and any such secrets definitely should be. [Turns out](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#features.external-config) there's an order on what overrides what, and you can just set some environment variables to override the application.properties. So now I do just this, as `hahabit` on `skagedal.tech`:
+I could try to somehow make those properties match the configuration here on my production server. There are those profiles things I could use. But I'd rather keep the configuration external to the JAR. For one thing, the password and any such secrets definitely should be. [Turns out](https://docs.spring.io/spring-boot/docs/current/reference/htmlsingle/#features.external-config) there's an order on what overrides what, and you can just set some environment variables to override the application.properties. So now I do just this, as `hahabit` on `skagedal.tech`:
 
 ```shell
 $ export SPRING_DATASOURCE_USERNAME=hahabit
@@ -40,7 +40,7 @@ $ export SPRING_DATASOURCE_PASSWORD=$(cat postgres-password)
 $ java -jar hahabit-0.0.1-SNAPSHOT.jar
 ```
 
-And it runs! It connects to the database and runs some migrations! And then serves requests – I can open up a separate `ssh` session to my machine and test it with `curl -v localhost:8080`. It challenges me with some Basic Auth,  so I give it a `-u admin:admin` and get my home page HTML!
+**And it runs!** It connects to the database and runs some migrations! And then serves requests – I can open up a separate `ssh` session to my machine and test it with `curl -v localhost:8080`. It challenges me with some Basic Auth,  so I give it a `-u admin:admin` and get my home page HTML!
 
 This reminds me that I have to change the admin password that I set up with a migration in [part ten](/2023/01/10/habit-tracker-securing-things-2.html). Better do that before I forget, and suddenly make this thing available from the outside. And then blog about it. 
 
