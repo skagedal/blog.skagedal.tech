@@ -50,6 +50,9 @@ scp -i ~/.ssh/hahabit-key build/libs/hahabit-0.0.1-SNAPSHOT.jar hahabit@skagedal
 
 Very good! Bits are flying through the wires! 
 
+_[Continue reading part twenty-three.](/2023/01/23/habit-tracker-running-it-on-the-server.html)_
+
+
 ### Notes
 
 [^1]: Yes, my server is running Linux – or if you're so inclined, GNU/Linux – which is not exactly "Unix", but I figure that if I write "Unix account", people will most directly understand what I mean. "Account" means so many things. Does that maek sense? 

@@ -67,3 +67,4 @@ UPDATE users SET password = '{bcrypt}SOMEENCRYPTEDSTUFF' WHERE username = 'admin
 
 I then confirm that I can no longer authenticate with the test password. All good.
 
+_[Continue reading part twenty-four.](/2023/01/24/habit-tracker-always-running-it.html)_
