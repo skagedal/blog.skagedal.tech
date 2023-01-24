@@ -25,4 +25,4 @@ Also, I'm learning about "new" semantic markup tags like [main](https://develope
 
 For now I'll just repeat a bunch of stuff between my two views (`home` and `habits`); I'll learn later how to use [page layouts](https://www.thymeleaf.org/doc/articles/layouts.html) and includes. 
 
-This will do for now – I'm realizing that to get the design I sort of have in mind, I'll have to do some custom CSS work. 
+This will do for now – I'm realizing that to get the design I sort of have in mind, I'll have to do some custom CSS work. I'm not sure that's what I want to focus on. Maybe. I'm thinking I might want to maybe instead write a native iOS client. Or add some visualizations of the progress so far. Or something else. Who knows what the future might bring!  
