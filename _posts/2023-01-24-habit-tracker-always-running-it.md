@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Writing a habit tracker, part 23: Running it continuously"
+title:  "Writing a habit tracker, part 24: Running it continuously"
 ---
 
 Right, so in the [last post](/2023/01/23/habit-tracker-running-it-on-the-server.html) we ran the thing on the server. We should be about ready to put it online. But there's a couple of things I'd like fix before regarding how Spring runs. First, I want it to **output logs** to a file so I can review them later. Second, I want it to **always run**. The actual running of the service to be controlled by the operating system  I shouldn't need to manually start it, and if it for some reason goes down – or the whole virtual machine goes down – it should restart.
