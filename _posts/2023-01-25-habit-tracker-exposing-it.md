@@ -1,11 +1,11 @@
 ---
 layout: post
-title:  "Writing a habit tracker, part 25: Exposing to the Internet"
+title:  "Writing a habit tracker, part 25: Exposing it to the Internet!"
 ---
 
-Now the service is running on the machine. But we can't yet connect to it. 
+Now the service is [running](/2023/01/24/habit-tracker-always-running-it.html) on the machine. But we can't yet connect to it from other machines.. 
 
-I'd like to set it up so that it listens to requests on `hahabit.skagedal.tech`. And I would very much like the traffic to be protected by TLS. 
+I'd like to set it up so that it **listens to requests** on `hahabit.skagedal.tech`. And I would very much like the traffic to be **protected by TLS**. 
 
 I always forget how these things work. With DNS and so on. Do I have to do anything with DNS? Let's what happens if we do a DNS lookup for `skagedal.tech`:
 
@@ -19,7 +19,7 @@ Name:	skagedal.tech
 Address: 142.93.136.170
 ```
 
-I'm not really sure why it says the DNS server is 10.101.12.1, that looks like it's an address in the private network...? And what does #53 mean? Anyway, the interesting thing is what it resolves `skagedal.tech` to – so 142.93.136.170 is the IP of my machine. My own little machine on the Internet. 
+I'm not really sure why it says that the DNS server is 10.101.12.1, that looks like it's an address in the private network...? And what does #53 mean? Anyway, the interesting thing is what it resolves `skagedal.tech` to – so 142.93.136.170 is the IP of my machine. My own little virtual machine on the Internet. Nice. 
 
 I also have `blog.skagedal.tech` set up. I did this a few years ago and I don't remember much. So that should reach the same machine, I only have one. 
 
@@ -45,7 +45,7 @@ Name:	skagedal.tech
 Address: 142.93.136.170
 ```
 
-I definitely did not specifically set that up. So I guess we're good, DNS-wise. I just gotta set things up with `nginx` – which is what receives calls on the machine – and make it forward requests to `hahabit` if that's the host, specified in the `Host` header. 
+I definitely did not specifically set that up. So I guess we're good, DNS-wise – every subdomain to skagedal.tech leads to that same machine. I just gotta **set up `nginx`** – which is what receives calls on the machine – and make it forward requests to `hahabit` if that's the host, specified in the `Host` header. 
 
 One thing I like with Digital Ocean is that they have really nice guides for everything. Like this one: [How To Configure Nginx as a Reverse Proxy on Ubuntu 22.04](https://www.digitalocean.com/community/tutorials/how-to-configure-nginx-as-a-reverse-proxy-on-ubuntu-22-04). I'm literally just following that and putting this is as my `/etc/nginx/sites-available/hahabit.skagedal.tech`:
 
@@ -96,7 +96,7 @@ And then I restart nginx:
 $ sudo systemctl restart nginx
 ```
 
-And boom! My little app is available on the Internet! Running this from MacBook:
+And boom! My little habit tracker app is available on the Internet! Trying this from my MacBook:
 
 ```shell
 $ curl -v hahabit.skagedal.tech
@@ -128,7 +128,7 @@ $ curl -v hahabit.skagedal.tech
 
 That's my machine, talking to Spring Boot via nginx, and a hell of a lot of other little wires in between.
 
-Final step is make sure the traffic is encrypted. It's cool that we can get that for free these days using Let's Encrypt. And Digital Ocean has a guide for this as well, [How To Secure Nginx with Let's Encrypt on Ubuntu 22.04](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04).
+Final step is make sure the **traffic is encrypted**. It's cool that we can get that for free these days using Let's Encrypt. And Digital Ocean has a guide for this as well, [How To Secure Nginx with Let's Encrypt on Ubuntu 22.04](https://www.digitalocean.com/community/tutorials/how-to-secure-nginx-with-let-s-encrypt-on-ubuntu-22-04).
 
 I followed this guide when I set up `skagedal.tech`. Then when I set up `blog.skagedal.tech`, I remember I was unsure whether I should just set it up using the same steps again, getting a new certificate, or if I could somehow reuse the same one. Then I was lazy and got a new one, because that was easier. It would have been nice if I had not been lazy so that I could just reuse the same setup once more. So, what do we do now? Are we nice to now-Simon or nice to future-Simon?
 
@@ -189,7 +189,7 @@ $ curl -v hahabit.skagedal.tech
 
 (Curl defaults to HTTP.)
 
-And I need to use https to actuall access my site:
+And I need to use https to actually access my site:
 
 ```shell
 $ curl -v https://hahabit.skagedal.tech
@@ -239,8 +239,6 @@ $ curl -v https://hahabit.skagedal.tech
 * Connection #0 to host hahabit.skagedal.tech left intact
 ```
 
-Nice! It expires in 90 days or so, and certbot will automatically renew it. 
+Nice! I can see that there's a certificate that expires in 90 days or so. `certbot` will automatically renew it. 
 
-What did certbot actually do? 
-
-It changed my nginx conf file for the hahabit.skagedal.tech site. 
+What happened now when I ran certbot with the nginx pluging is that it actually went and changed my nginx config file, the one I put in sites-available. I think I'll want to clean that up a little later. Maybe. Later. 

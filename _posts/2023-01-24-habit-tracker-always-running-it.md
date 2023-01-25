@@ -79,3 +79,5 @@ And also, I noticed that the Spring documentation [actually describes](https://d
 The first is that, obviously, in a more real production scenario, we wouldn't want any downtime on each deploy, as we'll get with this scenario. But to make that work we'd need some kind of load balancer in front of the application, and I ain't got time for that.
 
 Now, the last thing. One thing that I'm not so happy with right now is how much I'm configuring by just editing stuff directly on the server. Such as this systemd stuff right here. That should be deployed using some kind of Infrastructure-as-Code tool. Maybe Ansible? That'll be for later. Yes. Later.
+
+_[Continue reading part twenty-five.](/2023/01/25/habit-tracker-exposing-it.html)_
