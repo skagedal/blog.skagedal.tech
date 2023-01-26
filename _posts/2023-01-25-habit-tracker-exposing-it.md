@@ -241,4 +241,6 @@ $ curl -v https://hahabit.skagedal.tech
 
 Nice! I can see that there's a certificate that expires in 90 days or so. `certbot` will automatically renew it. 
 
-What happened now when I ran certbot with the nginx pluging is that it actually went and changed my nginx config file, the one I put in sites-available. I think I'll want to clean that up a little later. Maybe. Later. 
+What happened now when I ran certbot with the nginx pluging is that it actually went and changed my nginx config file, the one I put in sites-available. I think I'll want to clean that up a little later. Maybe. Later.
+
+_[Continue reading part twenty-six.](/2023/01/26/habit-tracker-usability.html)_
