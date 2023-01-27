@@ -35,3 +35,5 @@ Allright then, you get a screenshot.
 </figure>
 
 (Yeah, "done" is visualized as "disabled". Not very reinforcing, perhaps.)
+
+_[Continue reading part twenty-seven.](/2023/01/27/habit-tracker-updating-dependencies.html)_
