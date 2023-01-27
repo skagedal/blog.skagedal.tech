@@ -62,8 +62,77 @@ Gradle release-candidate updates:
  - Gradle: [7.6 -> 8.0-rc-2]
  ```
 
-I'm not going to update Flyway, because that version is set by the Spring dependency management plugin. I think. I do not specify the version myself explicitly in my `build.gradle`. I'm happy with running the version that has been tested to work well together with the rest of the Spring suite. 
+Upgrading Gradle [sounds like fun](https://docs.gradle.org/8.0-rc-2/release-notes.html)! I wouldn't use a "release candidate" version in a real production app, but here, why not. I'm doing this: 
+
+```shell
+$ ./gradlew wrapper --gradle-version 8.0-rc-2
+```
+
+I'm not going to update Flyway though, because that version is set by the Spring dependency management plugin, I think...? Maybe? I do not specify the version myself explicitly in my `build.gradle` in any case, and I'm happy with running the version that has been tested to work well together with the rest of the Spring suite. 
 
 Yeah, what is that Spring dependency management plugin anyway? Why aren't we happy with just the dependency mananagement we get from Gradle? That is, after all, its job. 
 
-The Spring dependency management plugin was added to the `plugins` section of our `build.gradle` file when we first 
+The Spring dependency management plugin was added to the `plugins` section of our `build.gradle` file when we first generated it with Spring Initializr. According to the [README](https://github.com/spring-gradle-plugins/dependency-management-plugin), it is
+
+> A Gradle plugin that provides Maven-like dependency management and exclusions. The plugin provides a DSL to configure dependency management directly and by importing existing Maven boms.
+
+Skimming through [the manual](https://docs.spring.io/dependency-management-plugin/docs/current/reference/html/), it is still a bit unclear to me why Maven-like semantics is preferred, or, when it is preferred. One example that is explicitly mentioned is under "Maven exclusions":
+
+> While Gradle can consume dependencies described with a Maven pom file, Gradle does not honour Maven’s semantics when it is using the pom to build the dependency graph. A notable difference that results from this is in how exclusions are handled.
+
+Ok. But how is this dependency management plugin used in my build? The only place where it is explicitly invoked is in its own `dependencyManagement` section, which in my `build.gradle` is like this:
+
+```
+dependencyManagement {
+    imports {
+        mavenBom "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
+    }
+}
+```
+
+So, only used for the testcontainers BOM ("bill of materials"), apparently. What difference would it make if we remove this and instead use the built-in Gradle solution?
+
+I'm curious, so I remove the above section and add the following in the `dependencies` section:
+
+```groovy
+    testImplementation(platform("org.testcontainers:testcontainers-bom:${testcontainersVersion}"))
+```
+
+That should make it honour the BOM for resolving the versions of the testcontainers dependencies. How do we find out if we inadvertently changed anything now? I'm doing this to look at the current dependency resolution and save it to a file:
+
+```shell
+$ ./gradlew dependencies > ~/with-gradle-platform.txt
+```
+
+Then I run `git stash` to switch back to the original code. Then I run it again:
+
+```shell
+$ ./gradlew dependencies > ~/with-spring-dependency-management.txt
+```
+
+Then I check the diff between the two files using `diff -u`, and see that there are some differences in the output that look like this:
+
+```
+-\--- org.testcontainers:postgresql -> 1.17.6
+-     \--- org.testcontainers:jdbc:1.17.6
+-          \--- org.testcontainers:database-commons:1.17.6
+-               \--- org.testcontainers:testcontainers:1.17.6 (*)
+++--- org.testcontainers:postgresql -> 1.17.6
++|    \--- org.testcontainers:jdbc:1.17.6
++|         \--- org.testcontainers:database-commons:1.17.6
++|              \--- org.testcontainers:testcontainers:1.17.6 (*)
++\--- org.testcontainers:testcontainers-bom:1.17.6
++     +--- org.testcontainers:junit-jupiter:1.17.6 (c)
++     +--- org.testcontainers:postgresql:1.17.6 (c)
++     +--- org.testcontainers:testcontainers:1.17.6 (c)
++     +--- org.testcontainers:jdbc:1.17.6 (c)
++     \--- org.testcontainers:database-commons:1.17.6 (c)
+```
+
+I don't think it actually means a difference in the build output though; those `(c)` markings means that it's just a dependency constraint that Gradle knows about. To be even more confident, I ran a `./gradlew bootJar` with both configurations, and saw that they in both cases built a jar of the exact same size. 
+
+So... if it were up to me – and it is – I'd rather use the Gradle native mechanism for this. So I will. Until someone explains why I shouldn't. 
+
+Can I even remove the Spring dependency management plugin altogether? No, I can't. Then it no longer knows what version of the various Spring Boot starter libs it should import.  So apparently it's also doing some implicit things, aside from the `dependencyManagement` section.
+
+I'll leave it at that. Enough of unsorted dependency management ramblings for today.  
