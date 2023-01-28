@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Writing a habit tracker, part 28: Spring dependency management"
+title:  "Writing a habit tracker, part 28: More on Spring dependency management"
 ---
 Here's an update on the Spring Dependency Management plugin that we talked about in the [previous post](/2023/01/27/habit-tracker-updating-dependencies.html).
 
