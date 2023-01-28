@@ -139,6 +139,12 @@ I don't think it actually means a difference in the build output though; those `
 
 So... if it were up to me – and it is – I'd rather use the Gradle native mechanism for this. So I will. Until someone explains why I shouldn't. 
 
-Can I even remove the Spring dependency management plugin altogether? No, I can't. Then it no longer knows what version of the various Spring Boot starter libs it should import.  So apparently it's also doing some implicit things, aside from the `dependencyManagement` section.
+Can I even remove the Spring dependency management plugin altogether? No, I can't[^1]. Then it no longer knows what version of the various Spring Boot starter libs it should import.  So apparently it's also doing some implicit things, aside from the `dependencyManagement` section.
 
 I'll leave it at that. Enough of unsorted dependency management ramblings for today.  
+
+_[Continue reading part twenty-eight.](/2023/01/28/habit-tracker-spring-dependency-management-plugin.html)_
+
+### Notes
+
+[^1]: Yes, I can! Read the [next part](/2023/01/28/habit-tracker-spring-dependency-management-plugin.html) for a continued investigation.
