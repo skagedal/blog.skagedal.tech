@@ -38,4 +38,6 @@ The Spring Boot plugin provides the `bootJar` task [that I use](https://blog.ska
 
 So Spring Boot plugin stays. It also provides some other things I think I'll want in the future, such as [integration with Spring Boot Actuator](https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/#integrating-with-actuator) which gives you run-time information through an HTTP endpoint. I'll want that. 
 
-I also noticed that the [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/) covers all of this stuff regarding whether to use the Dependency Management plugin or not. Of course it does.  
+I also noticed that the [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/) covers all of this stuff regarding whether to use the Dependency Management plugin or not. Of course it does.
+
+_[Continue reading part twenty-nine.](/2023/01/29/habit-tracker-so-far.html)_
