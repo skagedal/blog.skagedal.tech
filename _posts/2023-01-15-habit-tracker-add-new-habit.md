@@ -80,7 +80,7 @@ This also works, and then I can create my `Habit` model with the right user – 
 
 We can now type a habit name, press "Add", load the "habits" page again and boom, there it is! Yay! 
 
-Obviously, we shouldn't have to reload anything – it should just show up. Can we perhaps just return a `ModelAndView`, just like with the `getHabits` handler?
+Obviously, we shouldn't have to reload anything – it should just show up. Can we perhaps just return a `ModelAndView`[^2], just like with the `getHabits` handler?
 
 ```java
     @PostMapping("/habits")
@@ -116,5 +116,6 @@ For now, I am very happy with just using my single PostgreSQL server for this "t
 ### Notes
 
 [^1]: As a side node – when we use `repository.save(habit)`, we get a new object returned, and that will have the `id`, but not the `createdAt` filled in. How does it even get the id...? I should investigate that at some point.
+[^2]: While this works, a better pattern to use here is Post/Redirect/Get, as discussed in [part nineteen](/2023/01/19/habit-tracker-achieving-some-habits.html), as you avoid the annoying "resubmit form data?" popup when reloading.  
 
 _[Continue reading part sixteen.](/2023/01/16/habit-tracker-listing-your-achievements.html)_
