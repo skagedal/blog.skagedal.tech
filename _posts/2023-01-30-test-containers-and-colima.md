@@ -3,9 +3,9 @@ layout: post
 title:  "Testcontainers and Colima"
 ---
 
-At work, we use Docker containers quite a bit. For deploying stuff on ECS and Kubernetes, of course, but also for various things on local machines. All developers have Macs, so this has meant we use Docker Desktop for Mac. But recently, the cost for this has increased quite a bit, so the developer experience team investigated alternatives. And found [Colima](https://github.com/abiosoft/colima). It is based on a project called Lima, which means "Linux on Mac", and then Colima adds the "Co", standing for Containers.
+At work, we use Docker containers quite a bit. For deploying stuff on ECS and Kubernetes, of course, but also for supporting the local development environment in various ways. All developers have Macs, so this has meant we use Docker Desktop for Mac. But recently, the cost for this has increased quite a bit, so the developer experience team investigated alternatives. And found [Colima](https://github.com/abiosoft/colima). It is based on a project called [Lima](https://github.com/lima-vm/lima), which means "Linux on Mac", and then Colima adds the "Co", standing for Containers.
 
-It works great for the most part, but there have been some annoyances about running [Testcontainers](https://www.testcontainers.org/). Individual experiences seem to vary a little, but at least for me, to get this working properly, I need the following to be true in order to successfully run Testcontainers tests (and I am speaking about Testcontainers for Java):
+It works great for the most part, but there have been some annoyances about running [Testcontainers for Java](https://www.testcontainers.org/). Individual experiences seem to vary a little, but at least for several of us, the following needs to be true in order to successfully run Testcontainers tests:
 
 * `colima` needs to be started with the `--network-address` flag
 * `DOCKER_HOST` needs to be set to `unix://${HOME}/.colima/docker.sock`
@@ -16,16 +16,13 @@ That's a lot of annoying stuff. Running regular docker commands in the shell Jus
 
 ## Using Docker Contexts 
 
-The environment variable `DOCKER_HOST` simply tells Docker clients where to find the Docker server. Not that strange. But still, other Docker clients seem to just work, even without having set this. How come?
+The environment variable `DOCKER_HOST` simply tells Docker clients where to find the Docker server. Not that strange. But like I said, other Docker clients seem to just work, even without having set this. How come?
 
-Turns out there's this fairly recent feature of Docker called [Docker Context](https://docs.docker.com/engine/context/working-with-contexts/). A "docker context" contains all of the endpoint and security information required to manage a Docker cluster or node, and you can get manage them using the `docker context` subcommands in the CLI. 
+Turns out there's this fairly recent feature of Docker called [Docker Context](https://docs.docker.com/engine/context/working-with-contexts/). A "docker context" contains all of the endpoint and security information required to manage a Docker cluster or node, and you can manage them using the `docker context` subcommands in the CLI. 
 
-If I run `docker context ls`, without having any Docker specific environment variables set, this is what I get: 
-
-For me, when I do `docker context ls`, it says this:
+If I run `docker context ls`, without having any Docker specific environment variables set, this is what I get:
 
 ```shell
-$ unset DOCKER_HOST
 $ docker context ls
 NAME            DESCRIPTION                               DOCKER ENDPOINT                                   KUBERNETES ENDPOINT   ORCHESTRATOR
 colima *        colima                                    unix:///Users/simon/.colima/default/docker.sock
@@ -34,9 +31,9 @@ desktop-linux                                             unix:///Users/simon/.d
 ```
 
 
-So there is a `colima` context – which was created when I set up `colima` – and there's a `desktop-linux` context, which I think is still there since when I had Docker Desktop for Mac installed, and the `colima` context is the currently selected one. Then there's the `default` context, which I guess is a word for the-context-when-there-is-no-context. I.e., when you're just in classic mode, having some kind of default compiled in to the `docker` client binary that you can override with an environment variable. 
+So there is a `colima` context – which was created when I set up `colima` – and there's a `desktop-linux` context, which I think is still there since when I had Docker Desktop for Mac installed, and the `colima` context is the currently selected one. Then there's the `default` context, which I guess is a word for the context when there is no _explicit_ context – i.e., when you're just in classic mode, using the default value compiled in to the `docker` client binary that you can override with an environment variable. 
 
-But with this context set to `colima`, I can do all sorts of normal Docker stuff with the CLI – start and stop containers, and so on. But what happens when I run a test that uses Testcontainers? 
+So with this context set to `colima`, I can do all sorts of normal Docker stuff with the CLI – start and stop containers, and so on. But what happens when I run a test that uses Testcontainers? 
 
 We can use [this little example repo](https://github.com/skagedal/testcontainers-hello/tree/main) that I set up before. It has a single, simple little test case that creates a Testcontainer and asserts that it works:
 
@@ -79,4 +76,4 @@ Apparently, it's trying to use the default socket at `/var/run/docker.sock`, rat
 
 The problem here is that Testcontainers for Java does not know about Docker Contexts at all. 
 
-Let's try to fix that! 
+Let's try to fix that! More in the next post!
