@@ -76,4 +76,6 @@ Apparently, it's trying to use the default socket at `/var/run/docker.sock`, rat
 
 The problem here is that Testcontainers for Java does not know about Docker Contexts at all. 
 
-Let's try to fix that! More in the next post!
+Let's try to fix that! 
+
+_[Continue reading about supporting Docker contexts in docker-java](/2023/01/31/test-containers-and-docker-context.html)_
