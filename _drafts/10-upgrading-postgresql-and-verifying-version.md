@@ -1,0 +1,5 @@
+- see Ubuntu upgrade post, i should upgrade postgresl
+- i should check that i'm running the same postgresql on production and in the tests
+- if it's not the right version, it refuses to start up
+- also go back to the post about local setup and how we could have that managed by testcontainers, as mentioned in that podcast called Contributor or something
+- 
