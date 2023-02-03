@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "The DOCKER_CONTEXT environment variable"
+title:  "The DOCKER_CONTEXT environment variable and testing"
 ---
-Allright, so let's continue on the pull request for supporting docker context. 
+Allright, so let's continue on the pull request for supporting docker context that I discussed in [this post](/2023/01/31/test-containers-and-docker-context.html). 
 
 I wanted to support the `DOCKER_CONTEXT` environment variable. I also wanted to improve testing. 
 

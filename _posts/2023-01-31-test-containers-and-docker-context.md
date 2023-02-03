@@ -99,3 +99,5 @@ So two weeks ago, I [implemented this](https://github.com/docker-java/docker-jav
 Then I've not quite been able to find the time to finish this up. I should get that `DOCKER_CONTEXT` environment variable reading implemented and I should probably clean up the code and try to add some proper tests instead of static `main` methods.
 
 But that's where I'm at today! I just thought I'd get started by blogging a bit about it to remember where I left off, and motivate myself a little to continue! 
+
+_[Continue reading part three](/2023/02/01/submitting-a-bug-to-testcontainers.html)_
