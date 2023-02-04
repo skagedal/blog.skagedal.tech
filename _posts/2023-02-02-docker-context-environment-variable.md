@@ -185,4 +185,6 @@ class DefaultDockerClientConfigTest {
 }
 ```
 
-And it properly fails! Good! Let's go to bed! 
+And it properly fails! Good! Let's go to bed!
+
+_Continue reading about [implementing DOCKER_CONTEXT and bisecting a bug](/2023/02/03/docker-host-env-var-part-2.html)_
