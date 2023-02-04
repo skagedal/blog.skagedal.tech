@@ -1,0 +1,2 @@
+- just use homebrew, or whatever you have
+- use /usr/libexec/java_home 
