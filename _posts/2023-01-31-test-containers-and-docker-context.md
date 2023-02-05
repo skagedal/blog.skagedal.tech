@@ -100,4 +100,4 @@ Then I've not quite been able to find the time to finish this up. I should get t
 
 But that's where I'm at today! I just thought I'd get started by blogging a bit about it to remember where I left off, and motivate myself a little to continue! 
 
-_Continue reading [next post](/2023/02/01/submitting-a-bug-to-testcontainers.html), which is randomly about reporting a different Testcontainers bug, or [the one ofter that](/2023/02/02/docker-context-environment-variable.html) whic continues the story arc of supporting Docker contexts_
+_Continue reading [next post](/2023/02/01/submitting-a-bug-to-testcontainers.html), which is randomly about reporting a different Testcontainers bug, or [the one ofter that](/2023/02/02/docker-context-environment-variable.html) which continues the story arc of supporting Docker contexts_

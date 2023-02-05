@@ -79,7 +79,7 @@ Bisecting: 5 revisions left to test after this (roughly 3 steps)
 
 Allright, so we've started bisecting – doing a binary search for the commit that introduced the bad stuff. 
 
-But alas, the codew at the current commit does not even compile. Sloppy me. That makes it hard to tell if it's a "good" or "bad" commit. But I'm gonna mark it as bad, and we'll see what happens.
+But alas, the code at the current commit does not even compile. Sloppy me. That makes it hard to tell if it's a "good" or "bad" commit, in the sense we're interested in right now. One of the difficulties with `git bisect`-ing. But I'm gonna mark it as bad, and we'll see what happens.
 
 ```shell
 $ git bisect bad

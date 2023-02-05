@@ -6,7 +6,7 @@ Good morning! Let's continue on the work from [yesterday](/2023/02/03/docker-hos
 
 It's [this commit](https://github.com/skagedal/docker-java/commit/d4963d2ceac6affe1298e719ad78220d5bb09860), where I change where in the sequence the Docker `config.json` file is read. 
 
-It used to be that the `DefaultDockerClientConfig` class lazy-loaded the config.json file when first needed, like this:
+It used to be that the `DefaultDockerClientConfig` class lazy-loaded the `config.json` file when first needed, like this:
 
 ```java
 class DefaultDockerClientConfig {
@@ -26,9 +26,9 @@ class DefaultDockerClientConfig {
 }
 ```
 
-Those lines which are marked with a `-` were removed, and instead the `dockerConfig` was injected to the `DefaultDockerClientConfig` class at construction time. I did this because I needed to use properties from the config.json file (namely the context) earlier in the proces. 
+Those lines which are marked with a `-` were then removed with my commit, and instead the `dockerConfig` was injected to the `DefaultDockerClientConfig` class at construction time. I did this because I needed to use properties from the config.json file (namely the context) earlier in the proces. 
 
-Stepping around the debugger, starting from that same test that failed that I quoted in the previous, I am not starting to build a hypothesis of what's going on. So, it looks like it' trying to read a config.json file from the test resources that looks like this:
+Stepping around with the debugger, starting from that same test that failed that I quoted in the previous post, I am starting to build a hypothesis of what's going on. So, it looks like it's trying to read a config.json file from the test resources that looks like this:
 
 ```json
 {
@@ -61,7 +61,7 @@ Like, look at [these examples](https://en.wikipedia.org/wiki/Base64#Output_paddi
 
 So a trailing `=` should (or could, padding is not always used) be used when the last chunk of data is 2 bytes of length; here is is three bytes (or empty, depending on how we look at it). 
 
-How do different Base64 decoders deal with this situation? 
+I got curious – how do different Base64 decoders deal with a situation like this? 
 
 On my Mac I have a standard CLI tool called `base64`, I'm pretty sure it's installed by the OS. It happily decodes the string `XXXX`, but what does it do with `XXXX=`?
 
@@ -128,9 +128,9 @@ These three different behaviors from Shell, Python and Java seem pretty characte
 
 But anyway. Where were we. Right. Docker Java and some failing test. 
 
-Yeah, so thing is, we have this `config.json` in the test suite that does not parse correctly. As far as I can tell/guess, it never would have. But the tests would not fail, because this config would never have been loaded, as it was only lazy loaded upon request. With my changes, it's always loaded.
+Yeah, so the thing is, we have this `config.json` in the test suite that does not parse correctly. As far as I can tell/guess, it never would have. But the tests would not fail, because this config would never have been loaded, as it was only lazy loaded upon request. With my changes, it's always loaded.
 
-So what happens if we just change that to a valid Base64-encoded auth string? Let's use `jshell` again, that was fun, and encode the string `username:password`:
+So what happens if we just change that value to be a valid Base64-encoded auth string? Let's use `jshell` again, that was fun, and encode the string `username:password`:
 
 ```shell
 ❯ jshell
@@ -151,3 +151,5 @@ Putting that guy into that `config.json`, and now the test is green!
 That, of course, does not in itself mean that we have done the right thing. There are lots of wrong things you can do that makes a failing test green. Maybe this test case was constructed exactly like that for a reason. Maybe to assert the behavior that the config file is not read when it shouldn't be. That seems like a bit of an opaque way of asserting that. But I should check with the docker-java maintainers.
 
 For now, I'm happy with this though. However, we still have some other failures in some other tests in the test class. I'll look at them tomorrow.
+
+_[Continue reading about the green again test suite](/2023/02/05/the-finally-green-again-test-suite.html)_
