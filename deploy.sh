@@ -1,6 +1,6 @@
 #!/bin/bash
 
-bundle install || exit 1
+bundle install --quiet || exit 1
 bundle exec jekyll build || exit 1
 
 rsync \
