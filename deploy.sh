@@ -8,6 +8,8 @@ else
     RSYNC_ARG=""
 fi
 
+cd jekyll
+
 echo "💁 Installing Jekyll dependencies..."
 bundle install $BUNDLE_INSTALL_ARG || exit 1
 
