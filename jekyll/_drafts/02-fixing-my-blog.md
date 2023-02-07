@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Fixing my blog"
+title:  "Fixing annoying warnings in my blog"
 ---
 
-I deploy my blog by running a script, `./deploy.sh`, on my developer machine. When I do so, a flood of annoying text fills my screen, or several screenfuls of it. If there was any actually relevant information in there, for example about my blog not being formatted correctly, I'd miss it. So, I'd like to fix this. 
+I deploy my blog by running a script, `./deploy.sh`, on my developer machine, just like I [do with my habit tracker software](/2023/01/22/habit-tracker-deploying-the-jar.html). But currently, when I do so, a flood of annoying text fills my screen, several screenfulls of it. If there was any actually relevant information in there, for example about my blog not getting generated correctly, I'd miss it. So, I'd like to fix this. 
 
 The first thing my deploy script does is this:
 
@@ -11,7 +11,7 @@ The first thing my deploy script does is this:
 bundle install || exit 1
 ```
 
-That is, simply installning the dependencies needed by Jekyll, as specified in `Gemfile`. What happens when I run this?
+That is, simply installing the dependencies needed by Jekyll, as specified in `Gemfile`. What happens when I run this?
 
 ```shell
 $ bundle install
@@ -102,7 +102,7 @@ $ bundle install --quiet
 $ 
 ```
 
-Perfect. I'll change my deploy script to include that instead, trusting it would still tell me if there was something relevant going on.
+Perfect. I'll change my deploy script to include that instead, trusting it would still tell me if there was something very relevant going on.
 
 Now, the next step in the `deploy.sh` script is to actually build the HTML pages from Markdown and some other things. That's done with `bundle exec jekyll build`. This invocation also spits out lots of annoying stuff:
 
@@ -196,7 +196,7 @@ Configuration file: /Users/simon/code/blog.skagedal.tech/_config.yml
  $
 ```
 
-Yay, victory! And site still looks fine. Kudos to whoever did this tool. 
+Yay, victory! And site still looks fine. Kudos to these people for having a migrator tool and for telling me about it at the exact right place. 
 
 So, the final step in my script is `rsync` which is uploading the generated site to `blog.skagedal.tech`, and I think that's a bit too noisy as well. Can we make it less verbose? How are we calling it now?
 
@@ -245,4 +245,5 @@ rsync \
 echo "💁 Done!"
 ```
 
-The little emojis aren't just cute, they help me separate the output that comes from me and the output that comes from other tools. 
+The little emojis aren't just pretty, they help me separate the output that comes from me and the output that comes from other tools. 
+
