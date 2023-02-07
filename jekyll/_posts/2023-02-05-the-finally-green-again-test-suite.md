@@ -16,3 +16,4 @@ I tried running also the integration tests before, but didn't get it to work (fr
 
 Some of the things here in this commit could probably be cleaned up, but I think it's time to request some **feedback** from the docker-java maintainers again and see if they think things are moving in the right direction. I'll do that and then report back. 
 
+_[Continue reading this series](/2023/02/07/docker-java-pr-merged.html)_

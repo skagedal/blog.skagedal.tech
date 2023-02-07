@@ -9,4 +9,4 @@ Instead I spent today's allotted time for hobby hacking on [submitting a bug](ht
 
 I will definitely keep you, fine readers of the "skagedal's oboy" blog, updated on this topic! 
 
-_Continue reading about [supporting Docker Context](/2023/02/02/docker-context-environment-variable.html)_
+_Continue reading the next post in the Testcontainers series, about [supporting Docker Context](/2023/02/02/docker-context-environment-variable.html), or go to [this post](/2023/02/07/docker-java-pr-merged.html) where I discuss the above bug a bit more_
