@@ -3,7 +3,7 @@ layout: post
 title:  "Fixing annoying warnings in my blog"
 ---
 
-I deploy my blog by running a script, `./deploy.sh`, on my developer machine, just like I [do with my habit tracker software](/2023/01/22/habit-tracker-deploying-the-jar.html). But currently, when I do so, a flood of annoying text fills my screen, several screenfulls of it. If there was any actually relevant information in there, for example about my blog not getting generated correctly, I'd miss it. So, I'd like to fix this. 
+Continuing the project of [improving this blog](/2023/02/06/improving-skagedals-oboy.html). So, I deploy the blog by running a script, `./deploy.sh`, on my developer machine, just like I [do with my habit tracker software](/2023/01/22/habit-tracker-deploying-the-jar.html). But currently, when I do so, a flood of annoying text fills my screen. Several screenfulls of it. If there was any actually relevant information in there, for example about my blog not getting generated correctly, I'd miss it. So, I'd like to fix this. 
 
 The first thing my deploy script does is this:
 

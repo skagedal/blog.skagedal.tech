@@ -27,3 +27,5 @@ Most of all, I'd like to improve some things about the current blog. I'm pretty 
 * Maybe publish to ActivityPub automatically?
 
 Let's see where this goes!
+
+_[Continue reading about repairing the current blog tool](/2023/02/08/fixing-my-blog.html)_
