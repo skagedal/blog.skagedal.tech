@@ -3,19 +3,27 @@ layout: post
 title:  "Testing Zola"
 ---
 
+It does feel nice to have a clean deploy script again, after [yesterday's fixes](/2023/02/08/fixing-my-blog.html)!
+
 One thing that I wanted to do before in this blog is to have little custom blocks of content. So, for example, in [this post](/2023/01/04/habit-tracker-functionality-and-first-migration.html) I had a little conversation with ChatGPT. I was thinking that it would be really neat if I could wrap that whole ChatGPT response in a little div, and then style it with some CSS to make it look kind of like it does in the ChatGPT user interface.
 
 So, I thought maybe I could mix in a little bit of HTML in my Markdown, like:
 
-```
-Here's some content!
+````
+This is me speaking!
 
 <div class="chatgpt">
 Here's a response from ChatGPT!
 
-And maybe it has several paragraphs in it, and a code block or two!
-</div>
+```java
+Here is some Java code!
 ```
+
+And then maybe some other content from ChatGPT!
+</div>
+
+And so on.
+````
 
 But my attempts to do that in Jekyll failed. It passes the `<div>` tags through, but fails to parse code blocks within it. I did google around, and don't quote me on this (rather, correct me if I'm wrong), but it seemed like it wasn't possible. It seemed, however, that it might be possible with some other static site generators. And then I was also mildly annoyed with some other things regarding Jekyll and I was just in the mood for maybe testing out something else. 
 

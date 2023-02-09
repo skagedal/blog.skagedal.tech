@@ -247,3 +247,4 @@ echo "💁 Done!"
 
 The little emojis aren't just pretty, they help me separate the output that comes from me and the output that comes from other tools. 
 
+_[Continue reading the next post](/2023/02/09/testing-zola.html)_
