@@ -55,3 +55,4 @@ The `zola init` really sets up an empty site for me. I'm following the guide and
 
 So now I feel encouraged to continue the experiment. Obviously, I'll have to find a way to move over all of my existing content and not break incoming links. But I'm feeling optimistic!
 
+_[Continue reading about exceprts](/2023/02/10/adding-summaries.html)_
