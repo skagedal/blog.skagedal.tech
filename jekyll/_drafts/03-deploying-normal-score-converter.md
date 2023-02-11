@@ -48,9 +48,28 @@ Entry point: webroot = certbot._internal.plugins.webroot:Authenticator
 
 Allright, yeah, that seems right.
 
-I'm not quite sure why are we are doing this, but now I'm reading that...
+I'm not quite sure why we are doing this, but now I'm reading that...
 
 > Because Certbot needs to connect to your DNS provider and create DNS records on your behalf, you’ll need to give it permission to do so. 
 
 Ugh. Why does it have to create new DNS records? DNS is fine? I just want a certificate? No?
 
+I'm reading that guide again, closer, trying to understand. I'm taking a look at what the DNS setup looks like in my DigitalOcean console. It's like this:
+
+| Type | Hostname        | Value                          | TTL (seconds) |
+|------|-----------------|--------------------------------|---------------|
+| A    | *.skagedal.tech | directs to 142.93.136.170      | 3600          |
+| A    | skagedal.tech   | directs to 142.93.136.170      | 3600          |
+| NS   | skagedal.tech   | directs to n2.digitalocean.com | 1800          |
+| NS   | skagedal.tech   | directs to n1.digitalocean.com | 1800          |
+| NS   | skagedal.tech   | directs to n3.digitalocean.com | 1800          |
+
+Note, here: https://cloud.digitalocean.com/networking/domains/skagedal.tech?i=fc083a
+
+DigitalOcean has a guide of what these mean: https://docs.digitalocean.com/products/networking/dns/how-to/manage-records/
+
+Continue that wildcard guide: https://www.digitalocean.com/community/tutorials/how-to-create-let-s-encrypt-wildcard-certificates-with-certbot
+
+And yes, let's encrypt does issue wildcard certs: https://letsencrypt.org/docs/faq/
+
+And yes, subdomains need either their own cert or a wildcard cert:  - https://serverfault.com/questions/566426/does-each-subdomain-need-its-own-ssl-certificate
