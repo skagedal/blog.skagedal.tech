@@ -57,8 +57,6 @@ Like, look at [these examples](https://en.wikipedia.org/wiki/Base64#Output_paddi
 
 &nbsp;
 
-(I'm sorry about how sadly ugly the tables are formatted in this blog post, I'll try to fix it soon.)
-
 So a trailing `=` should (or could, padding is not always used) be used when the last chunk of data is 2 bytes of length; here is is three bytes (or empty, depending on how we look at it). 
 
 I got curious – how do different Base64 decoders deal with a situation like this? 
