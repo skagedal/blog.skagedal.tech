@@ -1,6 +1,7 @@
 ---
 layout: post
-title:  "Updating normal score converter"
+title:  "Presenting Normal Score Converter"
+summary: "Discussing Normal Score Converter, a tool I wrote in 2013 to convert values on common psychometric scales, and how I could bring it up to date."
 ---
 
 Back in 2013, I was working as a psychologist. That sentence probably needs to be expanded upon, and I hope to write a blog post about that in the future, but it's not what this post is about. 
@@ -21,7 +22,7 @@ I love that, "watch this space" – and then nothing happens for ten years. All 
 
 > This tool is free, open source, software. You may freely use, copy, modify and re-publish the source according to the terms of the MIT license. The code is managed at Github. Please feel free to contact me if you have anything to say about the Normal Score Converter!
 
-Not many people have contacted me over the years, but there was one person who reported that it didn't work in Google Chrome. There is however one person, my great and wonderful friend Johannes Zackari, who has kept using it and recommending it to people! 
+Not many people have contacted me over the years, but there was one person who reported that it didn't work in Google Chrome, which still seems to be the case. There is however one person, my wonderful friend Johannes Zackari, who has kept using it and recommending it to people! 
 
 Today, he pointed out that when you search for "normalscore" on Duck Duck Go, the tool is actually the second hit after the [Wikipedia page](https://en.wikipedia.org/wiki/Normal_score), which is pretty cool.
 
@@ -41,5 +42,5 @@ Johannes favorite thing is to add a 3d6 (the [dice notation](https://en.wikipedi
 
 I already have a couple of ongoing projects in this blog, but I'd like to do something with this. I'd like to fix the Google Chrome bug, because if I remember correctly I did investigate it at some point and it was something rather simple. And I would love to set it up to run on this server, as I'm trying to move content away from my old site https://helgo.net/simon/.
 
-First mission will be to see if I can clone it and get it running locally again. Seems that I have a Python script, [build.py](https://github.com/skagedal/normalscore/blob/5b512f2302083479ed25c80bd8ff6b93cef7b839/build.py) to put all the Javascript together. The modern approach would be to use something like [Yarn](https://yarnpkg.com/), but let's see first if I can get the old stuff to build.
+First mission will be to see if I can clone it and get it running locally again. Seems that I have a Python script, [build.py](https://github.com/skagedal/normalscore/blob/5b512f2302083479ed25c80bd8ff6b93cef7b839/build.py) to put all the Javascript together. The modern approach would be to use something like [Yarn](https://yarnpkg.com/), but let's see first if I can get the old stuff to build. Next episode, hopefully!
 
