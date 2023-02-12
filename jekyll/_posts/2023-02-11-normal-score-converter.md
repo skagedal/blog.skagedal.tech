@@ -44,3 +44,5 @@ I already have a couple of ongoing projects in this blog, but I'd like to do som
 
 First mission will be to see if I can clone it and get it running locally again. Seems that I have a Python script, [build.py](https://github.com/skagedal/normalscore/blob/5b512f2302083479ed25c80bd8ff6b93cef7b839/build.py) to put all the Javascript together. The modern approach would be to use something like [Yarn](https://yarnpkg.com/), but let's see first if I can get the old stuff to build. Next episode, hopefully!
 
+_[Continue reading about bringing it back to life](/2023/02/12/building-normal-score-converter.html)_
+
