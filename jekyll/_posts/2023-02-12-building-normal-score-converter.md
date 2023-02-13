@@ -82,3 +82,5 @@ Yeah! This opens up my single-page app, if we want to call it that, in Safari â€
 [Here's](https://github.com/skagedal/normalscore/commit/0b1a9ce804eb5305c1f4f7fa522b1439da967f4b) what my first commit in ten years (minus eleven days!) looks like. 
 
 Next thing will be to get this thing deployed here on skagedal.tech!  
+
+_[Continue to the next part](/2023/02/13/deploying-normal-score-converter.html)_

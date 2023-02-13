@@ -5,7 +5,7 @@ summary: "Since I now have three subdomains that need certificates, it's time to
 ---
 Here at skagedal's oboy, we don't just talk about writing code, but also about the mundane details of getting it deployed. For example, with the habit tracker, I wrote about [uploading it to the server](/2023/01/22/habit-tracker-deploying-the-jar.html) and [exposing the service](/2023/01/25/habit-tracker-exposing-it.html) to the Internet. 
 
-Now it's time to deploy the Normal Score converter, an old project which I managed to get building in the previous post. First of all, it should have its own subdomain, and it should be protected by HTTPS.  
+Now it's time to deploy the Normal Score converter, an old project which I managed to get building in the [previous post](/2023/02/12/building-normal-score-converter.html). First of all, it should have its own subdomain, and it should be protected by HTTPS.  
 Previously, I've set up certbot to get and renew certificates for each domain, `skagedal.tech`, `blog.skagedal.tech` and `hahabit.skagedal.tech`. Now I want to also set up `normalscore.skagedal.tech`. It gets a bit tedious – wouldn't it be sweet if I could just have one certificate for all of them, and future needs?  
 
 [This answer](https://serverfault.com/a/566433) on Stack Exchange explains that this is indeed possible using something called a wildcard certificate. Let's Encrypt, the free Certificate Authority that I use, confirms in [their FAQ](https://letsencrypt.org/docs/faq/) that they do support such certificates, and [this guide](https://www.digitalocean.com/community/tutorials/how-to-create-let-s-encrypt-wildcard-certificates-with-certbot) from Digital Ocean tells me how to set it up. Let's give it a shot. 
