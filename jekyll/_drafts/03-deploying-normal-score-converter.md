@@ -1,16 +1,28 @@
 ---
 layout: post
 title:  "Setting up a wildcard certificate for skagedal.tech"
+summary: "Since I now have three subdomains that need certificates, it's time to set up a wildcard certificate."
 ---
-Ok, this is starting to become a pattern here at skagedal's oboy – I write about some building some software project, but I also write about the mundane details of getting it deployed. Like with hahabit, the habit tracker, I wrote about [uploading it to the server](/2023/01/22/habit-tracker-deploying-the-jar.html) and [exposing the service](/2023/01/25/habit-tracker-exposing-it.html) to the Internet. 
+Here at skagedal's oboy, we don't just talk about writing code, but also about the mundane details of getting it deployed. For example, with the habit tracker, I wrote about [uploading it to the server](/2023/01/22/habit-tracker-deploying-the-jar.html) and [exposing the service](/2023/01/25/habit-tracker-exposing-it.html) to the Internet. 
 
-Let's first discuss TLS. So far, I've set up certbot to get and renew certificates for each domain, `skagedal.tech`, `blog.skagedal.tech` and `hahabit.skagedal.tech`. Now I think I want to also set up `normalscore.skagedal.tech`. It gets a bit tedious, wouldn't it be sweet if I could just get one certificate for all of them? 
+Now it's time to deploy the Normal Score converter, an old project which I managed to get building in the previous post. First of all, it should have its own subdomain, and it should be protected by HTTPS.  
+Previously, I've set up certbot to get and renew certificates for each domain, `skagedal.tech`, `blog.skagedal.tech` and `hahabit.skagedal.tech`. Now I want to also set up `normalscore.skagedal.tech`. It gets a bit tedious – wouldn't it be sweet if I could just have one certificate for all of them, and future needs?  
 
-[This guide](https://www.digitalocean.com/community/tutorials/how-to-create-let-s-encrypt-wildcard-certificates-with-certbot) tells me how to get a so-called wildcard certificate. I guess it can't hurt to try?
+[This answer](https://serverfault.com/a/566433) on Stack Exchange explains that this is indeed possible using something called a wildcard certificate. Let's Encrypt, the free Certificate Authority that I use, confirms in [their FAQ](https://letsencrypt.org/docs/faq/) that they do support such certificates, and [this guide](https://www.digitalocean.com/community/tutorials/how-to-create-let-s-encrypt-wildcard-certificates-with-certbot) from Digital Ocean tells me how to set it up. Let's give it a shot. 
 
-As far as I understand, the first step, "Setting up a Wildcard DNS", is something I've already taken care of, as I also discussed in [this post](/2023/01/25/habit-tracker-exposing-it.html). 
+The first step in the guide, "Setting up a Wildcard DNS", is something I've already taken care of, as I also discussed in [this post](/2023/01/25/habit-tracker-exposing-it.html). Here is what my DNS setup looks like (viewing it in the DigitalOcean console):
 
-but now apparently, I'm going ton need to install that "correct certbot DNS plugin". As you know, I'm using DigitalOcean, so I'll go with the `certbot-dns-digitalocean` plugin. 
+
+| Type | Hostname        | Value                          | TTL (seconds) |
+|------|-----------------|--------------------------------|---------------|
+| A    | *.skagedal.tech | directs to 142.93.136.170      | 3600          |
+| A    | skagedal.tech   | directs to 142.93.136.170      | 3600          |
+| NS   | skagedal.tech   | directs to n2.digitalocean.com | 1800          |
+| NS   | skagedal.tech   | directs to n1.digitalocean.com | 1800          |
+| NS   | skagedal.tech   | directs to n3.digitalocean.com | 1800          |
+
+
+But then apparently, I'm going to need to install a "certbot DNS plugin". Hmm. Not sure why, but let's continue. As you know, I'm on DigitalOcean, so I'll go with the `certbot-dns-digitalocean` plugin. 
 
 ```
 $ sudo apt install python3-certbot-dns-digitalocean
@@ -52,25 +64,15 @@ I'm not quite sure why we are doing this, but now I'm reading that...
 
 > Because Certbot needs to connect to your DNS provider and create DNS records on your behalf, you’ll need to give it permission to do so. 
 
-Ugh. Why does it have to create new DNS records? DNS is fine? I just want a certificate? No?
+Ugh. Why does it have to create new DNS records? My DNS is fine? I just want a certificate? No?
 
-Oh, I'm reading that guide again more slowly, and now I see the relevant paragraph:
+I read through the guide again, slowly, and now I see the relevant paragraph:
 
 > Before issuing certificates, Let’s Encrypt performs a challenge to verify that you control the hosts you’re requesting certificates for. In the case of a wildcard certificate, we need to prove that we control the entire domain. We do this by responding to a DNS-based challenge, where **Certbot answers the challenge by creating a special DNS record in the target domain**. Let’s Encrypt’s servers then verify this record before issuing the certificate.
 
 (My emphasis.) Allright, that makes sense I guess. 
 
-Well, I guess I'll just have to try it. Before I do, I should backup of my current certbot configuration, and take a look at what my DNS configuration currently looks like, in case things get messed up. It looks like this:
-
-| Type | Hostname        | Value                          | TTL (seconds) |
-|------|-----------------|--------------------------------|---------------|
-| A    | *.skagedal.tech | directs to 142.93.136.170      | 3600          |
-| A    | skagedal.tech   | directs to 142.93.136.170      | 3600          |
-| NS   | skagedal.tech   | directs to n2.digitalocean.com | 1800          |
-| NS   | skagedal.tech   | directs to n1.digitalocean.com | 1800          |
-| NS   | skagedal.tech   | directs to n3.digitalocean.com | 1800          |
-
-Ok. I generate a DigitalOcean API token, and put it in the `certbot-creds.ini` file according to the guide, and then I take a deep breath and run this:
+Well, I guess I'll just have to try it, after taking some relevant backup copies. Ok. I generate a DigitalOcean API token, and put it in the `certbot-creds.ini` file according to the guide, and then I take a deep breath and run this:
 
 ```shell
 $ sudo certbot certonly \
@@ -127,7 +129,7 @@ server = https://acme-v02.api.letsencrypt.org/directory
 
 So yeah, it seems to have recorded the place where I stored those credentials. Pretty sure it'll use those again. Pretty sure I'll have to make sure that API token is updated. How am I going to remember that?!
 
-Hopefully, DigitalOcean will send me an e-mail or something when the API token is about to expire. I'll just have to make sure to read my e-mails. I guess I'll try that. I can do it. I mean I could have also chosen an API token that never expires, but people say that's bad. 
+Hopefully, DigitalOcean will send me an e-mail or something when the API token is about to expire. I'll just have to make sure to read my e-mails. I mean I could have also chosen an API token that never expires, but people say that's bad. 
 
 Anyway, let's forget about tomorrow.
 
@@ -168,17 +170,8 @@ server {
 }
 ```
 
-Putting some nonsense in `~/normalscore/index.html`, and navigating to https://normalscore.skagedal.tech in my browser, and yeah! I can see the nonsense I put in `~/normalscore/index.html`. 
+Putting some nonsense in `~/normalscore/index.html`, and navigating to https://normalscore.skagedal.tech in my browser, and yeah! I can see the nonsense I put in `~/normalscore/index.html` there, and I can view the certificate and confirm that it's this shiny new one I created. Nice. I also replace the certificates of blog.skagedal.tech with this one, and it works fine. I realize I can't use this for the top-level skagedal.tech though, since that doesn't match the wildcard. Apparently, what I'd need to do to make that work with the same certificate is to put it as a Sugject Alternative Name in the certificate. Maybe later.
 
-----
-notes
+Another thing I need to do is to make sure that nginx gets restarted properly when the certificate is renewed. This happens automatically when you use the "nginx" plugin for certbot, but we can't have that for wildcard certificates. [This site](https://blog.arnonerba.com/2019/01/lets-encrypt-how-to-automatically-restart-nginx-with-certbot) describes one approach.
 
-Note, here: https://cloud.digitalocean.com/networking/domains/skagedal.tech?i=fc083a
-
-DigitalOcean has a guide of what these mean: https://docs.digitalocean.com/products/networking/dns/how-to/manage-records/
-
-Continue that wildcard guide: https://www.digitalocean.com/community/tutorials/how-to-create-let-s-encrypt-wildcard-certificates-with-certbot
-
-And yes, let's encrypt does issue wildcard certs: https://letsencrypt.org/docs/faq/
-
-And yes, subdomains need either their own cert or a wildcard cert:  - https://serverfault.com/questions/566426/does-each-subdomain-need-its-own-ssl-certificate
+But anyway, as I said, let's forget about tomorrow. I am now ready to put the real Normal Score Converter content in the snew ite! Tomorrow! Which I just said I would forget about! 
