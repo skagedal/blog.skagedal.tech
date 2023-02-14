@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Deploying normal score converter"
+title:  "Hahabit: Setting up Spring Actuator"
 ---
 I'm in the mood for continuing on my habit tracker! I do use it every day, you know. I click those buttons. It feels good because I built it. I'm proud of it. I'm proud of myself. I'm proud of you. I'm proud of us. I'm proud of the world. I'm proud of the universe. I'm proud of the multiverse.
 
