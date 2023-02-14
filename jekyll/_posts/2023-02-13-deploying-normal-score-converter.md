@@ -175,3 +175,5 @@ Putting some nonsense in `~/normalscore/index.html`, and navigating to https://n
 Another thing I need to do is to make sure that nginx gets restarted properly when the certificate is renewed. This happens automatically when you use the "nginx" plugin for certbot, but we can't have that for wildcard certificates. [This site](https://blog.arnonerba.com/2019/01/lets-encrypt-how-to-automatically-restart-nginx-with-certbot) describes one approach.
 
 But anyway, as I said, let's forget about tomorrow. I am now ready to put the real Normal Score Converter content in the snew ite! Tomorrow! Which I just said I would forget about! 
+
+_[Continue reading the final installment of this short series](/2023/02/14/deploying-and-fixing-chrome-bug.html)_

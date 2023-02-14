@@ -1,10 +1,13 @@
 ---
 layout: post
-title:  "Deploying normal score converter"
+title:  "Setting up Normal Score Converter and fixing a bug"
+summary: "I finish the migration of the Normal Score Converter tool and fix the Google Chrome bug reported to me in 2016."
 ---
-After setting up the nginx infrastructure in the previous post, I now just had to make a little deploy script. I already had one from back in the day, but it just copied some files from one directory to another – I think the workflow I used to have back then is that I'd ssh in to my server and have the Git repository cloned there, pull the latest changes and run the deploy script. That's not how I want to do any more. 
+Happy Valentine's Day!
 
-So I made a script similar to the one I have for [the habit tracker](/2023/01/22/habit-tracker-deploying-the-jar.html) and [the blog](/2023/02/08/fixing-my-blog.html), and after fixing a few other little things (apparently an HTTPS served HTML file can't point to a HTTP served JavaScript file, who knew?), I was able to deploy the app and get it up and running at https://normalscore.skagedal.tech.
+After setting up the nginx infrastructure and TLS certificate in the [previous post](/2023/02/13/deploying-normal-score-converter.html), I now just had to make a little deploy script. I already had one from back in the day, but it just copied some files from one directory to another – I think the workflow I used to have back then is that I'd ssh in to my server and have the Git repository cloned there, pull the latest changes and run the deploy script. That's not how I want to do it any more. 
+
+So I made a script similar to the one I have for [the habit tracker](/2023/01/22/habit-tracker-deploying-the-jar.html) and [the blog](/2023/02/08/fixing-my-blog.html), and after fixing a few other little things (apparently an HTTPS served HTML file can't point to a HTTP served JavaScript file, who knew?), I was able to deploy the app and get it up and running at [normalscore.skagedal.tech](https://normalscore.skagedal.tech).
 
 Then I set out to fix the bug I've gotten reported to me twice. Once, in 2016:
 
@@ -30,4 +33,4 @@ Redirect /simon/normalscore/ https://normalscore.skagedal.tech
 
 I removed the rest of the files, except a very placeholder `index.html`, in case the redirect would somehow not work. 
 
-I think this will be it for this project for the time being. Sorry, Johannes, no new features and no iOS app just yet! Who knows! "Watch this space", as they say.  
+I think this will be it for this project for the time being. Sorry, Johannes, no new features and no iOS app just yet! Who knows! "Watch this space", [as they say](/2023/02/11/normal-score-converter.html).  
