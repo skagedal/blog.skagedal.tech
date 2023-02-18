@@ -13,3 +13,9 @@ Yeah, that's a nice way of putting it. Hadn't thought about that. (Wonder what t
 >Then it will print out the context of the current template.
 
 And 
+
+
+---
+Btw, there are breaking changes in releases.
+https://github.com/getzola/zola/blob/master/CHANGELOG.md
+For example sass.
