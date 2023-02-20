@@ -1,11 +1,11 @@
 ---
 layout: post
 title:  "More HTML unit"
-summary: "I continue my exploration of HTML unit testing, this time with a more complex example."
+summary: "I continue covering the functionality of the Habit Tracker using the HtmlUnit framework, deal with missing support of the ECMAScript Internationalization API and get my test coverage up to 90%."
 ---
-We now have a nice testing setup for our HTML-serving Spring Boot App, using HtmlUnit and using a randomly created user. 
+We now have a nice testing setup for our HTML-serving Spring Boot App, using [HtmlUnit](/2023/02/18/html-unit-testing.html) and using a [randomly created user](/2023/02/19/creating-random-test-users.html). 
 
-Now I'm going to try to just flesh out the whole flow so far as tests. Every here and there, I need to add little things to the production code/html to make the tests easier to write, such as adding id:s to elements. That's fine. More than fine, I think.
+Now I'm going to try to just flesh out the whole flow so far as tests. Every here and there, I need to add little things to the production code and HTML templates to make the tests easier to write, such as adding id:s to elements. That's fine. More than fine, I think.
 
 So, now I have this to test the flow where we're adding a habit:
 
@@ -49,7 +49,7 @@ public class WebTests {
 }
 ```
 
-It looked weird to me at first, those lines that says `field.type(text)`; that should be read as the verb "type", as in that you're typing that into the field.
+Tthose lines that says `field.type(text)` looked weird to me at first; that should be read as the verb "type", as in that you're typing that into the field.
 
 New test coverage: 57.6208%. (Yeah, I'm sticking with that ridiculously precise number formatting, now that I've started with it.) 
 
@@ -92,9 +92,9 @@ That rings a bell. Frequent readers of the "Writing a Habit Tracker" series will
 document.cookie = 'zoneId=' + Intl.DateTimeFormat().resolvedOptions().timeZone;
 ```
 
-This `Intl` object API, however, is a "recent" addition to JavaScript. Well, it's [from 2012](https://402.ecma-international.org/1.0/), supported by [major browsers since the mid-10's](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl), but still). But I guess it's not supported by HtmlUnit's JavaScript engine. 
+This `Intl` object API, however, is a "recent" addition to JavaScript. Well, it's [from 2012](https://402.ecma-international.org/1.0/), supported by [major browsers since the mid-10's](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl). But apparently, it's not supported by HtmlUnit's JavaScript engine. 
 
-So in a way, we have uncovered a bug here, if we consider lacking support for decade-old browsers a bug. 
+So in a way, we have uncovered a bug in our code here, if we consider lacking support for decade-old browsers a bug. 
 
 I did research this briefly back when I wrote that code, and I found there were some workarounds for older browsers, buuuut.... I was too lazy now, and I'm too lazy now. Or, "lazy" is not really the word; it simply is not what I feel like spending my time on. 
 
