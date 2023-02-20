@@ -99,3 +99,4 @@ Coverage: 36.803%
 
 Nice. If I were a better Gradle hacker, I'd make this run as some kind of hook in the Gradle file itself. But I'm happy with this for now. 
 
+_[Continue reading part thirty-two.](/2023/02/17/spring-boot-test-with-random-port.html)_

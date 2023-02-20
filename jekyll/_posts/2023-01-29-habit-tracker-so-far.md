@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 29: Summary so far"
 ---
 
-I have now written twenty-seven little posts in the series called Writing a Habit Tracker! I'm pretty happy about that! 
+I have now written twenty-eight little posts in the series called Writing a Habit Tracker! I'm pretty happy about that! 
 
 It's not like we have implemented a whole lot of functionality. But we have discussed a whole bunch of stuff. I like to think of it as a kind of slow-cooking approach to programming, where we take the time to nerd out on details.
 
@@ -44,3 +44,5 @@ I think part twenty-six marks for a good ending of Season One of "Writing a Habi
 I'm now planning to take a little break from this series, but hoping to continue writing a blog post every day. I have some other little things I'd like to focus on for a bit: a PR for Testcontainers and some improvements for this blog.
 
 But after that, I hope to get back to the Habit Tracker. I might blog about improving the test suite, writing an API, writing a CLI client, visualizing the progress, writing an iOS client and enabling registration for other people. Who knows. Stay tuned! 
+
+_Continue reading about my [next little project](/2023/01/30/test-containers-and-colima.html), or [jump straight ahead to part thirty](/2023/02/15/hahabit-tracking-deploys.html) of the habit tracker series._
