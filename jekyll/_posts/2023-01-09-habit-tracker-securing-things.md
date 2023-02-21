@@ -132,7 +132,7 @@ Connection: keep-alive
 
 Interesting – now I get that 302. So it's gotta be one of those headers we're seeing there in my request, or a combination of them, that triggers this behavior. But which one? 
 
-I don't know, and after trying a couple of options, lazily googling and asking ChatGPT, I suddenly got bored with this tangent. I'm happy right now with understanding _approximately_ how this works. (But please let me know if you know!) Let's instead try authenticating ourselves with `curl`.
+I don't know, and after trying a couple of options, lazily googling and asking ChatGPT, I suddenly got bored with this tangent. I'm happy right now with understanding _approximately_ how this works[^1]. Let's instead try authenticating ourselves with `curl`.
 
 We can use the `--user` option to set the Basic Authentication header properly.
 
@@ -185,3 +185,7 @@ Set-Cookie: JSESSIONID=A0A8B589732A7DDE0CBDBA58A6901218; Path=/; HttpOnly
 But not now, when authenticated. I wonder why. Oh well.
 
 _[Continue reading part ten.](/2023/01/10/habit-tracker-securing-things-2.html)_
+
+### Notes
+
+[^1]: In [part thirty-six](/2023/02/21/adding-apis.html), I figure out this mystery! 

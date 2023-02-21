@@ -1,17 +1,19 @@
 ---
 layout: post
-title:  "Hahabit: Adding API:s"
-summary: "I discuss adding API:s to the habit tracker"
+title:  "Let's start looking at API:s"
+summary: "I want to add some JSON REST API:s to the habit tracker, and begin with writing a first failing test. Then I figure out some authentication details, add Basic Auth and disable CSRF."
 ---
-So, I'm pretty happy with the test coverage that we have worked now for a few post. I looked at what those remaining 10% consisted of, and did not deem them interesting enough to spend time writing tests for. Let's continue with other stuff.  
+I'm pretty happy with the test coverage now that we have worked on that for a few posts – [here's](/2023/02/20/more-html-unit.html) the last one. I looked at what those remaining 10% consisted of, and did not deem them interesting enough to spend time writing tests for. Let's continue with other stuff.  
 
-I want to add some new kinds of user experiences for Hahabit. I'm not all that happy with server-generated HTML. Eventually, I might consider either writing an iOS app, or a web app that uses React, or something entirely different. Either way, I'll want some API:s.
+I want to eventually add some new kinds of user experiences for Hahabit. I'm not all that happy with the server-generated HTML, and might after all want to move to a frontend app written in React or similar, eventually. Or, I might consider writing an iOS app. Actually, for myself, most of all I want a nice CLI! 
 
-To begin with, the API:s will reflect the current functionality of the web app. I'm going to start with writing some tests.
+In all those cases, I'll want some API:s.
 
-What's nice with doing the TDD thing of writing the tests first for API:s is that you get to think about the API:s from the client's point of view, how they're supposed to be used, before you write them.
+I'll begin with some API:s that  over the current functionality of the web app, and I'm going to start with writing some tests.
 
-I'm creating a new class called `ApiTests` and copy a whole bunch of boilerplate code from `WebTests`. Some day for sure I'll try to neaten things up a bit. 
+What's nice with doing the [test-driven development](https://en.wikipedia.org/wiki/Test-driven_development) thing of writing the tests first for API:s is that you get to think about them a bit from the client's point of view, how they're supposed to be used, before you write them.
+
+I'm going to create a new class called `ApiTests` and copy a whole bunch of boilerplate code from `WebTests`. Some day for sure I'll try to neaten things up a bit. 
 
 To get going, here's my first test:
 
@@ -42,7 +44,7 @@ public class ApiTests {
 }
 ```
 
-We should figure out something more proper for the API authentication later, but for now I think Basic Auth will do. So, that `testDataManager.authHeader(String userName)` function is just this:
+We should figure out something better for the API authentication later, but [Basic Auth](https://en.wikipedia.org/wiki/Basic_access_authentication) will do for now. So, that `testDataManager.authHeader(String userName)` function is just this:
 
 ```java
 public class TestDataManager {
@@ -62,7 +64,7 @@ expected: 200
  but was: 302
  ```
 
-It's directing everyone to the login form. Let's add Basic Auth:
+It's directing everyone to the login form using a [302 Found](https://http.cat/302), the most confusingly named HTTP status code. Let's add Basic Auth to our Spring Security configuration:
 
 ```java
 public class WebSecurityConfig {
@@ -84,7 +86,7 @@ public class WebSecurityConfig {
 }
 ```
 
-Now I expect my authentication to work, but as I haven't implemented the API yet, I should get a 404!
+Now I expect the authentication to work, but as I haven't implemented the API yet, I should get a [404 Not Found](https://http.cat/404) response!
 
 ```
 org.opentest4j.AssertionFailedError: 
@@ -92,7 +94,7 @@ expected: 200
  but was: 401
  ```
 
-Hmm no, now I get a [401](https://http.cat/401), Unauthorized. Did I mess up my Basic Auth header somehow? I don't think I did. I see nothing relevant in the service logs. I'd like to get more logs please. 
+Hmm no – instead, I get a [401 Unauthorized](https://http.cat/401). Did I mess up my Basic Auth header somehow? I don't think I did. I see nothing relevant in the service logs. But they are not very informative. I'd like to have more logs please. 
 
 I think I'll do that by adding a little `dev` profile for myself, an `application-dev.properties` file in resources:
 
@@ -117,7 +119,7 @@ s.w.a.DelegatingAuthenticationEntryPoint : Trying to match using RequestHeaderRe
 s.w.a.DelegatingAuthenticationEntryPoint : No match found. Using default entry point org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint@517fbb55
 ```
 
-Allright, so the first part of this at least makes sense! I have protection for [cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) (CSRF) enabled, and I'm not sending a CSRF token. The rest of the output is confusing; it says it's responding with a 403 but I clearly see a 401 as the end result of the call?  
+Allright, so the first two lines of this at least makes sense! I have protection for [cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) (CSRF) enabled, but I'm not sending a CSRF token. The rest of the output is confusing, however; it says it's responding with a [403 Forbidden](https://http.cat/403) but I clearly see a 401 as the end result of the call?  
 
 Anyway, let's just deal with the CSRF stuff. I don't think this is relevant to have enabled for the API.[^1] I'll disable it:
 
@@ -145,7 +147,7 @@ public class WebSecurityConfig {
 }
 ```
 
-Now I get my expected [404](https://http.cat/404), Not Found!
+Now I get my expected 404 Not Found!
 
 ```
 org.opentest4j.AssertionFailedError:
@@ -174,11 +176,13 @@ public class WebTests {
 }
 ```
 
-We no longer get a 302 here, but a 401. However, as I test the app locally and connect through the browser, I can confirm that the redirect is working as expected there. This is exactly the behavior I described [back in part nine](/2023/01/09/habit-tracker-securing-things.html). I still want to know what it is that causes this difference. It seems that also HtmlUnit is getting the redirect, so it's doing whatever browsers are doing.  
+We no longer get a 302 here, but a 401. However, as I test the app locally and connect through the browser, I can confirm that the redirect is working as expected there. This is exactly the behavior I described [back in part nine](/2023/01/09/habit-tracker-securing-things.html). I still want to know what it is that causes this difference between browsers and straight HTTP calls. It seems that also HtmlUnit is getting the redirect, so it's doing whatever browsers are doing.  
 
 I went so far as to [write a question on Stack Overflow](https://stackoverflow.com/questions/75511353/how-does-spring-determine-whether-to-redirect-to-form-login/75511354#75511354), and then, when I was writing the question I took a look again at the headers that the browsers were sending (again, see [part nine](/2023/01/09/habit-tracker-securing-things.html)) and had a face-palm moment. I had overlooked a very basic thing: the `Accept` header. So, with `Accept: text/html`, we get the redirect; with `Accept: */*`, we get the 401. 
 
-I'm going to encode this knowledge into the test suite. I'm moving the test to `ApiTests` so that `WebTests` only deals with the HtmlUnit tests and `ApiTests` is the one doing direct HTTP calls. Then I break it into these two:
+Rubberducking for the win. 
+
+Now that this knowledge is in my brain, I'm going to also encode it into the test suite. First, I'm moving the test to `ApiTests` so that `WebTests` only deals with the HtmlUnit tests and `ApiTests` is the one doing direct HTTP calls. Then I break it into these two:
 
 ```java
 public class ApiTests {
@@ -212,6 +216,8 @@ public class ApiTests {
 
 Cool! I mean, actually, not sure this is the behavior I want – I'd like to just have the form login protect the web endpoints and basic auth protect the API endpoints. But Spring Security setup is confusing to me. I'll need to dig deeper into it later, because also I don't want basic auth at all. 
 
-Now I'd like to write some API:s! 
+Let's continue with making our new `create_habit` test green tomorrow!  
 
-[^1]: But see [here](https://docs.spring.io/spring-security/reference/features/exploits/csrf.html#csrf-when-json). If I ever 
+### Notes
+
+[^1]: But see [here](https://docs.spring.io/spring-security/reference/features/exploits/csrf.html#csrf-when-json) regarding CSRF and JSON API:s. If I ever open this tool up to the public, I'll hopefully have revisited the security setup.

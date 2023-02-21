@@ -28,3 +28,7 @@ public class HabitsApiController {
 ```
 
 I considered making the API call return the created habit object. It could be useful perhaps to get the ID of the thing you just created. But I also think it's a good thing to keep things simple until you need them. Also, should it perhaps return a `201 Created`? 
+
+----
+
+Regarding HttpClient /  BodySubscriber etc https://stackoverflow.com/questions/57629401/deserializing-json-using-java-11-httpclient-and-custom-bodyhandler-with-jackson

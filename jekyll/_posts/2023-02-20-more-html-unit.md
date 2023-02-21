@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "More HTML unit"
-summary: "I continue covering the functionality of the Habit Tracker using the HtmlUnit framework, deal with missing support of the ECMAScript Internationalization API and get my test coverage up to 90%."
+summary: "I continue covering the functionality of the Habit Tracker with tests using the HtmlUnit framework, deal with missing support of the ECMAScript Internationalization API and get my test coverage up to 90%."
 ---
 We now have a nice testing setup for our HTML-serving Spring Boot App, using [HtmlUnit](/2023/02/18/html-unit-testing.html) and using a [randomly created user](/2023/02/19/creating-random-test-users.html). 
 
@@ -144,3 +144,5 @@ Coverage: 90.7063%
 ```
 
 That's pretty good!  
+
+_[Continue reading part thirty-six.](/2023/02/21/adding-apis.html)_
