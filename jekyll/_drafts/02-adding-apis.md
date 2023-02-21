@@ -9,7 +9,7 @@ I want to add some new kinds of user experiences for Hahabit. I'm not all that h
 
 To begin with, the API:s will reflect the current functionality of the web app. I'm going to start with writing some tests.
 
-What's nice with doing the TDD thing of writing the tests first for API:s is that you get to think about the API:s from the client's point of view, how they're suposed to be used, before you write them.
+What's nice with doing the TDD thing of writing the tests first for API:s is that you get to think about the API:s from the client's point of view, how they're supposed to be used, before you write them.
 
 I'm creating a new class called `ApiTests` and copy a whole bunch of boilerplate code from `WebTests`. Some day for sure I'll try to neaten things up a bit. 
 
@@ -94,14 +94,14 @@ expected: 200
 
 Hmm no, now I get a [401](https://http.cat/401), Unauthorized. Did I mess up my Basic Auth header somehow? I don't think I did. I see nothing relevant in the service logs. I'd like to get more logs please. 
 
-I think I'll add a little `dev` profile for myself, an `application-dev.properties` in resources:
+I think I'll do that by adding a little `dev` profile for myself, an `application-dev.properties` file in resources:
 
 ```properties
 logging.level.org.springframework.security=DEBUG
 logging.level.org.springframework.web=DEBUG
 ``` 
 
-Running my tests now with the `-Dspring.profiles.active=dev` flag in the VM arguments, I see this in logs:
+Running my tests now with the `-Dspring.profiles.active=dev` flag in the VM arguments, I see this in the logs:
 
 ```
 o.s.security.web.FilterChainProxy        : Securing POST /api/habits
@@ -117,9 +117,9 @@ s.w.a.DelegatingAuthenticationEntryPoint : Trying to match using RequestHeaderRe
 s.w.a.DelegatingAuthenticationEntryPoint : No match found. Using default entry point org.springframework.security.web.authentication.www.BasicAuthenticationEntryPoint@517fbb55
 ```
 
-Allright, so the first part of this at least makes sense! I have protection for [Cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) enabled, and I'm not sending a CSRF token. The rest of the output is confusing; it says it's responding with a 403 but I clearly see a 401 as the end result of the call?  
+Allright, so the first part of this at least makes sense! I have protection for [cross-site request forgery](https://en.wikipedia.org/wiki/Cross-site_request_forgery) (CSRF) enabled, and I'm not sending a CSRF token. The rest of the output is confusing; it says it's responding with a 403 but I clearly see a 401 as the end result of the call?  
 
-Anyway, I don't think this is relevant to have enabled for the API. I'll disable it:
+Anyway, let's just deal with the CSRF stuff. I don't think this is relevant to have enabled for the API.[^1] I'll disable it:
 
 ```java
 public class WebSecurityConfig {
@@ -175,3 +175,43 @@ public class WebTests {
 ```
 
 We no longer get a 302 here, but a 401. However, as I test the app locally and connect through the browser, I can confirm that the redirect is working as expected there. This is exactly the behavior I described [back in part nine](/2023/01/09/habit-tracker-securing-things.html). I still want to know what it is that causes this difference. It seems that also HtmlUnit is getting the redirect, so it's doing whatever browsers are doing.  
+
+I went so far as to [write a question on Stack Overflow](https://stackoverflow.com/questions/75511353/how-does-spring-determine-whether-to-redirect-to-form-login/75511354#75511354), and then, when I was writing the question I took a look again at the headers that the browsers were sending (again, see [part nine](/2023/01/09/habit-tracker-securing-things.html)) and had a face-palm moment. I had overlooked a very basic thing: the `Accept` header. So, with `Accept: text/html`, we get the redirect; with `Accept: */*`, we get the 401. 
+
+I'm going to encode this knowledge into the test suite. I'm moving the test to `ApiTests` so that `WebTests` only deals with the HtmlUnit tests and `ApiTests` is the one doing direct HTTP calls. Then I break it into these two:
+
+```java
+public class ApiTests {
+    // ...
+
+    @Test
+    void apis_get_unauthorized_response() {
+        final var response = send(GET(uri("/")).build());
+
+        assertThat(response.statusCode())
+            .isEqualTo(HttpStatus.UNAUTHORIZED.value());
+        assertThat(response.headers().firstValue("WWW-Authenticate"))
+            .isPresent()
+            .hasValueSatisfying(value -> assertThat(value).startsWith("Basic"));
+    }
+
+    @Test
+    void home_redirects_to_login_in_browsers() {
+        final var responseAcceptingHtml = send(GET(uri("/")).header("Accept", "text/html").build());
+
+        assertThat(responseAcceptingHtml.statusCode())
+            .isEqualTo(HttpStatus.FOUND.value()); // that's a 302 redirect
+        assertThat(responseAcceptingHtml.headers().firstValue("Location"))
+            .isPresent()
+            .hasValue(uri("/login").toString());
+    }
+    
+    // ...
+}
+```
+
+Cool! I mean, actually, not sure this is the behavior I want – I'd like to just have the form login protect the web endpoints and basic auth protect the API endpoints. But Spring Security setup is confusing to me. I'll need to dig deeper into it later, because also I don't want basic auth at all. 
+
+Now I'd like to write some API:s! 
+
+[^1]: But see [here](https://docs.spring.io/spring-security/reference/features/exploits/csrf.html#csrf-when-json). If I ever 
