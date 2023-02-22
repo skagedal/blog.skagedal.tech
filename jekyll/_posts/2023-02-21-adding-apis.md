@@ -218,6 +218,8 @@ Cool! I mean, actually, not sure this is the behavior I want – I'd like to jus
 
 Let's continue with making our new `create_habit` test green tomorrow!  
 
+_[Continue reading part thirty-seven.](/2023/02/22/continue-adding-apis.html)_
+
 ### Notes
 
 [^1]: But see [here](https://docs.spring.io/spring-security/reference/features/exploits/csrf.html#csrf-when-json) regarding CSRF and JSON API:s. If I ever open this tool up to the public, I'll hopefully have revisited the security setup.
