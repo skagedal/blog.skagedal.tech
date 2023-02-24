@@ -106,7 +106,7 @@ Hooray! It worked! (The `%` you see there is my shell's way of saying "this thin
 
 ## Adding Vert.x
 
-So again, the Servlet Container is the core technology that handles serving HTTP requests for Spring Boot and several other Java frameworks. Vert.x, however, is not built on top of that. It is built on different kind of architecture, more similar to for example Node.js, where instead of spawning a thread for handling each request, there is one thread (or a few) with a main loop that handles I/O events, and passes them on various handlers. The core library that Vert.x uses for such asynchronous network handling is called Netty. 
+So again, the Servlet Container is the core technology that handles serving HTTP requests for Spring Boot and several other Java frameworks. Vert.x, however, is not built on top of that. It is built on a different kind of architecture, more similar to for example Node.js, where instead of spawning a thread for handling each request, there is one thread (or a few) with a main loop that handles I/O events, and passes them on various handlers. The core library that Vert.x uses for such asynchronous network handling is called Netty. 
 
 There is actually also a version of Spring Boot that uses Netty, Spring Boot Reactive, but we're not using that here. We want the vanilla Spring Boot. 
 
@@ -185,7 +185,7 @@ Woo-hoo! Yes we can! Yes we can!
 
 Now, we could pretty much deploy this, if we wanted. We could run it in a Docker container that exposes both the 8080 port for Spring Boot endpoints and the 8888 port for Vert.x endpoints, and then we could set up our load balancer to forward calls that start with `/spring` to port 8080 and calls that start with `/vertx` to port 8888.
 
-But that's not really what we want. At least it's not what I want. I don't know about you. But as you remember from the start of the post, we'd want to gradually move things from Vert.x to Spring Boot. We should be able to do that without the outside world (including the load balancer) having to have any knowledge of these two subsystem; it's an application implementation detail. 
+But that's not really what we want. At least it's not what I want. I don't know about you. But as you remember from the start of the post, we'd want to gradually move things from Vert.x to Spring Boot. We should be able to do that without the outside world (including the load balancer) having to have any knowledge of these two subsystems - whether an endpoint is written with Vert.x or Spring is an application implementation detail. 
 
 So let's look at an approach on how to do that. But first, let's not just use `curl` to test things, bud add some stuff to our test suite.
 
