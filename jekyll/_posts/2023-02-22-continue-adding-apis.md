@@ -267,6 +267,8 @@ public class HabitsApiController {
 
 Test coverage is stable at 90.3394%! 
 
+_[Continue to part thirty-eight.](/2023/02/23/finish-up-the-api.html)_
+
 ### Notes
 
 [^1]: There are a number of things we could discuss with this simple piece of code. Should we return the "full object" here, i.e. the Habit with it's ID and all the attributes populated? Some say that's the REST-y thing to do. And certainly getting the ID of the thing you just created seems useful. I however chose not to for the time being, because of API simplicity. I did however want it to return an empty JSON object, so that I can extend the API when needed without breaking clients (which, I argue, should ignore unknown properties). There's probably a better way of dong that than creating a record without properties, as I did here. 
