@@ -5,7 +5,7 @@ summary: "We rename the \"achievement\" concept to the more obvious \"tracking\"
 ---
 So, naming is hard. Every programmer will tell you so. 
 
-Sometimes is hard because it really is difficult to find a name that matches some abstraction you're creating, without it becoming something super-clumsy. Sometimes, that's because you're trying to create a way too smart and complex abstraction. 
+Sometimes it's hard because it really is difficult to find a name that matches the abstraction you're creating, without becoming super-clumsy. Sometimes, that's because you're trying to create a way too smart and complex abstraction. 
 
 At other times, you do find what seems to be a good name. But then requirements change and the well-named thing gets different responsibilities, and all of a sudden the name no longer fits.  
 
