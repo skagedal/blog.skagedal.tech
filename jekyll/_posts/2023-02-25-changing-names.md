@@ -46,3 +46,5 @@ ALTER TABLE trackings
 And we're good. 
 
 For some reason the Marge Simpsons quote "at least they're wearing clean underwear" comes to mind ([YouTube link](https://www.youtube.com/watch?v=jHkhexAQXLA)). So that concludes this post. 
+
+_[Continue to part fourty-one.](/2023/02/26/adding-openapi.html)_

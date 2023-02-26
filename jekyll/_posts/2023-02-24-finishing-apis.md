@@ -134,4 +134,4 @@ public class HabitsApiController {
 
 And we're done! Tests are now green. And test coverage has risen to 92.74%.
 
-_[Continue to part forty.](/2023/02/25/changing-names.html)_
+_[Continue to part fourty.](/2023/02/25/changing-names.html)_
