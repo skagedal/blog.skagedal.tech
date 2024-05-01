@@ -17,4 +17,8 @@ started with a project, what I'll typically want is:
 - A test runner
 - A way to run the main program and package it for installation in my `PATH`.
 
-Let's start with the test runner. There's `npm`, `yarn`, `pnpm`, `bun`... 
+Let's start with the package manager. There's `npm`, `yarn`, `pnpm`, `bun`... 
+
+## Cargo 
+
+Let's start with a comparison to Rust. 
