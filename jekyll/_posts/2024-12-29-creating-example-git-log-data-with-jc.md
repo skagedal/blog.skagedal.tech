@@ -22,12 +22,13 @@ I began thinking about how I could do a `git log` in one of my repositories and 
 
 I started with the timestamps, as it seemed simple. JavaScript's `Date` constructor prefers to get them in a [specific simplified form](https://tc39.es/ecma262/multipage/numbers-and-dates.html#sec-date-time-string-format) of ISO-8601 that looks like `YYYY-MM-DDTHH:mm:ss.sssZ`. This is unfortunately not what you get with git's `git log --date=iso8601` command; it rather gives you something like `2023-11-13 21:53:28 +0200`. This doesn't look like it's actually valid ISO-8601 [combined date and time respresentation](https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations) at all? But anyway, with just a little googling I got this:
 
-```console
+```
 $ git log  --date=format:'%Y-%m-%dT%H:%M:%S.000Z'
 ```
 
 Which gave me output like this:
-```console
+
+```
 commit fecbcf68e012948831910264a6a180923a8deda3
 Author: Simon Kågedal Reimer <skagedal@gmail.com>
 Date:   2024-06-08T07:21:02.000Z
@@ -55,7 +56,6 @@ But Kelly didn't stop at writing a blog post, he also wrote this tool called [jc
 
 I found this tool to be an awesome idea when I read about it, and added it to my standard set Brew-installed tools, but I honestly haven't used it very often. Possibly because I forget about it in situations where I could have used it. But this time, I decided to try to simply put a `jc` in front of my previous command:
 
-```console
 ```console
 $ jc git log  --date=format:'%Y-%m-%dT%H:%M:%S.000Z'
 ```
@@ -119,7 +119,7 @@ There are also some fields I would like to rename – and honestly the easiest w
 
 I'm pretty sure jq can do this as well; this I do not however know off the top of my head. Here's another fun alternative though! 
 
-If you're a JavaScript programmer, and you don't feel like learning jq syntax or looking it up or asking ChatGPT every time, there's a nice alternative in the [fx](https://fx.wtf/) tool. (Yes, there is a law that every CLI tool that deals with JSON processing needs to have a two-letter name.) It allows you to use JavaScript syntax. The one thing you need to know is that to refer to the "current" object – the one being passed in standard input – you use the empty string, so you just start it off with a dot (`.`). So then you can go like:
+If you have decent knowledge of JavaScript, and you don't feel like learning jq syntax or looking it up or asking ChatGPT every time, there's a nice alternative in the [fx](https://fx.wtf/) tool. (Yes, there is a law that every CLI tool that deals with JSON processing needs to have a two-letter name.) It allows you to use JavaScript syntax. The one thing you need to know is that to refer to the "current" object – the one being passed in standard input – you use the empty string, so you just start it off with a dot (`.`). So then you can go like:
 
 ```console
 $ jc git log | fx '.map(x => ({sha: x.commit, author: x.author, message: x.message, date: new Date(x.epoch * 1000).toJSON()}))'
@@ -161,8 +161,7 @@ Presto!
     "author": "Simon Kågedal Reimer",
     "message": "update dependencies",
     "date": new Date("2024-06-08T05:20:57.000Z")
-  },
-  [etc...]
+  }
 ]
 ```
 
