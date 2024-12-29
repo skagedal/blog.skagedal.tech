@@ -1,7 +1,7 @@
 ---
 layout: post
-title: "Git log JSON data with jc"
-summary: "I generate some data"
+title: "Creating example git log data with jc"
+summary: "I explore some use cases of command line JSON processing tools like jc, jq and fx."
 ---
 The other day, I was playing around with some React code. I have some ideas of a simple deploy tool, and basically just wanted to try out some UI ideas. One part of this would be to build a  component that would show a git log.
 
