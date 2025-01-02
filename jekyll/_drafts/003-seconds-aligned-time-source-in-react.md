@@ -1,0 +1,5 @@
+- [Code Sandbox Experiment](https://codesandbox.io/p/sandbox/react-dev-forked-4y9shw?file=%2Fsrc%2FuseInterval.js%3A14%2C34)
+- [Overreacted: Making setInterval Declarative with React Hooks](https://overreacted.io/making-setinterval-declarative-with-react-hooks/)
+- MDN documentation for setInterval: https://developer.mozilla.org/en-US/docs/Web/API/Window/setInterval
+- Example of bug: https://www.npmjs.com/package/react-clock
+- 
