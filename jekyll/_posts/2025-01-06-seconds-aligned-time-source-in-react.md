@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Building a bug-free clock in React"
+title: "The second overflow bug: Implementing a clock in React"
 summary: "I demonstrate some unwanted behavior, and propose solutions, in using `setInterval` to implement a clock."
 
 ---
