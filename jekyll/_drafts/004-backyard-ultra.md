@@ -38,18 +38,23 @@ My clock should consistently tick with each second. As many clocks do. I had rec
 
 ## Time handling library
 
-I had some simple needs for doing time calculations (duration left until time X and so on) and formatting. I didn't think I'd bring in any external dependency for this, but the standard DOM API:s for this just turned out too limited and annoying, or I was just not looking hard enough. After shopping around for a bit I ended up with [Luxon](https://moment.github.io/luxon/) which felt simple and clean. Runner-up: [js-joda](https://js-joda.github.io/js-joda/), as it is pretty much the (modern) Java date and time API for JavaScript, which I know and love.  I considered [date-fns](https://date-fns.org/) as it seems popular, but I found it weird. Sorry for the vagueness. 
+I had some simple needs for doing time calculations (duration left until time X and so on) and formatting. I didn't think I'd bring in any external dependency for this, but the standard DOM API:s for this just turned out too limited and annoying, or I was just not looking hard enough. After shopping around for a bit I ended up with [Luxon](https://moment.github.io/luxon/) which felt simple and clean. Runner-up: [js-joda](https://js-joda.github.io/js-joda/), as it is pretty much the (modern) Java date and time API for JavaScript, which I know and love.  I considered [date-fns](https://date-fns.org/) as it seems popular, but I found it weird. Sorry for the vagueness. I did find some weirdness with the Luxon library as well; it uses generics in a way that felt odd, with `DateTime<true>` meaning something like a "validated" date-time and `DateTime<false>` meaning a "not validated" date-time. Probably there's a good reason, but it felt weird. 
+
+What's your favorite time handling library for the JavaScript ecosystem?  
 
 ## Playing sound
 
-
+I also needed to play some sounds. I did this in a small component that weirdly returned no JSX – just `<></>` – so it probably should have been a hook instead. In there I created an HTML `Audio` element and put it in a `ref`, then just called `play` on it. I found a decent sound for the whistle blow on [freesound.org](https://freesound.org/people/SpliceSound/sounds/218318/) and just used that everywhere, playing it multiple times as specified before. Sounds a bit stiff, but works.      
 
 ## Deployment
 
+I only needed a bunch of static HTML, so used the `output: "export"` option on Next.js. Then I just rsync those files onto my server and serve with nginx (as I now have this [wildcard certificate](https://blog.skagedal.tech/2023/02/13/deploying-normal-score-converter.html)). 
+
 ## Features I want
 
-Good URLs and good sounds. 
+Not planning to do much more on this project, it was just a fun little hack. There are two things that _would_ make it feel slightly more complete, though:
 
-* viewport sized typography: https://css-tricks.com/fitting-text-to-a-container/
-* luxon: https://moment.github.io/luxon/ (competitor: js-joda https://js-joda.github.io/js-joda/) (weird: https://date-fns.org/)
-* referee-whistle-blow-gymnasium: https://freesound.org/people/SpliceSound/sounds/218318/
+- There should be a way to specify the date and time via an URL like `https://backyard.skagedal.tech/race/2025-12-24/15:00` or something. This would make it possible for organizers to link to the race timer for a certain race. 
+- The sounds should not suck; there should be bespoke recordings for "three whistle blows", "two whistle blows", "one whistle blow" and "bell".
+
+
