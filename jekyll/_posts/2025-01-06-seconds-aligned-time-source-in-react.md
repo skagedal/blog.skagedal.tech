@@ -5,7 +5,7 @@ summary: "I demonstrate some unwanted behavior, and propose solutions, in using 
 
 ---
 
-I recently built a small race timer tool for the browser using [React](https://react.dev/). I think I will write a separate blog post about that, but first I wanted to discuss a specific issue. I will demonstrate it by building a simple clock widget. The post assumes some previous experience of using modern React with hooks.
+I recently built a small race timer tool for the browser using [React](https://react.dev/). I think I will write a separate blog post about that[^1], but first I wanted to discuss a specific issue. I will demonstrate it by building a simple clock widget. The post assumes some previous experience of using modern React with hooks.
 
 First, let's just have a component that shows the time: 
 
@@ -155,3 +155,7 @@ Maybe this solution is what you might have come up with to begin with, if you we
 Then there are of course other, completely different situations where `setInterval` is the right choice. In those situations, you might find value in [this blog post by Dan Abramov](https://overreacted.io/making-setinterval-declarative-with-react-hooks/), which discusses some other pit falls you may encounter, and develops a custom `useInterval` hook that could use in those cases.
 
 If you have any experience on this topic, or anything else you'd like to comment on regarding this post, please feel free to reach out! 
+
+---
+
+[^1]: I have now – see [The backyard ultra timer](/2025/01/21/backyard-ultra.html)
