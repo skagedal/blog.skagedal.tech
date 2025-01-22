@@ -9,7 +9,9 @@ There is a kind of ultramarathon race called a [backyard ultra](https://en.wikip
 
 I was in the mood for a random little web project, when my brother-in-law mentioned something that he thought should exist in the world: a timer for such a race. This would be something that the race organizer has on display somewhere near the starting line. It should show the time left until the race starts, and then for each lap it should show the time of that lap. It should give sound signals at specific points every hour: three whistle blows at three minutes before each lap, two whistle blows at two minutes, and one whistle blow at one minute, before each lap. Finally, a bell should ring when the lap starts. 
 
-You can find the results of my little project at [backyard.skagedal.tech](https://backyard.skagedal.tech/).  Here are some rather unstructured implementation notes and things I thought about while implementing this. 
+You can find the results of my little project at [backyard.skagedal.tech](https://backyard.skagedal.tech/) and the source [at Github](https://github.com/skagedal/backyard-timer).  
+
+Here are some rather unstructured implementation notes and random things going through my mind while implementing this. 
 
 ## UI controls
 
