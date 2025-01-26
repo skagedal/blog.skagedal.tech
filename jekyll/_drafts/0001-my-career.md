@@ -1,1 +1,0 @@
-Om någon frågar "lärde du dig något av den här perioden" – prova vad som händer om ni svarar "nej"
