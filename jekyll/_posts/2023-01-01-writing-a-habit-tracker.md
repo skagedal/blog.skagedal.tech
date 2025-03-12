@@ -1,6 +1,7 @@
 ---
 layout: post
 title:  "Writing a habit tracker, part 1: Setting up some tools"
+summary: "First post of the Habit Tracker series, starting with my New Year's resolution to spend at least 30 minutes outside daily, transitioning into a technical walkthrough of setting up a habit tracking app backend using PostgreSQL and Java on my Digital Ocean Ubuntu server"
 ---
 
 It's a new year and, as such, the time to try to form new habits. The time to fail to maintain those habits comes later (mid-January at the latest). But let's not be cynical! Let's do it! And let's have fun and be kind to ourselves! 
@@ -13,7 +14,7 @@ Honestly, I am a bit ambivalent when it comes to this "quantified self" style se
 
 But then there's the side of me who really enjoys programming, and starting up small projects every now and then. And this kind of small "productivity" tools are perfect as an excuse to toy around with some technology, and get the feeling that you're "doing something". 
 
-So, here we go. I want to do start this off by writing a backend service in Java with Spring Boot using PostgreSQL, because that's some stuff I want to toy around with more. And I'm going to sort of start backwards – with the deployment.   
+So, here we go. I want to do start this off by writing a backend service in Java with Spring Boot using PostgreSQL, because that's some stuff I want to toy around with more. And I'm going to sort of start backwards[^4] – with the deployment.   
 
 I'm gonna set things up on my Digital Ocean Ubuntu machine that also serves this blog. Let's begin with installing PostgreSQL.
 
@@ -146,3 +147,4 @@ _[Continue reading part two.](/2023/01/02/habit-tracker-part-two-spring-boot.htm
     ```
 
     Indeed, I can now see that there were [better instructions](https://adoptium.net/installation/linux/) for how to install Temurin on Debian, following the recommended way from the apt man pages. Oh well.
+[^4]: Comment from early 2025: I was listening to [this episode](https://www.youtube.com/watch?v=2AIrLBG_Eb0) of podcast Two's Complement, Matt Godbolt and Ben Rady discuss the concept "Deploy First Development". I like it. 

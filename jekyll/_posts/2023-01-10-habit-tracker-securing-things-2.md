@@ -16,7 +16,7 @@ We can read more about form-based login system [here](https://docs.spring.io/spr
 
 I'm doing that instead. 
 
-But what I need to figure out now is how to make this use our actual user repository we set up earlier (you know, the one that ChatGPT helped out with in [part five](/2023/01/05/habit-tracker-repository.html).
+But what I need to figure out now is how to make this use our actual user repository we set up earlier – you know, the one that ChatGPT helped out with in [part five](/2023/01/05/habit-tracker-repository.html).
 
 Now, as it turns out, Spring Security [has a way](https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/jdbc.html) of handling all that by itself, if you just make your data source comply to a specific schema. Of course it has. 
 
