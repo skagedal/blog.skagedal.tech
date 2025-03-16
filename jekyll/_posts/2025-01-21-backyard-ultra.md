@@ -2,7 +2,6 @@
 layout: post
 title: "The backyard ultra timer"
 summary: "Implementation notes and reflections."
-
 ---
 
 There is a kind of ultramarathon race called a [backyard ultra](https://en.wikipedia.org/wiki/Backyard_ultra). Here's how it works. Every hour a new lap starts. You need to finish the lap within the hour. The person who runs the most laps wins[^1]. Each lap is 6.7 km, or 4.1 miles – it is set to this distance so that if you complete 24 laps, i.e stay in the race for 24 hours, you have run 100 miles. 
