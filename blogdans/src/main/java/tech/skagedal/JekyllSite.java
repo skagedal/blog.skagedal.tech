@@ -112,6 +112,12 @@ private List<Map<String, Object>> posts() {
             })
             .map(this::processPostFile)
             .filter(Objects::nonNull)
+            .sorted((post1, post2) -> {
+                String date1 = (String) post1.get("date");
+                String date2 = (String) post2.get("date");
+                // Sort in descending order (newer dates first)
+                return date2.compareTo(date1);
+            })
             .toList();
     } catch (IOException e) {
         log.error("Failed to read posts from {}: {}", postsDirectory, e.getMessage());
