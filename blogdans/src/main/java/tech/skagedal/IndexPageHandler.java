@@ -4,10 +4,10 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
 
-public class IndexPage implements Handler {
+public class IndexPageHandler implements Handler {
     private final JekyllSite jekyllSite;
 
-    public IndexPage(final JekyllSite jekyllSite) {
+    public IndexPageHandler(final JekyllSite jekyllSite) {
         this.jekyllSite = jekyllSite;
     }
 

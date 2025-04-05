@@ -11,10 +11,12 @@ public class App {
     public static void main(String[] args) {
         final var jekyllRoot = Path.of("../jekyll");
         final var jekyllSite = new JekyllSite(jekyllRoot);
-        final var indexPage = new IndexPage(jekyllSite);
-        Javalin.create(javalinConfig(jekyllRoot))
-            .get("/", indexPage)
+        final var indexPageHandler = new IndexPageHandler(jekyllSite);
+        final var postPageHandler = new PostPageHandler(jekyllSite);
 
+        Javalin.create(javalinConfig(jekyllRoot))
+            .get("/", indexPageHandler)
+            .get("/posts/{slug}", postPageHandler)
             .start(8081);
     }
 

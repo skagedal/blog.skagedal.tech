@@ -8,17 +8,17 @@ import liqp.antlr.NameResolver;
 import liqp.filters.Filter;
 import liqp.parser.Flavor;
 import org.intellij.lang.annotations.Language;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tech.skagedal.entry.EntryCollectors;
+import tech.skagedal.entry.PossibleEntry;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -45,6 +45,12 @@ public class JekyllSite {
                 return markdownToHtml(text);
             }
         })
+        .withFilter(new Filter("date_to_xmlschema") {
+            @Override
+            public Object apply(Object value, TemplateContext context, Object... params) {
+                return "foo";
+            }
+        })
         .build();
 
     public JekyllSite(final Path jekyllRoot) {
@@ -53,6 +59,10 @@ public class JekyllSite {
 
     public Path indexPath() {
         return jekyllRoot.resolve("index.html");
+    }
+
+    public Path postPath(final String slug) {
+        return jekyllRoot.resolve("_posts").resolve(slug + ".md");
     }
 
     public Path layoutsPath() {
@@ -96,14 +106,29 @@ public class JekyllSite {
         );
     }
 
-private List<Map<String, Object>> posts() {
-    Path postsDirectory = jekyllRoot.resolve("_posts");
-    if (!Files.exists(postsDirectory) || !Files.isDirectory(postsDirectory)) {
-        log.warn("Posts directory not found: {}", postsDirectory);
-        return List.of();
+    private List<Map<String, Object>> posts() {
+        Path postsDirectory = jekyllRoot.resolve("_posts");
+        if (!Files.exists(postsDirectory) || !Files.isDirectory(postsDirectory)) {
+            log.warn("Posts directory not found: {}", postsDirectory);
+            return List.of();
+        }
+
+        try (Stream<Path> postFiles = Files.list(postsDirectory)) {
+            return processPostFiles(postFiles)
+                .sorted((post1, post2) -> {
+                    String date1 = (String) post1.get("date");
+                    String date2 = (String) post2.get("date");
+                    // Sort in descending order (newer dates first)
+                    return date2.compareTo(date1);
+                })
+                .toList();
+        } catch (IOException e) {
+            log.error("Failed to read posts from {}", postsDirectory, e);
+            throw new UncheckedIOException("Failed to read posts", e);
+        }
     }
 
-    try (Stream<Path> postFiles = Files.list(postsDirectory)) {
+    private Stream<Map<String, Object>> processPostFiles(final Stream<Path> postFiles) {
         return postFiles
             .filter(Files::isRegularFile)
             .filter(path -> {
@@ -111,53 +136,38 @@ private List<Map<String, Object>> posts() {
                 return filename.matches("\\d{4}-\\d{2}-\\d{2}-.*\\.(md|markdown|html)");
             })
             .map(this::processPostFile)
-            .filter(Objects::nonNull)
-            .sorted((post1, post2) -> {
-                String date1 = (String) post1.get("date");
-                String date2 = (String) post2.get("date");
-                // Sort in descending order (newer dates first)
-                return date2.compareTo(date1);
-            })
-            .toList();
-    } catch (IOException e) {
-        log.error("Failed to read posts from {}: {}", postsDirectory, e.getMessage());
-        throw new UncheckedIOException("Failed to read posts", e);
+            .filter(Objects::nonNull);
     }
-}
 
-@Nullable
-private Map<String, Object> processPostFile(Path postFile) {
-    try {
-        String content = readFile(postFile);
-        FrontMatterSeparated frontMatterSeparated = FrontMatterSeparated.split(content);
+    @Nullable
+    private Map<String, Object> processPostFile(Path postFile) {
+        try {
+            final var content = readFile(postFile);
+            final var frontMatterSeparated = FrontMatterSeparated.split(content);
 
-        String filename = postFile.getFileName().toString();
-        // Extract date from filename (assuming Jekyll's format: YYYY-MM-DD-title.md)
-        String dateFromFilename = filename.substring(0, 10);
-        String slugFromFilename = filename.substring(11, filename.lastIndexOf('.'));
+            final var filename = postFile.getFileName().toString();
+            // Extract date from filename (assuming Jekyll's format: YYYY-MM-DD-title.md)
+            final var dateFromFilename = filename.substring(0, 10);
+            final var slugFromFilename = filename.substring(0, filename.lastIndexOf('.'));
+            final var url = "/posts/" + slugFromFilename;
 
-        // Create URL from slug
-        String url = "/" + slugFromFilename;
+            final var frontMatter = frontMatterSeparated.frontMatter();
 
-        // Combine front matter with metadata from filename
-        Map<String, Object> metadata = new HashMap<>(frontMatterSeparated.frontMatter().asMap());
-
-        // Use date from filename if not specified in front matter
-        if (!metadata.containsKey("date")) {
-            metadata.put("date", dateFromFilename);
+            return Stream.concat(
+                frontMatter.asPossibleEntries(),
+                Stream.of(
+                    new PossibleEntry("content", frontMatterSeparated.content()),
+                    new PossibleEntry("date", frontMatter.date() == null ? dateFromFilename : null),
+                    new PossibleEntry("slug", slugFromFilename),
+                    new PossibleEntry("url", url)
+                )
+            ).collect(EntryCollectors.nonNullEntriesToMap());
+        } catch (Exception e) {
+            log.error("Failed to process post file {}: {}", postFile, e.getMessage());
+            return null;
         }
-
-        // Add URL if not present
-        if (!metadata.containsKey("url")) {
-            metadata.put("url", url);
-        }
-
-        return metadata;
-    } catch (Exception e) {
-        log.error("Failed to process post file {}: {}", postFile, e.getMessage());
-        return null;
     }
-}
+
     private Template readTemplate(final Path path) {
         try {
             return templateParser.parse(path);
