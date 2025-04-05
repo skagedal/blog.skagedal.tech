@@ -4,8 +4,6 @@ import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
 
-import java.nio.file.Files;
-
 public class IndexPage implements Handler {
     private final JekyllSite jekyllSite;
 
