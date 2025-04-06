@@ -1,12 +1,11 @@
 package tech.skagedal.entry;
 
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import java.util.Map;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 
 class EntryCollectorsTest {
@@ -18,6 +17,7 @@ class EntryCollectorsTest {
         )
             .collect(EntryCollectors.nonNullEntriesToMap());
 
-        assertEquals(Map.of("key", "value"), entries);
+        assertThat(entries)
+            .isEqualTo(Map.of("key", "value"));
     }
 }
