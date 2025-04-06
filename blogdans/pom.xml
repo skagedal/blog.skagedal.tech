@@ -49,6 +49,11 @@
             <artifactId>flexmark</artifactId>
             <version>0.64.8</version>
         </dependency>
+        <dependency>
+            <groupId>org.glassfish.jersey.core</groupId>
+            <artifactId>jersey-common</artifactId>
+            <version>4.0.0-M2</version>
+        </dependency>
 
         <dependency>
             <groupId>org.jspecify</groupId>
