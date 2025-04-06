@@ -1,5 +1,8 @@
 package tech.skagedal;
 
+import com.vladsch.flexmark.html.HtmlRenderer;
+import com.vladsch.flexmark.parser.Parser;
+import com.vladsch.flexmark.util.data.MutableDataSet;
 import liqp.Template;
 import liqp.TemplateContext;
 import liqp.TemplateParser;
@@ -34,7 +37,6 @@ public class JekyllSite {
         .withNameResolver(new NameResolver() {
             @Override
             public CharStreamWithLocation resolve(final String includeName) throws IOException {
-                log.info("JekyllSite resolving {}", includeName);
                 return new CharStreamWithLocation(jekyllRoot.resolve("_includes").resolve(includeName));
             }
         })
@@ -75,12 +77,12 @@ public class JekyllSite {
         return renderWithLayout(content, siteContext);
     }
 
-    private String renderWithLayout(String content, Map<String, Object> siteContext) {
-        final var frontMatter = FrontMatterSeparated.split(content);
+    private String renderWithLayout(ContentFile contentFile, Map<String, Object> siteContext) {
+        final var frontMatter = FrontMatterSeparated.split(contentFile.content());
         final var contentTemplate = readTemplate(frontMatter.content());
 
         // Render the content with the site context
-        final var renderedContent = contentTemplate.render(siteContext);
+        final var renderedContent = getRenderedContent(siteContext, contentFile.contentType(), contentTemplate);
 
         // Create context with rendered content
         final var contentContext = siteContext.containsKey("content") ? siteContext : Stream.concat(
@@ -102,6 +104,15 @@ public class JekyllSite {
             log.error("Error rendering layout {}: {}", layoutPath, e.getMessage());
             return "Error rendering layout: " + e.getMessage();
         }
+    }
+
+    private String getRenderedContent(final Map<String, Object> siteContext, final ContentType contentType, final Template contentTemplate) {
+        final var templatedInlined = contentTemplate.render(siteContext);
+        return switch (contentType) {
+            case HTML -> templatedInlined;
+            case MARKDOWN -> markdownToHtml(templatedInlined);
+            case TEXT -> "<code><pre>" + templatedInlined + "</pre></code>";
+        };
     }
 
     private Map<String, Object> getSiteContext() {
@@ -156,11 +167,11 @@ public class JekyllSite {
     @Nullable
     private Map<String, Object> processPostFile(Path postFile) {
         try {
-            final var content = readFile(postFile);
-            final var frontMatterSeparated = FrontMatterSeparated.split(content);
+            final var contentFile = readFile(postFile);
+            final var frontMatterSeparated = FrontMatterSeparated.split(contentFile.content());
 
             final var filename = postFile.getFileName().toString();
-            // Extract date from filename (assuming Jekyll's format: YYYY-MM-DD-title.md)
+            // Assuming Jekyll's format: YYYY-MM-DD-title.md
             final var dateFromFilename = filename.substring(0, 10);
             final var slugFromFilename = filename.substring(0, filename.lastIndexOf('.'));
             final var url = "/posts/" + slugFromFilename;
@@ -194,19 +205,34 @@ public class JekyllSite {
         return templateParser.parse(contents);
     }
 
-    private String readFile(final Path path) {
+    private ContentFile readFile(final Path path) {
+        final var contentType = switch (getFilenameExtension(path)) {
+            case "html" -> ContentType.HTML;
+            case "md" -> ContentType.MARKDOWN;
+            default -> ContentType.TEXT;
+        };
         try {
-            return Files.readString(path);
+            return new ContentFile(Files.readString(path), contentType);
         } catch (IOException e) {
             throw new UncheckedIOException(e);
         }
     }
 
-    // Helper method to convert markdown to HTML
+    private static String getFilenameExtension(final Path path) {
+        final var fileName = path.getFileName().toString();
+        if (fileName.contains(".")) {
+            return fileName.substring(fileName.lastIndexOf(".") + 1);
+        } else {
+            return "";
+        }
+    }
+
     private String markdownToHtml(String markdown) {
-        // Implement markdown processing here
-        // This is a simple example, you should use a proper markdown library like flexmark
-        // For now, return the input as-is to avoid compilation errors
-        return markdown;
+        final var options = new MutableDataSet();
+        final var parser = Parser.builder(options).build();
+        final var renderer = HtmlRenderer.builder(options).build();
+
+        final var document = parser.parse(markdown);
+        return renderer.render(document);
     }
 }

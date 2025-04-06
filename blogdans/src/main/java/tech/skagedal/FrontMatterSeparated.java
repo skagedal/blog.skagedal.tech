@@ -10,7 +10,7 @@ public record FrontMatterSeparated(FrontMatter frontMatter, String content) {
     private static final YAMLMapper yamlMapper = new YAMLMapper();
 
     public static FrontMatterSeparated split(String text) {
-        final var array = pattern.split(text);
+        final var array = pattern.split(text, 3);
         return switch (array.length) {
             case 1 -> new FrontMatterSeparated(FrontMatter.empty(), text);
             case 2 -> new FrontMatterSeparated(parseFrontMatterYaml(array[0]), array[1]);

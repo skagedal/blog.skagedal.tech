@@ -1,7 +1,6 @@
 ---
 layout: post
 title:  "Next on next: Gmail and configuration"
-tags: next
 ---
 
 I [added support](https://github.com/skagedal/next/compare/415a1245f7efbe4ce40767a75137bb124976d32d...01874c2488852ada90ed9fe8d21899821de4ab89) for checking my Gmail account. If there are threads in the Inbox, it opens up Gmail so that I can clear it.
