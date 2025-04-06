@@ -15,6 +15,10 @@ public record FrontMatter(
     @Nullable String summary,
     @Nullable String date
 ) {
+    public static FrontMatter empty() {
+        return new FrontMatter(null, null, null, null);
+    }
+
     public Stream<PossibleEntry> asPossibleEntries() {
         return Stream.of(
                 new PossibleEntry("layout", layout),

@@ -72,21 +72,35 @@ public class JekyllSite {
     public @Language("HTML") String renderHtml(final Path path) {
         final var siteContext = getSiteContext();
         final var content = readFile(path);
-        final var frontMatter = FrontMatterSeparated.split(content);
-        final var layoutPath = layoutsPath().resolve(frontMatter.frontMatter().layout() + ".html");
-        final var layoutTemplate = readTemplate(layoutPath);
-        try {
-            final var contentTemplate = readTemplate(frontMatter.content());
-            final var renderedContent = contentTemplate.render(siteContext);
-            final var joinedContext = Stream.concat(
-                siteContext.entrySet().stream(),
-                Map.<String, Object>of("content", renderedContent).entrySet().stream()
-            ).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+        return renderWithLayout(content, siteContext);
+    }
 
-            return layoutTemplate.render(joinedContext);
+    private String renderWithLayout(String content, Map<String, Object> siteContext) {
+        final var frontMatter = FrontMatterSeparated.split(content);
+        final var contentTemplate = readTemplate(frontMatter.content());
+
+        // Render the content with the site context
+        final var renderedContent = contentTemplate.render(siteContext);
+
+        // Create context with rendered content
+        final var contentContext = siteContext.containsKey("content") ? siteContext : Stream.concat(
+            siteContext.entrySet().stream(),
+            Map.<String, Object>of("content", renderedContent).entrySet().stream()
+        ).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
+
+        // If no layout is specified, return the rendered content
+        if (frontMatter.frontMatter().layout() == null) {
+            return renderedContent;
+        }
+
+        // Otherwise, load the layout and recursively process it
+        final var layoutPath = layoutsPath().resolve(frontMatter.frontMatter().layout() + ".html");
+        try {
+            final var layoutContent = readFile(layoutPath);
+            return renderWithLayout(layoutContent, contentContext);
         } catch (Exception e) {
-            log.error(e.getMessage());
-            return e.getMessage();
+            log.error("Error rendering layout {}: {}", layoutPath, e.getMessage());
+            return "Error rendering layout: " + e.getMessage();
         }
     }
 

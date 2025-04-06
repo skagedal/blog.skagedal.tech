@@ -11,12 +11,17 @@ public record FrontMatterSeparated(FrontMatter frontMatter, String content) {
 
     public static FrontMatterSeparated split(String text) {
         final var array = pattern.split(text);
-        return new FrontMatterSeparated(parseFrontMatterYaml(array), array[2]);
+        return switch (array.length) {
+            case 1 -> new FrontMatterSeparated(FrontMatter.empty(), text);
+            case 2 -> new FrontMatterSeparated(parseFrontMatterYaml(array[0]), array[1]);
+            case 3 -> new FrontMatterSeparated(parseFrontMatterYaml(array[1]), array[2]);
+            default -> throw new IllegalStateException("Unexpected number of --- splits in file: " + array.length);
+        };
     }
 
-    private static FrontMatter parseFrontMatterYaml(final String[] array) {
+    private static FrontMatter parseFrontMatterYaml(final String yaml) {
         try {
-            return yamlMapper.readValue(array[1], FrontMatter.class);
+            return yamlMapper.readValue(yaml, FrontMatter.class);
         } catch (JsonProcessingException e) {
             throw new JekyllParseException("Could not parse front matter as YAML", e);
         }
