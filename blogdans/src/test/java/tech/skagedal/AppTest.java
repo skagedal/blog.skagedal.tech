@@ -23,7 +23,8 @@ class AppTest {
         final var response = httpClient.send(request, BodyHandlers.ofString());
 
         assertThat(response.statusCode()).isEqualTo(200);
-        assertThat(response.body()).contains("Hello world");
+        assertThat(response.body().strip()).isEqualTo("""
+            <html>Hello world</html>""");
     }
 
     @Test
@@ -38,6 +39,11 @@ class AppTest {
         final var response = httpClient.send(request, BodyHandlers.ofString());
 
         assertThat(response.statusCode()).isEqualTo(200);
-        assertThat(response.body()).contains("First post");
+        assertThat(response.body()).isEqualTo("""
+            <html>
+            <title>Inaugural post</title>
+            <body><p>First post!</p>
+            </body>
+            </html>""");
     }
 }

@@ -3,6 +3,7 @@ package tech.skagedal;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
+import tech.skagedal.jekyll.JekyllSite;
 
 public class IndexPageHandler implements Handler {
     private final JekyllSite jekyllSite;
@@ -19,6 +20,6 @@ public class IndexPageHandler implements Handler {
     @NotNull
     private String renderHtml() {
         final var path = jekyllSite.indexPath();
-        return jekyllSite.renderHtml(path);
+        return jekyllSite.render(path);
     }
 }

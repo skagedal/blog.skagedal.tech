@@ -1,4 +1,4 @@
-package tech.skagedal;
+package tech.skagedal.jekyll;
 
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
@@ -13,10 +13,11 @@ public record FrontMatter(
     @Nullable String layout,
     @Nullable String title,
     @Nullable String summary,
-    @Nullable String date
+    @Nullable String date,
+    @Nullable String permalink
 ) {
     public static FrontMatter empty() {
-        return new FrontMatter(null, null, null, null);
+        return builder().build();
     }
 
     public Stream<PossibleEntry> asPossibleEntries() {
@@ -37,10 +38,11 @@ public record FrontMatter(
     }
 
     public static class Builder {
-        private String layout;
-        private String title;
-        private String summary;
-        private String date;
+        @Nullable private String layout;
+        @Nullable private String title;
+        @Nullable private String summary;
+        @Nullable private String date;
+        @Nullable private String permalink;
 
         private Builder() {}
 
@@ -64,8 +66,13 @@ public record FrontMatter(
             return this;
         }
 
+        public Builder permalink(String permalink) {
+            this.permalink = permalink;
+            return this;
+        }
+
         public FrontMatter build() {
-            return new FrontMatter(layout, title, summary, date);
+            return new FrontMatter(layout, title, summary, date, permalink);
         }
     }
 }

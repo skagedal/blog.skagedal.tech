@@ -3,6 +3,7 @@ package tech.skagedal;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jspecify.annotations.NullMarked;
+import tech.skagedal.jekyll.JekyllSite;
 
 @NullMarked
 public class PostPageHandler implements Handler {
@@ -19,6 +20,7 @@ public class PostPageHandler implements Handler {
 
     private String render(final Context context) {
         final var slug = context.pathParam("slug");
-        return jekyllSite.renderHtml(jekyllSite.postPath(slug));
+        final var date = jekyllSite.dateFromSlug(slug);
+        return jekyllSite.render(jekyllSite.postPath(slug), date);
     }
 }

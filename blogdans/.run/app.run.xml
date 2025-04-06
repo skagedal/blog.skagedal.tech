@@ -4,7 +4,7 @@
     <module name="blogdans" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="tech.skagedal.*" />
+        <option name="PATTERN" value="tech.skagedal.jekyll.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

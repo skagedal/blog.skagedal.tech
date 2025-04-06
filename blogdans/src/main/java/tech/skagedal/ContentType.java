@@ -1,5 +1,5 @@
 package tech.skagedal;
 
 public enum ContentType {
-    MARKDOWN, HTML, TEXT
+    MARKDOWN, HTML, XML, TEXT
 }

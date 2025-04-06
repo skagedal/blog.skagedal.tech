@@ -1,6 +1,8 @@
 package tech.skagedal;
 
 import org.junit.jupiter.api.Test;
+import tech.skagedal.jekyll.FrontMatter;
+import tech.skagedal.jekyll.FrontMatterSeparated;
 
 import static org.assertj.core.api.Assertions.*;
 

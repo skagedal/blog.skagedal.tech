@@ -6,6 +6,7 @@ import io.javalin.http.staticfiles.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import tech.skagedal.jekyll.JekyllSite;
 
 import java.nio.file.Path;
 import java.util.function.Consumer;
@@ -39,6 +40,8 @@ public class App {
         final var javalin = Javalin.create(javalinConfig(jekyllRoot))
             .get("/", indexPageHandler)
             .get("/posts/{slug}", postPageHandler)
+            .get("/about/", new CustomPageHandler(jekyllSite, jekyllSite.getAboutPath()))
+            .get("/feed.xml", new CustomPageHandler(jekyllSite, jekyllSite.getFeedPath()))
             .start(port);
         return javalin;
     }
@@ -46,6 +49,11 @@ public class App {
     private static Consumer<JavalinConfig> javalinConfig(final Path jekyllRoot) {
         return config -> {
             config.showJavalinBanner = false;
+            config.staticFiles.add(staticConfig -> {;
+                staticConfig.hostedPath = "/images";
+                staticConfig.directory = jekyllRoot.resolve("images").toString();
+                staticConfig.location = Location.EXTERNAL;
+            });
             config.staticFiles.add(staticConfig -> {
                 staticConfig.hostedPath = "/css";
                 staticConfig.directory = jekyllRoot.resolve("_site").resolve("css").toString();

@@ -1,4 +1,4 @@
-package tech.skagedal;
+package tech.skagedal.jekyll;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -10,11 +10,14 @@ import liqp.antlr.CharStreamWithLocation;
 import liqp.antlr.NameResolver;
 import liqp.filters.Filter;
 import liqp.parser.Flavor;
-import org.intellij.lang.annotations.Language;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import tech.skagedal.ContentFile;
+import tech.skagedal.ContentType;
+import tech.skagedal.Rss;
+import tech.skagedal.Xml;
 import tech.skagedal.entry.EntryCollectors;
 import tech.skagedal.entry.PossibleEntry;
 
@@ -22,9 +25,14 @@ import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.ZonedDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -43,14 +51,43 @@ public class JekyllSite {
         .withFilter(new Filter("markdownify") {
             @Override
             public Object apply(Object value, TemplateContext context, Object... params) {
-                String text = super.asString(value, context);
+                final var text = asString(value, context);
                 return markdownToHtml(text);
             }
         })
         .withFilter(new Filter("date_to_xmlschema") {
             @Override
             public Object apply(Object value, TemplateContext context, Object... params) {
-                return "foo";
+                final var date = asRubyDate(value, context);
+                return date.format(DateTimeFormatter.RFC_1123_DATE_TIME);
+            }
+        })
+        .withFilter(new Filter("xml_escape") {
+            @Override
+            public Object apply(Object value, TemplateContext context, Object... params) {
+                final var text = asString(value, context);
+                return Xml.escape(text);
+            }
+        })
+        .withFilter(new Filter("date_to_rfc822") {
+            @Override
+            public Object apply(Object value, TemplateContext context, Object... params) {
+                if (value instanceof String dateString) {
+                    try {
+                        final var date = LocalDate.parse(dateString);
+                        return Rss.formatToRFC822(date.atStartOfDay(ZoneId.of("Europe/Stockholm")));
+                    } catch (Exception e) {
+                        log.error("error parsing date: {}", value, e);
+                        return "";
+                    }
+                }
+                try {
+                    final var date = asRubyDate(value, context);
+                    return Rss.formatToRFC822(date);
+                } catch (Exception e) {
+                    log.error("error parsing date: {}", value, e);
+                    return "";
+                }
             }
         })
         .build();
@@ -67,27 +104,43 @@ public class JekyllSite {
         return jekyllRoot.resolve("_posts").resolve(slug + ".md");
     }
 
+    public String dateFromSlug(final String slug) {
+        return slug.substring(0, 10);
+    }
+
     public Path layoutsPath() {
         return jekyllRoot.resolve("_layouts");
     }
 
-    public @Language("HTML") String renderHtml(final Path path) {
-        final var siteContext = getSiteContext();
-        final var content = readFile(path);
-        return renderWithLayout(content, siteContext);
+    public String render(final Path path) {
+        return render(path, null);
     }
 
-    private String renderWithLayout(ContentFile contentFile, Map<String, Object> siteContext) {
+    public String render(final Path path, final @Nullable String defaultDate) {
+        final var siteContext = getSiteContext();
+        final var content = readFile(path);
+        return renderWithLayout(content, siteContext, defaultDate);
+    }
+
+    private String renderWithLayout(final ContentFile contentFile, final Map<String, Object> siteContext, final @Nullable String defaultDate) {
         final var frontMatter = FrontMatterSeparated.split(contentFile.content());
         final var contentTemplate = readTemplate(frontMatter.content());
 
         // Render the content with the site context
         final var renderedContent = getRenderedContent(siteContext, contentFile.contentType(), contentTemplate);
 
+        Object page = Stream.of(
+            new PossibleEntry("title", frontMatter.frontMatter().title()),
+            new PossibleEntry("date", Optional.ofNullable(frontMatter.frontMatter().date()).orElse(defaultDate))
+        ).collect(EntryCollectors.nonNullEntriesToMap());
+
         // Create context with rendered content
         final var contentContext = siteContext.containsKey("content") ? siteContext : Stream.concat(
             siteContext.entrySet().stream(),
-            Map.<String, Object>of("content", renderedContent).entrySet().stream()
+            Map.<String, Object>of(
+                "content", renderedContent,
+                "page", page
+            ).entrySet().stream()
         ).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
 
         // If no layout is specified, return the rendered content
@@ -99,7 +152,7 @@ public class JekyllSite {
         final var layoutPath = layoutsPath().resolve(frontMatter.frontMatter().layout() + ".html");
         try {
             final var layoutContent = readFile(layoutPath);
-            return renderWithLayout(layoutContent, contentContext);
+            return renderWithLayout(layoutContent, contentContext, defaultDate);
         } catch (Exception e) {
             log.error("Error rendering layout {}: {}", layoutPath, e.getMessage());
             return "Error rendering layout: " + e.getMessage();
@@ -109,7 +162,7 @@ public class JekyllSite {
     private String getRenderedContent(final Map<String, Object> siteContext, final ContentType contentType, final Template contentTemplate) {
         final var templatedInlined = contentTemplate.render(siteContext);
         return switch (contentType) {
-            case HTML -> templatedInlined;
+            case HTML, XML -> templatedInlined;
             case MARKDOWN -> markdownToHtml(templatedInlined);
             case TEXT -> "<code><pre>" + templatedInlined + "</pre></code>";
         };
@@ -119,8 +172,10 @@ public class JekyllSite {
         return Map.of(
             "site", Map.ofEntries(
                 Map.entry("title", "skagedal.tech"),
-                Map.entry("baseUrl", "https://example.com"),
+                Map.entry("baseUrl", "https://skagedal.tech"),
                 Map.entry("posts", posts()),
+                Map.entry("pages", pages()),
+                Map.entry("time", ZonedDateTime.now()),
                 Map.entry("email", "skagedal@gmail.com"),
                 Map.entry("description", "Thoughts on programming, music and other things. Feel free to e-mail me comments!"),
                 Map.entry("baseurl", ""),
@@ -153,6 +208,25 @@ public class JekyllSite {
         }
     }
 
+    private List<Map<String, Object>> pages() {
+        final var aboutPath = getAboutPath();
+        return List.of(
+            Map.of(
+                "title", "About",
+                "url", "/about/",
+                "content", readFile(aboutPath).content()
+            )
+        );
+    }
+
+    public Path getAboutPath() {
+        return jekyllRoot.resolve("about.md");
+    }
+
+    public Path getFeedPath() {
+        return jekyllRoot.resolve("feed.xml");
+    }
+
     private Stream<Map<String, Object>> processPostFiles(final Stream<Path> postFiles) {
         return postFiles
             .filter(Files::isRegularFile)
@@ -181,7 +255,7 @@ public class JekyllSite {
             return Stream.concat(
                 frontMatter.asPossibleEntries(),
                 Stream.of(
-                    new PossibleEntry("content", frontMatterSeparated.content()),
+                    new PossibleEntry("content", markdownToHtml(frontMatterSeparated.content())),
                     new PossibleEntry("date", frontMatter.date() == null ? dateFromFilename : null),
                     new PossibleEntry("slug", slugFromFilename),
                     new PossibleEntry("url", url)
@@ -209,6 +283,7 @@ public class JekyllSite {
         final var contentType = switch (getFilenameExtension(path)) {
             case "html" -> ContentType.HTML;
             case "md" -> ContentType.MARKDOWN;
+            case "xml" -> ContentType.XML;
             default -> ContentType.TEXT;
         };
         try {
