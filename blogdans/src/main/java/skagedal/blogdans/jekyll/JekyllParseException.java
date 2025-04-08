@@ -1,4 +1,4 @@
-package tech.skagedal.jekyll;
+package skagedal.blogdans.jekyll;
 
 public class JekyllParseException extends RuntimeException {
     public JekyllParseException(String message) {

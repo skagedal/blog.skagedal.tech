@@ -1,9 +1,9 @@
-package tech.skagedal;
+package skagedal.blogdans;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
-import tech.skagedal.jekyll.JekyllSite;
+import skagedal.blogdans.jekyll.JekyllSite;
 
 public class IndexPageHandler implements Handler {
     private final JekyllSite jekyllSite;

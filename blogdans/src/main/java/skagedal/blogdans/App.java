@@ -1,4 +1,4 @@
-package tech.skagedal;
+package skagedal.blogdans;
 
 import io.javalin.Javalin;
 import io.javalin.config.JavalinConfig;
@@ -6,7 +6,7 @@ import io.javalin.http.staticfiles.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
-import tech.skagedal.jekyll.JekyllSite;
+import skagedal.blogdans.jekyll.JekyllSite;
 
 import java.nio.file.Path;
 import java.util.function.Consumer;

@@ -1,4 +1,4 @@
-package tech.skagedal.jekyll;
+package skagedal.blogdans.jekyll;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.dataformat.yaml.YAMLMapper;

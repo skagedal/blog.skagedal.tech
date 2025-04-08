@@ -1,7 +1,7 @@
-package tech.skagedal;
+package skagedal.blogdans;
 
 import org.junit.jupiter.api.Test;
-import tech.skagedal.testutil.TestApp;
+import skagedal.blogdans.testutil.TestApp;
 
 import java.io.IOException;
 import java.net.http.HttpClient;

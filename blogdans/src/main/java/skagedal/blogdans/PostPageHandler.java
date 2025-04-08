@@ -1,9 +1,9 @@
-package tech.skagedal;
+package skagedal.blogdans;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jspecify.annotations.NullMarked;
-import tech.skagedal.jekyll.JekyllSite;
+import skagedal.blogdans.jekyll.JekyllSite;
 
 @NullMarked
 public class PostPageHandler implements Handler {

@@ -1,4 +1,4 @@
-package tech.skagedal;
+package skagedal.blogdans;
 
 import org.jspecify.annotations.NullMarked;
 

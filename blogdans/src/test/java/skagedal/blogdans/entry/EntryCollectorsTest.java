@@ -1,4 +1,4 @@
-package tech.skagedal.entry;
+package skagedal.blogdans.entry;
 
 import org.junit.jupiter.api.Test;
 

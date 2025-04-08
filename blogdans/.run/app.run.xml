@@ -1,10 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="app" type="Application" factoryName="Application">
-    <option name="MAIN_CLASS_NAME" value="tech.skagedal.App" />
+    <option name="MAIN_CLASS_NAME" value="skagedal.blogdans.App" />
     <module name="blogdans" />
     <extension name="coverage">
       <pattern>
-        <option name="PATTERN" value="tech.skagedal.jekyll.*" />
+        <option name="PATTERN" value="skagedal.blogdans.jekyll.*" />
         <option name="ENABLED" value="true" />
       </pattern>
     </extension>

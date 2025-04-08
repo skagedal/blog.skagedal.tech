@@ -1,8 +1,8 @@
-package tech.skagedal.testutil;
+package skagedal.blogdans.testutil;
 
 import io.javalin.Javalin;
-import tech.skagedal.App;
-import tech.skagedal.AppConfig;
+import skagedal.blogdans.App;
+import skagedal.blogdans.AppConfig;
 
 import java.net.URI;
 import java.nio.file.Paths;

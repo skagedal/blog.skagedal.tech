@@ -1,4 +1,4 @@
-package tech.skagedal.jekyll;
+package skagedal.blogdans.jekyll;
 
 import com.vladsch.flexmark.html.HtmlRenderer;
 import com.vladsch.flexmark.parser.Parser;
@@ -14,12 +14,12 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import tech.skagedal.ContentFile;
-import tech.skagedal.ContentType;
-import tech.skagedal.Rss;
-import tech.skagedal.Xml;
-import tech.skagedal.entry.EntryCollectors;
-import tech.skagedal.entry.PossibleEntry;
+import skagedal.blogdans.ContentFile;
+import skagedal.blogdans.ContentType;
+import skagedal.blogdans.Rss;
+import skagedal.blogdans.Xml;
+import skagedal.blogdans.entry.EntryCollectors;
+import skagedal.blogdans.entry.PossibleEntry;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;

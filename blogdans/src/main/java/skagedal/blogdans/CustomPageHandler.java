@@ -1,11 +1,11 @@
-package tech.skagedal;
+package skagedal.blogdans;
 
 import io.javalin.http.ContentType;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
 import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NullMarked;
-import tech.skagedal.jekyll.JekyllSite;
+import skagedal.blogdans.jekyll.JekyllSite;
 
 import java.nio.file.Path;
 
