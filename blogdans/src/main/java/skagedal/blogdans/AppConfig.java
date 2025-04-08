@@ -9,10 +9,10 @@ public record AppConfig(Path jekyllRoot, int port) {
 
     public static AppConfig forEnvironment() {
         return switch (System.getenv("ENVIRONMENT")) {
-            case "PRODUCTION", "PROD" -> productionConfig();
-            case "DEVELOPMENT", "DEV" -> developmentConfig();
+            case "production", "prod" -> productionConfig();
+            case "development", "dev" -> developmentConfig();
             case null ->
-                throw new IllegalArgumentException("Please set the ENVIRONMENT environment variable (for example to DEV)");
+                throw new IllegalArgumentException("Please set the ENVIRONMENT environment variable (for example to dev)");
             default -> throw new IllegalArgumentException("Unknown environment: " + System.getenv("ENVIRONMENT"));
         };
     }

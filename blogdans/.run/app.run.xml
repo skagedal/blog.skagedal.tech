@@ -1,5 +1,8 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="app" type="Application" factoryName="Application">
+    <envs>
+      <env name="ENVIRONMENT" value="dev" />
+    </envs>
     <option name="MAIN_CLASS_NAME" value="skagedal.blogdans.App" />
     <module name="blogdans" />
     <extension name="coverage">
