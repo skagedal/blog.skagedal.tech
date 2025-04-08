@@ -26,4 +26,15 @@ rsync \
     _site/ \
     simon@skagedal.tech:blog
 
+echo "💁 Uploading to blogdans..."
+rsync \
+    --archive \
+    --compress \
+    --delete \
+    --info=progress2 \
+    $RSYNC_ARG \
+    ./ \
+    --rsh="ssh -i ${HOME}/.ssh/blogdans-key" \
+    blogdans@skagedal.tech:content
+
 echo "💁 Done!"

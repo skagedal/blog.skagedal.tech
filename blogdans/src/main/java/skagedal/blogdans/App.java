@@ -20,10 +20,7 @@ public class App {
     }
 
     public static void main(String[] args) {
-        final var appConfig = AppConfig.builder()
-            .jekyllRoot(Path.of("../jekyll"))
-            .port(8081)
-            .build();
+        final var appConfig = AppConfig.forEnvironment();
         final var app = new App(appConfig);
         MDC.put("app", "blogdans");
         final var javalin = app.run();
