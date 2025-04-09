@@ -12,9 +12,9 @@ export JAVA_HOME
 mvn clean package assembly:single
 
 echo
-echo "👋 Uploading JAR to skagedal.tech..."
+echo "👋 Uploading JAR and scripts to skagedal.tech..."
 scp -i "$KEYFILE" "target/$APP-1.0-SNAPSHOT-jar-with-dependencies.jar" "$USER:"
-scp -i "$KEYFILE" server-scripts/run.sh "$USER:"
+scp -i "$KEYFILE" server-scripts/*.sh "$USER:"
 
 echo "👋 Sending TERM signal to running service..."
-ssh -i "$KEYFILE" "$USER" pkill -TERM -f "$APP-1.0-SNAPSHOT"
+ssh -i "$KEYFILE" "$USER" ./restart.sh
