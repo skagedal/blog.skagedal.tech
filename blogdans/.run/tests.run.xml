@@ -1,9 +1,10 @@
 <component name="ProjectRunConfigurationManager">
   <configuration default="false" name="tests" type="JUnit" factoryName="JUnit">
     <module name="blogdans" />
+    <option name="PACKAGE_NAME" value="skagedal.blogdans" />
     <option name="MAIN_CLASS_NAME" value="" />
     <option name="METHOD_NAME" value="" />
-    <option name="TEST_OBJECT" value="directory" />
+    <option name="TEST_OBJECT" value="package" />
     <dir value="$PROJECT_DIR$/src/test/java/tech/skagedal" />
     <method v="2">
       <option name="Make" enabled="true" />
