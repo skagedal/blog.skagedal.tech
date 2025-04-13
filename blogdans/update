@@ -1,0 +1,5 @@
+#!/bin/sh
+mvn versions:use-latest-releases \
+  -Dmaven.version.ignore='.+-M.,.+-SNAPSHOT,.+-rc.' \
+  -DgenerateBackupPoms=false
+
