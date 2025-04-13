@@ -2,7 +2,6 @@ package skagedal.blogdans;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import org.jetbrains.annotations.NotNull;
 import skagedal.blogdans.jekyll.JekyllSite;
 
 public class IndexPageHandler implements Handler {
@@ -17,7 +16,6 @@ public class IndexPageHandler implements Handler {
         context.html(renderHtml());
     }
 
-    @NotNull
     private String renderHtml() {
         final var path = jekyllSite.indexPath();
         return jekyllSite.render(path);

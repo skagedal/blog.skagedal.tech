@@ -1,16 +1,11 @@
 package skagedal.blogdans;
 
-import org.jspecify.annotations.NullMarked;
-
-import java.time.LocalDate;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.ResolverStyle;
-import java.time.format.TextStyle;
 import java.util.Locale;
 
-@NullMarked
 public class Rss {
     private static final DateTimeFormatter rfc822Formatter = new DateTimeFormatterBuilder()
         .appendPattern("EEE, dd MMM yyyy")

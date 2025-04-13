@@ -3,13 +3,10 @@ package skagedal.blogdans;
 import io.javalin.http.ContentType;
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
-import org.jetbrains.annotations.NotNull;
-import org.jspecify.annotations.NullMarked;
 import skagedal.blogdans.jekyll.JekyllSite;
 
 import java.nio.file.Path;
 
-@NullMarked
 public class CustomPageHandler implements Handler {
     private final JekyllSite jekyllSite;
     private final Path sourcePath;
@@ -20,7 +17,7 @@ public class CustomPageHandler implements Handler {
     }
 
     @Override
-    public void handle(@NotNull final Context context) throws Exception {
+    public void handle(final Context context) throws Exception {
         final var rendered = jekyllSite.render(sourcePath);
         if (sourcePath.getFileName().toString().endsWith(".xml")) {
             context

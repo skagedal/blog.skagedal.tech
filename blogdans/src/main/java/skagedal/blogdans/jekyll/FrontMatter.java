@@ -8,7 +8,6 @@ import skagedal.blogdans.entry.PossibleEntry;
 import java.util.Map;
 import java.util.stream.Stream;
 
-@NullMarked
 public record FrontMatter(
     @Nullable String layout,
     @Nullable String title,

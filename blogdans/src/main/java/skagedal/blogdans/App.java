@@ -6,6 +6,7 @@ import io.javalin.http.staticfiles.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import skagedal.blogdans.config.AppConfig;
 import skagedal.blogdans.jekyll.JekyllSite;
 
 import java.nio.file.Path;
@@ -28,11 +29,14 @@ public class App {
     }
 
     public Javalin run() {
+        final var database = new Database(appConfig.databaseConfig());
         final var jekyllRoot = appConfig.jekyllRoot();
         final var port = appConfig.port();
         final var jekyllSite = new JekyllSite(jekyllRoot);
         final var indexPageHandler = new IndexPageHandler(jekyllSite);
         final var postPageHandler = new PostPageHandler(jekyllSite);
+
+        database.runMigrations();
 
         final var javalin = Javalin.create(javalinConfig(jekyllRoot))
             .get("/", indexPageHandler)

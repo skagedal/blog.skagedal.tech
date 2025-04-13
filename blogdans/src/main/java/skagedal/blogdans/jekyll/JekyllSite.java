@@ -10,7 +10,6 @@ import liqp.antlr.CharStreamWithLocation;
 import liqp.antlr.NameResolver;
 import liqp.filters.Filter;
 import liqp.parser.Flavor;
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,7 +26,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.ZoneId;
-import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
@@ -37,7 +35,6 @@ import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-@NullMarked
 public class JekyllSite {
     private static final Logger log = LoggerFactory.getLogger(JekyllSite.class);
     private final Path jekyllRoot;

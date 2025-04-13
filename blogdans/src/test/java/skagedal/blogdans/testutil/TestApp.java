@@ -2,7 +2,8 @@ package skagedal.blogdans.testutil;
 
 import io.javalin.Javalin;
 import skagedal.blogdans.App;
-import skagedal.blogdans.AppConfig;
+import skagedal.blogdans.config.AppConfig;
+import skagedal.blogdans.config.DatabaseConfig;
 
 import java.net.URI;
 import java.nio.file.Paths;
@@ -20,6 +21,7 @@ public record TestApp(
 
             final var config = AppConfig.builder()
                 .jekyllRoot(simpleSite)
+                .databaseConfig(DatabaseConfig.developmentConfig()) // should be testcontainer later
                 .build();
             final var app = new App(config);
             final var javalin = app.run();

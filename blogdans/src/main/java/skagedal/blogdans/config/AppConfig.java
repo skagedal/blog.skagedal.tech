@@ -1,11 +1,14 @@
-package skagedal.blogdans;
+package skagedal.blogdans.config;
 
-import org.jspecify.annotations.NullMarked;
+import org.jspecify.annotations.Nullable;
 
 import java.nio.file.Path;
 
-@NullMarked
-public record AppConfig(Path jekyllRoot, int port) {
+public record AppConfig(
+    Path jekyllRoot,
+    int port,
+    DatabaseConfig databaseConfig
+) {
 
     public static AppConfig forEnvironment() {
         return switch (System.getenv("ENVIRONMENT")) {
@@ -21,6 +24,7 @@ public record AppConfig(Path jekyllRoot, int port) {
         return builder()
             .jekyllRoot(Path.of("../jekyll"))
             .port(8081)
+            .databaseConfig(DatabaseConfig.developmentConfig())
             .build();
     }
 
@@ -28,6 +32,7 @@ public record AppConfig(Path jekyllRoot, int port) {
         return builder()
             .jekyllRoot(Path.of("content"))
             .port(9020)
+            .databaseConfig(DatabaseConfig.productionConfig())
             .build();
     }
 
@@ -38,6 +43,7 @@ public record AppConfig(Path jekyllRoot, int port) {
     public static class Builder {
         private Path jekyllRoot = Path.of(".");
         private int port = 0;
+        private @Nullable DatabaseConfig databaseConfig;
 
         private Builder() {
         }
@@ -52,8 +58,16 @@ public record AppConfig(Path jekyllRoot, int port) {
             return this;
         }
 
+        public Builder databaseConfig(DatabaseConfig databaseConfig) {
+            this.databaseConfig = databaseConfig;
+            return this;
+        }
+
         public AppConfig build() {
-            return new AppConfig(jekyllRoot, port);
+            if (databaseConfig == null) {
+                throw new IllegalStateException("Database config needs to be set");
+            }
+            return new AppConfig(jekyllRoot, port, databaseConfig);
         }
     }
 }
