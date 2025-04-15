@@ -24,7 +24,7 @@ public record TestApp(
                 .databaseConfig(DatabaseConfig.developmentConfig()) // should be testcontainer later
                 .build();
             final var app = new App(config);
-            final var javalin = app.run();
+            final var javalin = app.runServer();
 
             SIMPLE_INSTANCE = new TestApp(config, app, javalin);
         }

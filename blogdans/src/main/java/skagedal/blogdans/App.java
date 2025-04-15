@@ -6,6 +6,8 @@ import io.javalin.http.staticfiles.Location;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.slf4j.MDC;
+import skagedal.blogdans.cli.Cli;
+import skagedal.blogdans.cli.Command;
 import skagedal.blogdans.config.AppConfig;
 import skagedal.blogdans.jekyll.JekyllSite;
 
@@ -23,12 +25,30 @@ public class App {
     public static void main(String[] args) {
         final var appConfig = AppConfig.forEnvironment();
         final var app = new App(appConfig);
+        app.parseArgsAndRun(args);
+    }
+
+    public void parseArgsAndRun(final String[] args) {
+        final var cli = new Cli();
+        final var command = cli.parse(args);
+        switch (command) {
+            case Command.Help help -> cli.printHelp(help);
+            case Command.Serve serve -> serveCommand();
+            case Command.Import importCommand -> importCommand();
+        }
+    }
+
+    private void serveCommand() {
         MDC.put("app", "blogdans");
-        final var javalin = app.run();
+        final var javalin = runServer();
         log.info("blogdans is up and running on port {}", javalin.port());
     }
 
-    public Javalin run() {
+    private void importCommand() {
+        log.info("importing");
+    }
+
+    public Javalin runServer() {
         final var database = new Database(appConfig.databaseConfig());
         final var jekyllRoot = appConfig.jekyllRoot();
         final var port = appConfig.port();
