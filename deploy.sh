@@ -37,4 +37,24 @@ rsync \
     --rsh="ssh -i ${HOME}/.ssh/blogdans-key" \
     blogdans@skagedal.tech:content
 
+echo "💁 Raw version: installing dependencies..."
+
+cd .. && cd rendered-posts
+bundle install $BUNDLE_INSTALL_ARG || exit 1
+
+echo "💁 Raw version: generating site..."
+bundle exec jekyll build || exit 1
+
+echo "💁 Uploading to blogdans..."
+rsync \
+    --archive \
+    --compress \
+    --delete \
+    --info=progress2 \
+    $RSYNC_ARG \
+    _site/ \
+    --rsh="ssh -i ${HOME}/.ssh/blogdans-key" \
+    blogdans@skagedal.tech:rawposts
+
+
 echo "💁 Done!"
