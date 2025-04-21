@@ -19,6 +19,7 @@ import skagedal.blogdans.Rss;
 import skagedal.blogdans.Xml;
 import skagedal.blogdans.entry.EntryCollectors;
 import skagedal.blogdans.entry.PossibleEntry;
+import skagedal.blogdans.markdown.MarkdownRenderer;
 
 import java.io.IOException;
 import java.io.UncheckedIOException;
@@ -39,6 +40,7 @@ public class JekyllSite {
     private static final Logger log = LoggerFactory.getLogger(JekyllSite.class);
     private final Path jekyllRoot;
     private final AtomicReference<SiteContext> cachedSiteContext = new AtomicReference<>();
+    private final MarkdownRenderer markdownRenderer = new MarkdownRenderer();
 
     private final TemplateParser templateParser = new TemplateParser.Builder()
         .withFlavor(Flavor.JEKYLL)
@@ -289,11 +291,6 @@ public class JekyllSite {
     }
 
     private String markdownToHtml(String markdown) {
-        final var options = new MutableDataSet();
-        final var parser = Parser.builder(options).build();
-        final var renderer = HtmlRenderer.builder(options).build();
-
-        final var document = parser.parse(markdown);
-        return renderer.render(document);
+        return markdownRenderer.render(markdown);
     }
 }
