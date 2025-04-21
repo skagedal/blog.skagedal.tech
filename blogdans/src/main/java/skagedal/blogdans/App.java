@@ -80,6 +80,11 @@ public class App {
                 staticConfig.directory = jekyllRoot.resolve("_site").resolve("css").toString();
                 staticConfig.location = Location.EXTERNAL;
             });
+            config.staticFiles.add(staticConfig -> {
+                staticConfig.hostedPath = "/highlightcss";
+                staticConfig.directory = "assets/highlightcss";
+                staticConfig.location = Location.EXTERNAL;
+            });
         };
     }
 }

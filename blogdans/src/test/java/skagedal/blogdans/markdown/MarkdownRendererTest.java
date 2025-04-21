@@ -36,12 +36,12 @@ class MarkdownRendererTest {
 
         final var html = renderer.render(markdown);
         assertThat(html).isEqualTo("""
-           <pre><code class="language-java">public class HelloWorld {
-               public static void main(String[] args) {
+           <code class="language-java"><em>public</em> class HelloWorld {
+               <em>public</em> static void main(String[] args) {
                    System.out.println(&quot;Hello, world!&quot;);
                }
            }
-           </code></pre>
+           </code>
            """);
     }
 }
