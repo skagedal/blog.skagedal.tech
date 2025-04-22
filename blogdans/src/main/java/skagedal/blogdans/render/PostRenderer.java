@@ -10,7 +10,7 @@ import static j2html.TagCreator.*;
 
 @NullMarked
 public class PostRenderer {
-    public String render(final String content) {
+    public String render(final String title, final String content) {
         final var htmlBuilder = IndentedHtml.inMemory();
         try {
             document().render(htmlBuilder);
@@ -23,9 +23,17 @@ public class PostRenderer {
 
     private static HtmlTag buildHtml(final String content) {
         return html(
+            head(
+                meta().withCharset("utf-8"),
+                meta().withName("viewport").withContent("width=device-width, initial-scale=1"),
+                link().withRel("stylesheet").withHref("/css/style.css"),
+                title("Blog Post")
+            ),
             rawHtml(content)
         );
     }
+
+
 
     /*
     <!DOCTYPE html>

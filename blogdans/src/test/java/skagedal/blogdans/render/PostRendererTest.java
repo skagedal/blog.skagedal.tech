@@ -1,5 +1,6 @@
 package skagedal.blogdans.render;
 
+import org.intellij.lang.annotations.Language;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -11,14 +12,26 @@ class PostRendererTest {
     @Test
     void simple() {
         final var content = "<p>Hello</p>";
-        final var renderedPage = postRenderer.render(content);
+        final var renderedPage = postRenderer.render("First post", content);
 
-        assertThat(renderedPage)
-            .isEqualTo("""
-                <!DOCTYPE html>
-                <html>
+        final @Language("html") String expectedHtml = """
+            <!DOCTYPE html>
+            <html>
+                 <head>
+                      <meta charset="utf-8">
+                      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                      <meta name="viewport" content="width=device-width, initial-scale=1">
+                      <title>First post</title>
+                      <meta name="description" content="Excerpt from First post">
+                      <link rel="stylesheet" href="/css/main.css">
+                      <link rel="canonical" href="https://blog.skagedal.tech/2025-04-07-first-post/">
+                 </head>
+                <body>
                     <p>Hello</p>
-                </html>
-                """);
+                </body>
+            </html>
+            """;
+        assertThat(renderedPage)
+            .isEqualTo(expectedHtml);
     }
 }

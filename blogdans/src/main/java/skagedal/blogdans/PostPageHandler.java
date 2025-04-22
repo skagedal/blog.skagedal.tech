@@ -28,7 +28,9 @@ public class PostPageHandler implements Handler {
         final var slug = Slug.of(context.pathParam("slug"));
         final var path = renderedPostsPath.resolve(slug + ".html");
         final var content = readFile(path);
-        return postRenderer.render(content);
+        // TODO
+        return content;
+//        return postRenderer.render(content);
     }
 
     private String readFile(final Path path) {
