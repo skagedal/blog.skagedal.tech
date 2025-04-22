@@ -6,6 +6,7 @@ import java.nio.file.Path;
 
 public record AppConfig(
     Path jekyllRoot,
+    Path renderedPosts,
     int port,
     DatabaseConfig databaseConfig
 ) {
@@ -23,6 +24,7 @@ public record AppConfig(
     private static AppConfig developmentConfig() {
         return builder()
             .jekyllRoot(Path.of("../jekyll"))
+            .renderedPosts(Path.of("../rendered-posts/_site"))
             .port(8081)
             .databaseConfig(DatabaseConfig.developmentConfig())
             .build();
@@ -31,6 +33,7 @@ public record AppConfig(
     private static AppConfig productionConfig() {
         return builder()
             .jekyllRoot(Path.of("content"))
+            .renderedPosts(Path.of("rawposts/_site"))
             .port(9020)
             .databaseConfig(DatabaseConfig.productionConfig())
             .build();
@@ -41,11 +44,17 @@ public record AppConfig(
     }
 
     public static class Builder {
+        private Path renderedPosts = Path.of(".");
         private Path jekyllRoot = Path.of(".");
         private int port = 0;
         private @Nullable DatabaseConfig databaseConfig;
 
         private Builder() {
+        }
+
+        public Builder renderedPosts(Path renderedPosts) {
+            this.renderedPosts = renderedPosts;
+            return this;
         }
 
         public Builder jekyllRoot(Path jekyllRoot) {
@@ -67,7 +76,7 @@ public record AppConfig(
             if (databaseConfig == null) {
                 throw new IllegalStateException("Database config needs to be set");
             }
-            return new AppConfig(jekyllRoot, port, databaseConfig);
+            return new AppConfig(jekyllRoot, renderedPosts, port, databaseConfig);
         }
     }
 }

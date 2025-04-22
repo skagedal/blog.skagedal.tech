@@ -1,5 +1,6 @@
 package skagedal.blogdans.markdown;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import static org.assertj.core.api.Assertions.*;
@@ -22,6 +23,7 @@ class MarkdownRendererTest {
                 """);
     }
 
+    @Disabled("For now, letting Jekyll handle the Markdown and syntax highlighting")
     @Test
     void syntaxHighlighting() {
         final var markdown = """

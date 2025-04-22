@@ -1,8 +1,5 @@
 package skagedal.blogdans.jekyll;
 
-import com.vladsch.flexmark.html.HtmlRenderer;
-import com.vladsch.flexmark.parser.Parser;
-import com.vladsch.flexmark.util.data.MutableDataSet;
 import liqp.Template;
 import liqp.TemplateContext;
 import liqp.TemplateParser;
