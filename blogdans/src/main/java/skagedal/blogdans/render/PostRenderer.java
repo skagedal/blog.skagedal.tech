@@ -1,22 +1,30 @@
 package skagedal.blogdans.render;
 
-import j2html.rendering.FlatHtml;
 import j2html.rendering.IndentedHtml;
+import j2html.tags.specialized.HtmlTag;
+import org.jspecify.annotations.NullMarked;
 
 import java.io.IOException;
 
 import static j2html.TagCreator.*;
 
+@NullMarked
 public class PostRenderer {
     public String render(final String content) {
         final var htmlBuilder = IndentedHtml.inMemory();
         try {
             document().render(htmlBuilder);
-            html().render(htmlBuilder);
+            buildHtml(content).render(htmlBuilder);
         } catch (IOException exception) {
             throw new IllegalStateException("Failed to render HTML", exception);
         }
         return htmlBuilder.output().toString();
+    }
+
+    private static HtmlTag buildHtml(final String content) {
+        return html(
+            rawHtml(content)
+        );
     }
 
     /*

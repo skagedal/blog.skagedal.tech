@@ -17,6 +17,7 @@ class PostRendererTest {
             .isEqualTo("""
                 <!DOCTYPE html>
                 <html>
+                    <p>Hello</p>
                 </html>
                 """);
     }
