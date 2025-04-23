@@ -20,7 +20,7 @@ public class App {
     private static Logger log = LoggerFactory.getLogger(App.class);
     private final AppConfig appConfig;
 
-    private static final Site SITE = new Site(URI.create("https://blog.skagedal.tech"));
+    private static final Site SITE = Site.skagedalTech();
 
     public App(final AppConfig appConfig) {
         this.appConfig = appConfig;

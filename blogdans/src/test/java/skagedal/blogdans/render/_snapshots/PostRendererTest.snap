@@ -5,11 +5,33 @@ skagedal.blogdans.render.PostRendererTest.render=[
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/css/style.css">
-        <link rel="canonical" href="https://blog.skagedal.tech/2025-04-07-first-post/">
+        <link rel="canonical" href="https://example.com/2025-04-07-first-post/">
         <title>
             First post
         </title>
     </head>
+    <body>
+        <header></header>
+        <div class="page-content">
+            <div class="wrapper">
+                <article class="post" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+                    <header class="post-header">
+                        <h1 class="post-title" itemprop="name headline">
+                            First post
+                        </h1>
+                        <p class="post-meta">
+                            <time datetime="2025-04-07" itemprop="datePublished">
+                                2025-04-07
+                            </time>
+                        </p>
+                    </header>
+                    <div class="post-content" itemprop="articleBody">
+                        
+                    </div>
+                </article>
+            </div>
+        </div>
+    </body>
     
 </html>
 
@@ -24,11 +46,33 @@ skagedal.blogdans.render.PostRendererTest.withDescription=[
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Excerpt from First post">
         <link rel="stylesheet" href="/css/style.css">
-        <link rel="canonical" href="https://blog.skagedal.tech/2025-04-07-first-post/">
+        <link rel="canonical" href="https://example.com/2025-04-07-first-post/">
         <title>
             First post
         </title>
     </head>
+    <body>
+        <header></header>
+        <div class="page-content">
+            <div class="wrapper">
+                <article class="post" itemscope="itemscope" itemtype="http://schema.org/BlogPosting">
+                    <header class="post-header">
+                        <h1 class="post-title" itemprop="name headline">
+                            First post
+                        </h1>
+                        <p class="post-meta">
+                            <time datetime="2025-04-07" itemprop="datePublished">
+                                2025-04-07
+                            </time>
+                        </p>
+                    </header>
+                    <div class="post-content" itemprop="articleBody">
+                        
+                    </div>
+                </article>
+            </div>
+        </div>
+    </body>
     
 </html>
 

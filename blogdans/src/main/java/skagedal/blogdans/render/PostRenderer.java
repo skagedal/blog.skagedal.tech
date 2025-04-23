@@ -1,6 +1,7 @@
 package skagedal.blogdans.render;
 
 import j2html.rendering.IndentedHtml;
+import j2html.tags.DomContent;
 import j2html.tags.specialized.HtmlTag;
 import j2html.tags.specialized.MetaTag;
 import org.jspecify.annotations.NullMarked;
@@ -42,6 +43,11 @@ public class PostRenderer {
                 link().withRel("canonical").withHref(site.baseUri().resolve(post.slug().toString() + "/").toString()),
                 title(post.title())
             ),
+            body(
+                rawHtml(site.header()),
+                pageContent(post)
+                // TODO: footer
+            ),
             rawHtml(post.htmlContent())
         );
     }
@@ -54,36 +60,46 @@ public class PostRenderer {
         }
     }
 
-    /*
-    <!DOCTYPE html>
-<html>
+    private DomContent pageContent(final Post post) {
+        return div()
+            .withClasses("page-content")
+            .with(
+                div()
+                    .withClasses("wrapper")
+                    .with(
+                        article()
+                            .withClasses("post")
+                            .attr("itemscope", "itemscope")
+                            .attr("itemtype", "http://schema.org/BlogPosting")
+                            .with(
+                                header()
+                                    .withClasses("post-header")
+                                    .with(
+                                        h1()
+                                            .withClasses("post-title")
+                                            .attr("itemprop", "name headline")
+                                            .withText(post.title())
+                                    )
+                                    .with(
+                                        p()
+                                            .withClasses("post-meta")
+                                            .with(
+                                                time()
+                                                    // TODO: this shouldn't necessarily be from the slug
+                                                    .attr("datetime", post.slug().date().toString())
+                                                    .attr("itemprop", "datePublished")
+                                                    .withText(post.slug().date().toString())
+                                            )
+                                    )
+                            )
+                            .with(
+                                div()
+                                    .withClasses("post-content")
+                                    .attr("itemprop", "articleBody")
+                                    .with(rawHtml(post.htmlContent()))
+                            )
+                    )
+            );
+    }
 
-{% include head.html %}
-
-<body>
-
-{% include header.html %}
-
-<div class="page-content">
-  <div class="wrapper">
-    <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
-
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">{{ page.title }}</h1>
-        <p class="post-meta"><time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>{% if page.author %} • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}</p>
-      </header>
-
-      <div class="post-content" itemprop="articleBody">
-        {{ content }}
-      </div>
-
-    </article>
-  </div>
-</div>
-
-{% include footer.html %}
-
-</body>
-</html>
-     */
 }
