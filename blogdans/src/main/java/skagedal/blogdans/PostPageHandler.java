@@ -2,21 +2,18 @@ package skagedal.blogdans;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;
+import skagedal.blogdans.domain.Site;
+import skagedal.blogdans.domain.Slug;
 import skagedal.blogdans.jekyll.JekyllSite;
 import skagedal.blogdans.render.PostRenderer;
 
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 public class PostPageHandler implements Handler {
     private final JekyllSite jekyllSite;
-    private final Path renderedPostsPath;
-    private final PostRenderer postRenderer = new PostRenderer();
+    private final PostRenderer postRenderer;
 
-    public PostPageHandler(final JekyllSite jekyllSite, final Path renderedPostsPath) {
+    public PostPageHandler(final Site site, final JekyllSite jekyllSite) {
         this.jekyllSite = jekyllSite;
-        this.renderedPostsPath = renderedPostsPath;
+        this.postRenderer = new PostRenderer(site);
     }
 
     @Override
@@ -26,18 +23,7 @@ public class PostPageHandler implements Handler {
 
     private String render(final Context context) {
         final var slug = Slug.of(context.pathParam("slug"));
-        final var path = renderedPostsPath.resolve(slug + ".html");
-        final var content = readFile(path);
-        // TODO
-        return content;
-//        return postRenderer.render(content);
-    }
-
-    private String readFile(final Path path) {
-        try {
-            return Files.readString(path);
-        } catch (IOException e) {
-            throw new IllegalStateException("Failed to read file: " + path, e);
-        }
+        final var post = jekyllSite.readPost(slug);
+        return postRenderer.render(post);
     }
 }

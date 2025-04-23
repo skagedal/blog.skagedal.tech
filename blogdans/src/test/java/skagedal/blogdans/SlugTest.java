@@ -3,6 +3,7 @@ package skagedal.blogdans;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
+import skagedal.blogdans.domain.Slug;
 
 import static org.assertj.core.api.Assertions.*;
 

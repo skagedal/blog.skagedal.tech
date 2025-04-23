@@ -14,6 +14,8 @@ import skagedal.blogdans.ContentFile;
 import skagedal.blogdans.ContentType;
 import skagedal.blogdans.Rss;
 import skagedal.blogdans.Xml;
+import skagedal.blogdans.domain.Post;
+import skagedal.blogdans.domain.Slug;
 import skagedal.blogdans.entry.EntryCollectors;
 import skagedal.blogdans.entry.PossibleEntry;
 import skagedal.blogdans.markdown.MarkdownRenderer;
@@ -36,6 +38,7 @@ import java.util.stream.Stream;
 public class JekyllSite {
     private static final Logger log = LoggerFactory.getLogger(JekyllSite.class);
     private final Path jekyllRoot;
+    private final Path renderedPostsRoot;
     private final AtomicReference<SiteContext> cachedSiteContext = new AtomicReference<>();
     private final MarkdownRenderer markdownRenderer = new MarkdownRenderer();
 
@@ -91,15 +94,30 @@ public class JekyllSite {
         })
         .build();
 
-    public JekyllSite(final Path jekyllRoot) {
+    public JekyllSite(final Path jekyllRoot, final Path renderedPostsRoot) {
         this.jekyllRoot = jekyllRoot;
+        this.renderedPostsRoot = renderedPostsRoot;
     }
 
     public Path indexPath() {
         return jekyllRoot.resolve("index.html");
     }
 
-    public Path postPath(final String slug) {
+    public Post readPost(final Slug slug) {
+        final var postPath = postPath(slug);
+        final var contentFile = readFile(postPath);
+        final var frontMatterSeparated = FrontMatterSeparated.split(contentFile.content());
+        final var title = frontMatterSeparated.frontMatter().title();
+        final var renderedPost = readFile(renderedPostsRoot.resolve(slug + ".html"));
+        return new Post(
+            slug,
+            title != null ? title : slug.title(),
+            frontMatterSeparated.content(),
+            renderedPost.content()
+        );
+    }
+
+    public Path postPath(final Slug slug) {
         return jekyllRoot.resolve("_posts").resolve(slug + ".md");
     }
 

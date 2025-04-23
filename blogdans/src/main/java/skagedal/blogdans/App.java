@@ -9,14 +9,18 @@ import org.slf4j.MDC;
 import skagedal.blogdans.cli.Cli;
 import skagedal.blogdans.cli.Command;
 import skagedal.blogdans.config.AppConfig;
+import skagedal.blogdans.domain.Site;
 import skagedal.blogdans.jekyll.JekyllSite;
 
+import java.net.URI;
 import java.nio.file.Path;
 import java.util.function.Consumer;
 
 public class App {
     private static Logger log = LoggerFactory.getLogger(App.class);
     private final AppConfig appConfig;
+
+    private static final Site SITE = new Site(URI.create("https://blog.skagedal.tech"));
 
     public App(final AppConfig appConfig) {
         this.appConfig = appConfig;
@@ -52,9 +56,9 @@ public class App {
         final var database = new Database(appConfig.databaseConfig());
         final var jekyllRoot = appConfig.jekyllRoot();
         final var port = appConfig.port();
-        final var jekyllSite = new JekyllSite(jekyllRoot);
+        final var jekyllSite = new JekyllSite(jekyllRoot, appConfig.renderedPosts());
         final var indexPageHandler = new IndexPageHandler(jekyllSite);
-        final var postPageHandler = new PostPageHandler(jekyllSite, appConfig.renderedPosts());
+        final var postPageHandler = new PostPageHandler(SITE, jekyllSite);
 
         database.runMigrations();
 

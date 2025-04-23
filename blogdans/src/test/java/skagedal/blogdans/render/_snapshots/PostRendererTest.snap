@@ -5,11 +5,31 @@ skagedal.blogdans.render.PostRendererTest.render=[
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <link rel="stylesheet" href="/css/style.css">
+        <link rel="canonical" href="https://blog.skagedal.tech/2025-04-07-first-post/">
         <title>
-            Blog Post
+            First post
         </title>
     </head>
-    <p>Hello</p>
+    
+</html>
+
+]
+
+
+skagedal.blogdans.render.PostRendererTest.withDescription=[
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="description" content="Excerpt from First post">
+        <link rel="stylesheet" href="/css/style.css">
+        <link rel="canonical" href="https://blog.skagedal.tech/2025-04-07-first-post/">
+        <title>
+            First post
+        </title>
+    </head>
+    
 </html>
 
 ]

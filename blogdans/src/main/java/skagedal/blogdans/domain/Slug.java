@@ -1,4 +1,4 @@
-package skagedal.blogdans;
+package skagedal.blogdans.domain;
 
 import org.jspecify.annotations.NullMarked;
 

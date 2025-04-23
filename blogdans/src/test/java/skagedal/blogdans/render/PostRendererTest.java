@@ -6,6 +6,11 @@ import org.intellij.lang.annotations.Language;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import skagedal.blogdans.domain.Post;
+import skagedal.blogdans.domain.Site;
+import skagedal.blogdans.domain.Slug;
+
+import java.net.URI;
 
 import static org.assertj.core.api.Assertions.*;
 
@@ -14,14 +19,27 @@ import static org.assertj.core.api.Assertions.*;
 })
 class PostRendererTest {
 
-    private final PostRenderer postRenderer = new PostRenderer();
+    private final PostRenderer postRenderer = new PostRenderer(new Site(URI.create("https://blog.skagedal.tech")));
 
     private Expect expect;
 
     @Test
     void render() {
-        final var content = "<p>Hello</p>";
-        final var renderedPage = postRenderer.render("First post", content);
+        final var post = Post.builder(Slug.of("2025-04-07-first-post"))
+            .title("First post")
+            .build();
+        final var renderedPage = postRenderer.render(post);
+
+        expect.toMatchSnapshot(renderedPage);
+    }
+
+    @Test
+    void withDescription() {
+        final var post = Post.builder(Slug.of("2025-04-07-first-post"))
+            .title("First post")
+            .excerpt("Excerpt from First post")
+            .build();
+        final var renderedPage = postRenderer.render(post);
 
         expect.toMatchSnapshot(renderedPage);
     }
@@ -29,15 +47,11 @@ class PostRendererTest {
     @Disabled
     @Test
     void simple() {
-        final var content = "<p>Hello</p>";
-        final var renderedPage = postRenderer.render("First post", content);
-
         final @Language("html") String expectedHtml = """
             <!DOCTYPE html>
             <html>
                  <head>
                       <meta charset="utf-8">
-                      <meta http-equiv="X-UA-Compatible" content="IE=edge">
                       <meta name="viewport" content="width=device-width, initial-scale=1">
                       <title>First post</title>
                       <meta name="description" content="Excerpt from First post">
@@ -49,7 +63,5 @@ class PostRendererTest {
                 </body>
             </html>
             """;
-        assertThat(renderedPage)
-            .isEqualTo(expectedHtml);
     }
 }
