@@ -1,14 +1,32 @@
 package skagedal.blogdans.render;
 
+import au.com.origin.snapshots.Expect;
+import au.com.origin.snapshots.junit5.SnapshotExtension;
 import org.intellij.lang.annotations.Language;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 
 import static org.assertj.core.api.Assertions.*;
 
+@ExtendWith({
+    SnapshotExtension.class
+})
 class PostRendererTest {
 
     private final PostRenderer postRenderer = new PostRenderer();
 
+    private Expect expect;
+
+    @Test
+    void render() {
+        final var content = "<p>Hello</p>";
+        final var renderedPage = postRenderer.render("First post", content);
+
+        expect.toMatchSnapshot(renderedPage);
+    }
+
+    @Disabled
     @Test
     void simple() {
         final var content = "<p>Hello</p>";

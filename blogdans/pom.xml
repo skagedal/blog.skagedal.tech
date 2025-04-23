@@ -105,6 +105,12 @@
             <version>3.27.3</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>io.github.origin-energy</groupId>
+            <artifactId>java-snapshot-testing-junit5</artifactId>
+            <version>4.0.8</version>
+            <scope>test</scope>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
