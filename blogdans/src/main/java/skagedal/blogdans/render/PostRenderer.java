@@ -1,9 +1,7 @@
 package skagedal.blogdans.render;
 
 import j2html.rendering.FlatHtml;
-import j2html.rendering.IndentedHtml;
 import j2html.tags.DomContent;
-import j2html.tags.specialized.HeadTag;
 import j2html.tags.specialized.HtmlTag;
 import j2html.tags.specialized.MetaTag;
 import org.jspecify.annotations.NullMarked;
