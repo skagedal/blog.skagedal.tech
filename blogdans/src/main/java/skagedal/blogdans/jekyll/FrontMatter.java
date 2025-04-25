@@ -1,9 +1,8 @@
 package skagedal.blogdans.jekyll;
 
-import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
-import skagedal.blogdans.entry.EntryCollectors;
-import skagedal.blogdans.entry.PossibleEntry;
+import skagedal.blogdans.util.entry.EntryCollectors;
+import skagedal.blogdans.util.entry.PossibleEntry;
 
 import java.util.Map;
 import java.util.stream.Stream;

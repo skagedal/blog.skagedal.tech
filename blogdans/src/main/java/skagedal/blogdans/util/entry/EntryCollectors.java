@@ -1,4 +1,4 @@
-package skagedal.blogdans.entry;
+package skagedal.blogdans.util.entry;
 
 import java.util.Collections;
 import java.util.HashMap;

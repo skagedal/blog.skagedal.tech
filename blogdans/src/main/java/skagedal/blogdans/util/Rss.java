@@ -1,4 +1,4 @@
-package skagedal.blogdans;
+package skagedal.blogdans.util;
 
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;

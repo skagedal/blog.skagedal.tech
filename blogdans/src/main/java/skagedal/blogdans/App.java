@@ -10,9 +10,11 @@ import skagedal.blogdans.cli.Cli;
 import skagedal.blogdans.cli.Command;
 import skagedal.blogdans.config.AppConfig;
 import skagedal.blogdans.domain.Site;
+import skagedal.blogdans.handlers.CustomPageHandler;
+import skagedal.blogdans.handlers.IndexPageHandler;
+import skagedal.blogdans.handlers.PostPageHandler;
 import skagedal.blogdans.jekyll.JekyllSite;
 
-import java.net.URI;
 import java.nio.file.Path;
 import java.util.function.Consumer;
 

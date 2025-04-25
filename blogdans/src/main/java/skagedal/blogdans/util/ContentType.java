@@ -1,4 +1,4 @@
-package skagedal.blogdans;
+package skagedal.blogdans.util;
 
 public enum ContentType {
     MARKDOWN, HTML, XML, TEXT

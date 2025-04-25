@@ -1,4 +1,4 @@
-package skagedal.blogdans;
+package skagedal.blogdans.handlers;
 
 import io.javalin.http.Context;
 import io.javalin.http.Handler;

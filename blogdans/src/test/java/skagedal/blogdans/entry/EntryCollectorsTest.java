@@ -1,6 +1,8 @@
 package skagedal.blogdans.entry;
 
 import org.junit.jupiter.api.Test;
+import skagedal.blogdans.util.entry.EntryCollectors;
+import skagedal.blogdans.util.entry.PossibleEntry;
 
 import java.util.Map;
 import java.util.stream.Stream;

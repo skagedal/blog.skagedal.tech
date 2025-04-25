@@ -1,4 +1,4 @@
-package skagedal.blogdans;
+package skagedal.blogdans.util;
 
 public class Xml {
     private Xml() {

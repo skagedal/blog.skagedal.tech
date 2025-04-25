@@ -1,4 +1,4 @@
-package skagedal.blogdans.entry;
+package skagedal.blogdans.util.entry;
 
 import org.jspecify.annotations.Nullable;
 
