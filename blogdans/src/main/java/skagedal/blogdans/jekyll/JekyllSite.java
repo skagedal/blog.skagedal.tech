@@ -259,7 +259,7 @@ public class JekyllSite {
                 )
             ).collect(EntryCollectors.nonNullEntriesToMap());
         } catch (Exception e) {
-            log.error("Failed to process post file {}: {}", postFile, e.getMessage());
+            log.error("Failed to process post file {}", postFile, e);
             return null;
         }
     }
