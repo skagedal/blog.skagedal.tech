@@ -67,7 +67,6 @@ public class App {
         final var javalin = Javalin.create(javalinConfig(jekyllRoot))
             .get("/", indexPageHandler)
             .get("/posts/{slug}", postPageHandler)
-            .get("/about/", new CustomPageHandler(jekyllSite, jekyllSite.getAboutPath()))
             .get("/feed.xml", new CustomPageHandler(jekyllSite, jekyllSite.getFeedPath()))
             .start(port);
         return javalin;

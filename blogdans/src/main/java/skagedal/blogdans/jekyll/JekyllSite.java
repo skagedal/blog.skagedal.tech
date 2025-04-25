@@ -213,14 +213,7 @@ public class JekyllSite {
     }
 
     private List<Map<String, Object>> pages() {
-        final var aboutPath = getAboutPath();
-        return List.of(
-            Map.of(
-                "title", "About",
-                "url", "/about/",
-                "content", readFile(aboutPath).content()
-            )
-        );
+        return List.of();
     }
 
     public Path getAboutPath() {

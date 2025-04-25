@@ -4,7 +4,7 @@ skagedal.blogdans.render.PostRendererTest.render=[
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/main.css">
         <link rel="canonical" href="https://example.com/2025-04-07-first-post/">
         <title>
             First post
@@ -31,8 +31,8 @@ skagedal.blogdans.render.PostRendererTest.render=[
                 </article>
             </div>
         </div>
+        <footer></footer>
     </body>
-    
 </html>
 
 ]
@@ -45,7 +45,7 @@ skagedal.blogdans.render.PostRendererTest.withDescription=[
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="Excerpt from First post">
-        <link rel="stylesheet" href="/css/style.css">
+        <link rel="stylesheet" href="/css/main.css">
         <link rel="canonical" href="https://example.com/2025-04-07-first-post/">
         <title>
             First post
@@ -72,8 +72,8 @@ skagedal.blogdans.render.PostRendererTest.withDescription=[
                 </article>
             </div>
         </div>
+        <footer></footer>
     </body>
-    
 </html>
 
 ]
