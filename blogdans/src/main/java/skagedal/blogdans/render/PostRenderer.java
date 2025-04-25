@@ -1,7 +1,9 @@
 package skagedal.blogdans.render;
 
+import j2html.rendering.FlatHtml;
 import j2html.rendering.IndentedHtml;
 import j2html.tags.DomContent;
+import j2html.tags.specialized.HeadTag;
 import j2html.tags.specialized.HtmlTag;
 import j2html.tags.specialized.MetaTag;
 import org.jspecify.annotations.NullMarked;
@@ -23,7 +25,8 @@ public class PostRenderer {
     }
 
     public String render(final Post post) {
-        final var htmlBuilder = IndentedHtml.inMemory();
+        // IndentedHtml messes up the `<pre>` tags inside the pre-formatted content
+        final var htmlBuilder = FlatHtml.inMemory();
         try {
             document().render(htmlBuilder);
             buildHtml(post).render(htmlBuilder);
@@ -35,19 +38,23 @@ public class PostRenderer {
 
     private HtmlTag buildHtml(final Post post) {
         return html(
-            head(
-                meta().withCharset("utf-8"),
-                meta().withName("viewport").withContent("width=device-width, initial-scale=1"),
-                metaDescription(post),
-                link().withRel("stylesheet").withHref("/css/main.css"),
-                link().withRel("canonical").withHref(site.baseUri().resolve(post.slug().toString() + "/").toString()),
-                title(post.title())
-            ),
+            renderHead(post),
             body(
                 rawHtml(site.header()),
                 pageContent(post),
                 rawHtml(site.footer())
             )
+        );
+    }
+
+    private DomContent renderHead(final Post post) {
+        return head(
+            meta().withCharset("utf-8"),
+            meta().withName("viewport").withContent("width=device-width, initial-scale=1"),
+            metaDescription(post),
+            link().withRel("stylesheet").withHref("/css/main.css"),
+            link().withRel("canonical").withHref(site.baseUri().resolve(post.slug().toString() + "/").toString()),
+            title(post.title())
         );
     }
 
