@@ -107,12 +107,13 @@ public class JekyllSite {
         final var postPath = postPath(slug);
         final var contentFile = readFile(postPath);
         final var frontMatterSeparated = FrontMatterSeparated.split(contentFile.content());
-        final var title = frontMatterSeparated.frontMatter().title();
+        final var frontMatter = frontMatterSeparated.frontMatter();
+        final var title = frontMatter.title();
         final var renderedPost = readFile(renderedPostsRoot.resolve(slug + ".html"));
         return new Post(
             slug,
             title != null ? title : slug.title(),
-            frontMatterSeparated.content(),
+            frontMatter.summary(),
             renderedPost.content()
         );
     }

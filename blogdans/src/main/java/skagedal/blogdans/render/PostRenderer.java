@@ -39,16 +39,15 @@ public class PostRenderer {
                 meta().withCharset("utf-8"),
                 meta().withName("viewport").withContent("width=device-width, initial-scale=1"),
                 metaDescription(post),
-                link().withRel("stylesheet").withHref("/css/style.css"),
+                link().withRel("stylesheet").withHref("/css/main.css"),
                 link().withRel("canonical").withHref(site.baseUri().resolve(post.slug().toString() + "/").toString()),
                 title(post.title())
             ),
             body(
                 rawHtml(site.header()),
-                pageContent(post)
-                // TODO: footer
-            ),
-            rawHtml(post.htmlContent())
+                pageContent(post),
+                rawHtml(site.footer())
+            )
         );
     }
 
