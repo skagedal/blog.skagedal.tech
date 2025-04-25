@@ -5,4 +5,7 @@ source common.sh
 export JAVA="${JAVA_HOME}"/bin/java
 export ENVIRONMENT=production
 
-exec $JAVA -jar blogdans-1.0-SNAPSHOT-jar-with-dependencies.jar serve
+exec $JAVA \
+  -Dlogback.configurationFile=logback-prod.xml \
+  -jar blogdans-1.0-SNAPSHOT-jar-with-dependencies.jar serve
+  
