@@ -33,7 +33,7 @@ public record AppConfig(
     private static AppConfig productionConfig() {
         return builder()
             .jekyllRoot(Path.of("content"))
-            .renderedPosts(Path.of("rawposts/_site"))
+            .renderedPosts(Path.of("rawposts"))
             .port(9020)
             .databaseConfig(DatabaseConfig.productionConfig())
             .build();

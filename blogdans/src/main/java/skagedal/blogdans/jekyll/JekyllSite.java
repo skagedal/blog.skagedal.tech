@@ -252,7 +252,7 @@ public class JekyllSite {
             return Stream.concat(
                 frontMatter.asPossibleEntries(),
                 Stream.of(
-                    new PossibleEntry("content", markdownToHtml(frontMatterSeparated.content())),
+                    new PossibleEntry("content", "" /*markdownToHtml(frontMatterSeparated.content()) */),
                     new PossibleEntry("date", frontMatter.date() == null ? dateFromFilename : null),
                     new PossibleEntry("slug", slugFromFilename),
                     new PossibleEntry("url", url)
