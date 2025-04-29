@@ -1,9 +1,10 @@
 package skagedal.blogdans.handlers;
 
-import io.javalin.http.Context;
-import io.javalin.http.Handler;
+import org.jetbrains.annotations.NotNull;
 import skagedal.blogdans.domain.Site;
 import skagedal.blogdans.domain.Slug;
+import skagedal.blogdans.infra.Context;
+import skagedal.blogdans.infra.Handler;
 import skagedal.blogdans.jekyll.JekyllSite;
 import skagedal.blogdans.render.PostRenderer;
 
@@ -17,13 +18,13 @@ public class PostPageHandler implements Handler {
     }
 
     @Override
-    public void handle(final Context context) throws Exception {
-        context.html(render(context));
+    public void handle(final @NotNull Context context) {
+        context.javalin().html(render(context));
     }
 
     private String render(final Context context) {
-        final var slug = Slug.of(context.pathParam("slug"));
+        final var slug = Slug.of(context.javalin().pathParam("slug"));
         final var post = jekyllSite.readPost(slug);
-        return postRenderer.render(post);
+        return postRenderer.render(post, context.user());
     }
 }

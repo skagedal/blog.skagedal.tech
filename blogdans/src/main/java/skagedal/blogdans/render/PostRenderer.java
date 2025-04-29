@@ -8,6 +8,7 @@ import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import skagedal.blogdans.domain.Post;
 import skagedal.blogdans.domain.Site;
+import skagedal.blogdans.domain.User;
 
 import java.io.IOException;
 
@@ -22,27 +23,37 @@ public class PostRenderer {
         this.site = site;
     }
 
-    public String render(final Post post) {
+    public String render(final Post post, final User user) {
         // IndentedHtml messes up the `<pre>` tags inside the pre-formatted content
         final var htmlBuilder = FlatHtml.inMemory();
         try {
             document().render(htmlBuilder);
-            buildHtml(post).render(htmlBuilder);
+            buildHtml(post, user).render(htmlBuilder);
         } catch (IOException exception) {
             throw new IllegalStateException("Failed to render HTML", exception);
         }
         return htmlBuilder.output().toString();
     }
 
-    private HtmlTag buildHtml(final Post post) {
+    private HtmlTag buildHtml(final Post post, final User user) {
         return html(
             renderHead(post),
             body(
                 rawHtml(site.header()),
                 pageContent(post),
-                rawHtml(site.footer())
+                rawHtml(site.footer()),
+                userInfo(user)
             )
         );
+    }
+
+    private DomContent userInfo(final User user) {
+        return switch (user) {
+            case User.Anonymous ignored -> div();
+            case User.Authenticated(String email) -> div()
+                .withClasses("user-info")
+                .withText("You are logged in as " + email);
+        };
     }
 
     private DomContent renderHead(final Post post) {

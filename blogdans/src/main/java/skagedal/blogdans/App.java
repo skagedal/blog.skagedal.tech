@@ -10,9 +10,7 @@ import skagedal.blogdans.cli.Cli;
 import skagedal.blogdans.cli.Command;
 import skagedal.blogdans.config.AppConfig;
 import skagedal.blogdans.domain.Site;
-import skagedal.blogdans.handlers.CustomPageHandler;
-import skagedal.blogdans.handlers.IndexPageHandler;
-import skagedal.blogdans.handlers.PostPageHandler;
+import skagedal.blogdans.handlers.*;
 import skagedal.blogdans.jekyll.JekyllSite;
 
 import java.nio.file.Path;
@@ -65,9 +63,11 @@ public class App {
         database.runMigrations();
 
         final var javalin = Javalin.create(javalinConfig(jekyllRoot))
+            .before(new BeforeRequestHandler())
             .get("/", indexPageHandler)
             .get("/posts/{slug}", postPageHandler)
             .get("/feed.xml", new CustomPageHandler(jekyllSite, jekyllSite.getFeedPath()))
+            .after(new AfterRequestHandler())
             .start(port);
         return javalin;
     }
