@@ -41,6 +41,7 @@ public class JekyllSite {
     private final Path renderedPostsRoot;
     private final AtomicReference<SiteContext> cachedSiteContext = new AtomicReference<>();
     private final MarkdownRenderer markdownRenderer = new MarkdownRenderer();
+    private final Yamler yamler = new Yamler();
 
     private final TemplateParser templateParser = new TemplateParser.Builder()
         .withFlavor(Flavor.JEKYLL)
@@ -122,10 +123,6 @@ public class JekyllSite {
         return jekyllRoot.resolve("_posts").resolve(slug + ".md");
     }
 
-    public String dateFromSlug(final String slug) {
-        return slug.substring(0, 10);
-    }
-
     public Path layoutsPath() {
         return jekyllRoot.resolve("_layouts");
     }
@@ -197,6 +194,7 @@ public class JekyllSite {
             return List.of();
         }
 
+        final var before = System.currentTimeMillis();
         try (Stream<Path> postFiles = Files.list(postsDirectory)) {
             return processPostFiles(postFiles)
                 .sorted((post1, post2) -> {
@@ -209,15 +207,14 @@ public class JekyllSite {
         } catch (IOException e) {
             log.error("Failed to read posts from {}", postsDirectory, e);
             throw new UncheckedIOException("Failed to read posts", e);
+        } finally {
+            final var after = System.currentTimeMillis();
+            log.info("Processed posts in {} ms", after - before);
         }
     }
 
     private List<Map<String, Object>> pages() {
         return List.of();
-    }
-
-    public Path getAboutPath() {
-        return jekyllRoot.resolve("about.md");
     }
 
     public Path getFeedPath() {
@@ -238,16 +235,13 @@ public class JekyllSite {
     @Nullable
     private Map<String, Object> processPostFile(Path postFile) {
         try {
-            final var contentFile = readFile(postFile);
-            final var frontMatterSeparated = FrontMatterSeparated.split(contentFile.content());
-
             final var filename = postFile.getFileName().toString();
             // Assuming Jekyll's format: YYYY-MM-DD-title.md
             final var dateFromFilename = filename.substring(0, 10);
             final var slugFromFilename = filename.substring(0, filename.lastIndexOf('.'));
             final var url = "/posts/" + slugFromFilename;
 
-            final var frontMatter = frontMatterSeparated.frontMatter();
+            final var frontMatter = yamler.load(postFile);
 
             return Stream.concat(
                 frontMatter.asPossibleEntries(),
@@ -261,14 +255,6 @@ public class JekyllSite {
         } catch (Exception e) {
             log.error("Failed to process post file {}", postFile, e);
             return null;
-        }
-    }
-
-    private Template readTemplate(final Path path) {
-        try {
-            return templateParser.parse(path);
-        } catch (IOException e) {
-            throw new UncheckedIOException("Failed to read template: " + path, e);
         }
     }
 

@@ -1,7 +1,8 @@
 package skagedal.blogdans.handlers;
 
-import io.javalin.http.Context;
-import io.javalin.http.Handler;
+import skagedal.blogdans.infra.Context;
+import skagedal.blogdans.infra.Handler;
+
 import skagedal.blogdans.jekyll.JekyllSite;
 
 public class IndexPageHandler implements Handler {
@@ -12,8 +13,8 @@ public class IndexPageHandler implements Handler {
     }
 
     @Override
-    public void handle(Context context) throws Exception {
-        context.html(renderHtml());
+    public void handle(Context context)  {
+        context.javalin().html(renderHtml());
     }
 
     private String renderHtml() {
