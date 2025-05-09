@@ -1,0 +1,67 @@
+{
+  name: 'Main CI job',
+  on: {
+    push: {
+      branches: [ "main" ]
+    }
+  },
+  jobs: {
+    build: {
+      runs-on: 'ubuntu-latest',
+      steps: [
+        {
+          id: 'checkout',
+          name: 'Checkout repository',
+          uses: 'actions/checkout@v4'
+        },
+        {
+          id: 'jdk',
+          name: 'Set up JDK',
+          uses: 'actions/setup-java@v4',
+          with: {
+            java-version: '24',
+            distribution: 'temurin',
+            cache: 'maven'
+          }
+        },
+        {
+          id: 'ssh',
+          name: 'Set up SSH',
+          env: {
+            SSH_KEY: '${{ secrets.SSH_KEY }}',
+            SSH_KNOWN_HOSTS: '${{ secrets.SSH_KNOWN_HOSTS }}'
+          },
+          run: './ci/setup-ssh.sh'
+        },
+        {
+          id: 'build',
+          name: 'Build with Maven',
+          run: 'mvn -B package assembly:single --file pom.xml'
+        },
+        {
+          id: 'upload',
+          name: 'Upload files',
+          run: '
+            scp target/blogdans-1.0-SNAPSHOT-jar-with-dependencies.jar blogdans:
+            scp server-scripts/*.sh blogdans:
+            '
+        }
+
+        #        - name: Restart service
+        #          run: |
+        #            ssh bonband "pkill -TERM -f bonband-1.0-SNAPSHOT"
+        #        - name: Claim success
+        #          env:
+        #            SLACK_WEBHOOK_URL: ${ { secrets.SLACK_HOOK_URL } }
+        #          run: |
+        #            person=$(git log -n1 --format='format:%aN' | awk '{print $1}')
+        #            commithash=$(git log -n1 --format='format:%H')
+        #            commiturl="https://github.com/skagedal/bonband/commit/${commithash}"
+        #            commit="<${commiturl}|commit>"
+        #            curl -X POST -H 'Content-type: application/json' \
+        #              --data "{\"text\":\"Nu har jag deployat koden från ${person}s senaste ${commit}.\"}" \
+        #              "${SLACK_WEBHOOK_URL}"
+      ]
+    }
+  }
+}
