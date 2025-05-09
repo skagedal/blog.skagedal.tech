@@ -25,6 +25,6 @@ public class PostPageHandler implements Handler {
     private String render(final Context context) {
         final var slug = Slug.of(context.javalin().pathParam("slug"));
         final var post = jekyllSite.readPost(slug);
-        return renderer.render(post, context.user());
+        return renderer.renderPost(post, context.user());
     }
 }

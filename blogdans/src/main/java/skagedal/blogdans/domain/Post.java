@@ -1,7 +1,10 @@
 package skagedal.blogdans.domain;
 
+import j2html.tags.specialized.MetaTag;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+
+import static j2html.TagCreator.meta;
 
 @NullMarked
 public record Post(
@@ -10,6 +13,14 @@ public record Post(
     @Nullable String excerpt,
     String htmlContent
 ) {
+    public MetaInfo metaInfo(Site site) {
+        return new MetaInfo(
+            site.baseUri().resolve(slug + "/"),
+            excerpt,
+            title
+        );
+    }
+
     public static Builder builder(final Slug slug) {
         return new Builder(slug);
     }

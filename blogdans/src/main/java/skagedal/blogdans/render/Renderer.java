@@ -6,6 +6,7 @@ import j2html.tags.specialized.HtmlTag;
 import j2html.tags.specialized.MetaTag;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
+import skagedal.blogdans.domain.MetaInfo;
 import skagedal.blogdans.domain.Post;
 import skagedal.blogdans.domain.Site;
 import skagedal.blogdans.domain.User;
@@ -23,21 +24,42 @@ public class Renderer {
         this.site = site;
     }
 
-    public String render(final Post post, final User user) {
+    public String renderPost(final Post post, final User user) {
+        return renderToString(buildPostHtml(post, user));
+    }
+
+    public String renderNextVersionIndexPage(final User user) {
+        return renderToString(buildIndexHtml(user));
+    }
+
+    private static String renderToString(final HtmlTag htmlTag) {
         // IndentedHtml messes up the `<pre>` tags inside the pre-formatted content
         final var htmlBuilder = FlatHtml.inMemory();
         try {
             document().render(htmlBuilder);
-            buildHtml(post, user).render(htmlBuilder);
+            htmlTag.render(htmlBuilder);
         } catch (IOException exception) {
             throw new IllegalStateException("Failed to render HTML", exception);
         }
         return htmlBuilder.output().toString();
     }
 
-    private HtmlTag buildHtml(final Post post, final User user) {
+    private HtmlTag buildIndexHtml(final User user) {
+        final var metaInfo = new MetaInfo(site.baseUri(), "Thoughts on programming, music and other things. Feel free to e-mail me comments!", "skagedal.tech");
         return html(
-            renderHead(post),
+            renderHead(metaInfo),
+            body(
+                rawHtml(site.header()),
+                div(),
+                rawHtml(site.footer()),
+                userInfo(user)
+            )
+        );
+    }
+
+    private HtmlTag buildPostHtml(final Post post, final User user) {
+        return html(
+            renderHead(post.metaInfo(site)),
             body(
                 rawHtml(site.header()),
                 pageContent(post),
@@ -56,20 +78,20 @@ public class Renderer {
         };
     }
 
-    private DomContent renderHead(final Post post) {
+    private DomContent renderHead(final MetaInfo metaInfo) {
         return head(
             meta().withCharset("utf-8"),
             meta().withName("viewport").withContent("width=device-width, initial-scale=1"),
-            metaDescription(post),
+            metaDescription(metaInfo),
             link().withRel("stylesheet").withHref("/css/main.css"),
-            link().withRel("canonical").withHref(site.baseUri().resolve(post.slug().toString() + "/").toString()),
-            title(post.title())
+            link().withRel("canonical").withHref(metaInfo.canonicalUri().toString()),
+            title(metaInfo.title())
         );
     }
 
-    @Nullable private static MetaTag metaDescription(final Post post) {
-        if (post.excerpt() instanceof String excerpt) {
-            return meta().withName("description").withContent(excerpt);
+    @Nullable private static MetaTag metaDescription(final MetaInfo post) {
+        if (post.description() instanceof String description) {
+            return meta().withName("description").withContent(description);
         } else {
             return null;
         }
@@ -115,9 +137,5 @@ public class Renderer {
                             )
                     )
             );
-    }
-
-    public String renderNextVersionIndexPage(final User user) {
-        return "<html>Hello</html>";
     }
 }

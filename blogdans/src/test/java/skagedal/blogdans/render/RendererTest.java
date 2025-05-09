@@ -21,12 +21,12 @@ class RendererTest {
 
     @Disabled("i should do something smarter than this")
     @Test
-    void render() {
+    void renderPost() {
         final var post = Post.builder(Slug.of("2025-04-07-first-post"))
             .title("First post")
             .build();
         final var user = new User.Anonymous();
-        final var renderedPage = renderer.render(post, user);
+        final var renderedPage = renderer.renderPost(post, user);
 
         expect.toMatchSnapshot(renderedPage);
     }
@@ -39,7 +39,7 @@ class RendererTest {
             .excerpt("Excerpt from First post")
             .build();
         final var user = new User.Anonymous();
-        final var renderedPage = renderer.render(post, user);
+        final var renderedPage = renderer.renderPost(post, user);
 
         expect.toMatchSnapshot(renderedPage);
     }
