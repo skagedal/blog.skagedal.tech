@@ -36,11 +36,13 @@
         {
           id: 'build',
           name: 'Build with Maven',
+          working-directory: 'blogdans',
           run: 'mvn -B package assembly:single --file pom.xml'
         },
         {
           id: 'upload',
           name: 'Upload files',
+          working-directory: 'blogdans',
           run: '
             scp target/blogdans-1.0-SNAPSHOT-jar-with-dependencies.jar blogdans:
             scp server-scripts/*.sh blogdans:
