@@ -15,11 +15,11 @@ import java.io.IOException;
 import static j2html.TagCreator.*;
 
 @NullMarked
-public class PostRenderer {
+public class Renderer {
 
     private final Site site;
 
-    public PostRenderer(final Site site) {
+    public Renderer(final Site site) {
         this.site = site;
     }
 
@@ -117,4 +117,7 @@ public class PostRenderer {
             );
     }
 
+    public String renderNextVersionIndexPage(final User user) {
+        return "<html>Hello</html>";
+    }
 }

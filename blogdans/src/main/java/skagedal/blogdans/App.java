@@ -57,7 +57,7 @@ public class App {
         final var jekyllRoot = appConfig.jekyllRoot();
         final var port = appConfig.port();
         final var jekyllSite = new JekyllSite(jekyllRoot, appConfig.renderedPosts());
-        final var indexPageHandler = new IndexPageHandler(jekyllSite);
+        final var indexPageHandler = new IndexPageHandler(SITE, jekyllSite);
         final var postPageHandler = new PostPageHandler(SITE, jekyllSite);
 
         database.runMigrations();

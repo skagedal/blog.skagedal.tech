@@ -6,15 +6,15 @@ import skagedal.blogdans.domain.Slug;
 import skagedal.blogdans.infra.Context;
 import skagedal.blogdans.infra.Handler;
 import skagedal.blogdans.jekyll.JekyllSite;
-import skagedal.blogdans.render.PostRenderer;
+import skagedal.blogdans.render.Renderer;
 
 public class PostPageHandler implements Handler {
     private final JekyllSite jekyllSite;
-    private final PostRenderer postRenderer;
+    private final Renderer renderer;
 
     public PostPageHandler(final Site site, final JekyllSite jekyllSite) {
         this.jekyllSite = jekyllSite;
-        this.postRenderer = new PostRenderer(site);
+        this.renderer = new Renderer(site);
     }
 
     @Override
@@ -25,6 +25,6 @@ public class PostPageHandler implements Handler {
     private String render(final Context context) {
         final var slug = Slug.of(context.javalin().pathParam("slug"));
         final var post = jekyllSite.readPost(slug);
-        return postRenderer.render(post, context.user());
+        return renderer.render(post, context.user());
     }
 }

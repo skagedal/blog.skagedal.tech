@@ -13,9 +13,9 @@ import skagedal.blogdans.domain.User;
 @ExtendWith({
     SnapshotExtension.class
 })
-class PostRendererTest {
+class RendererTest {
 
-    private final PostRenderer postRenderer = new PostRenderer(Site.simple());
+    private final Renderer renderer = new Renderer(Site.simple());
 
     private Expect expect;
 
@@ -26,7 +26,7 @@ class PostRendererTest {
             .title("First post")
             .build();
         final var user = new User.Anonymous();
-        final var renderedPage = postRenderer.render(post, user);
+        final var renderedPage = renderer.render(post, user);
 
         expect.toMatchSnapshot(renderedPage);
     }
@@ -39,7 +39,7 @@ class PostRendererTest {
             .excerpt("Excerpt from First post")
             .build();
         final var user = new User.Anonymous();
-        final var renderedPage = postRenderer.render(post, user);
+        final var renderedPage = renderer.render(post, user);
 
         expect.toMatchSnapshot(renderedPage);
     }
