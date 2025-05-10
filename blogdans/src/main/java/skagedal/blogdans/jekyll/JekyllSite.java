@@ -7,6 +7,7 @@ import liqp.antlr.CharStreamWithLocation;
 import liqp.antlr.NameResolver;
 import liqp.filters.Filter;
 import liqp.parser.Flavor;
+import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -132,7 +133,7 @@ public class JekyllSite {
     }
 
     public String render(final Path path, final @Nullable String defaultDate) {
-        final var siteContext = getSiteContext();
+        final var siteContext = getSiteContextAsMap();
         final var content = readFile(path);
         return renderWithLayout(content, siteContext, defaultDate);
     }
@@ -183,8 +184,12 @@ public class JekyllSite {
         };
     }
 
-    private Map<String, Object> getSiteContext() {
-        return cachedSiteContext.updateAndGet((_) -> new SiteContext(posts(), pages())).asMap();
+    private Map<String, Object> getSiteContextAsMap() {
+        return getSiteContext().asMap();
+    }
+
+    public SiteContext getSiteContext() {
+        return cachedSiteContext.updateAndGet((_) -> new SiteContext(posts(), pages()));
     }
 
     private List<Map<String, Object>> posts() {

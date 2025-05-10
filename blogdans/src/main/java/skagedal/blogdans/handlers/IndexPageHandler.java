@@ -25,7 +25,8 @@ public class IndexPageHandler implements Handler {
 
     private String renderHtml(final Context context) {
         if (Objects.equals(context.javalin().queryParam("version"), "next")) {
-            return renderer.renderNextVersionIndexPage(context.user());
+            final var siteContext = jekyllSite.getSiteContext();
+            return renderer.renderNextVersionIndexPage(context.user(), siteContext);
         } else {
             final var path = jekyllSite.indexPath();
             return jekyllSite.render(path);

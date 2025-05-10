@@ -2,6 +2,8 @@ package skagedal.blogdans.render;
 
 import j2html.rendering.FlatHtml;
 import j2html.tags.DomContent;
+import j2html.tags.specialized.ArticleTag;
+import j2html.tags.specialized.DivTag;
 import j2html.tags.specialized.HtmlTag;
 import j2html.tags.specialized.MetaTag;
 import org.jspecify.annotations.NullMarked;
@@ -10,8 +12,11 @@ import skagedal.blogdans.domain.MetaInfo;
 import skagedal.blogdans.domain.Post;
 import skagedal.blogdans.domain.Site;
 import skagedal.blogdans.domain.User;
+import skagedal.blogdans.jekyll.SiteContext;
 
 import java.io.IOException;
+import java.util.List;
+import java.util.Map;
 
 import static j2html.TagCreator.*;
 
@@ -28,8 +33,8 @@ public class Renderer {
         return renderToString(buildPostHtml(post, user));
     }
 
-    public String renderNextVersionIndexPage(final User user) {
-        return renderToString(buildIndexHtml(user));
+    public String renderNextVersionIndexPage(final User user, final SiteContext siteContext) {
+        return renderToString(buildIndexPage(user, siteContext.posts()));
     }
 
     private static String renderToString(final HtmlTag htmlTag) {
@@ -44,18 +49,48 @@ public class Renderer {
         return htmlBuilder.output().toString();
     }
 
-    private HtmlTag buildIndexHtml(final User user) {
+    private HtmlTag buildIndexPage(final User user, final List<Map<String, Object>> posts) {
         final var metaInfo = new MetaInfo(site.baseUri(), "Thoughts on programming, music and other things. Feel free to e-mail me comments!", "skagedal.tech");
         return html(
             renderHead(metaInfo),
             body(
                 rawHtml(site.header()),
-                div(),
+                postOverview(posts),
                 rawHtml(site.footer()),
                 userInfo(user)
             )
         );
     }
+
+    private static DomContent postOverview(final List<Map<String, Object>> posts) {
+        return wrappedContent(div().withClasses("home")
+            .with(
+                h1("Posts").withClasses("page-heading"),
+                postOverviewList(posts)
+            ));
+    }
+
+    private static DomContent postOverviewList(final List<Map<String, Object>> posts) {
+        return ul().withClasses("post-list")
+            .with(
+                posts.stream()
+                    .map(Renderer::postInPostOverview)
+                    .toList()
+            );
+    }
+
+    private static DomContent postInPostOverview(final Map<String, Object> post) {
+        final var title = (String) post.get("title");
+        final var url = (String) post.get("url");
+        return li().with(
+            span().withClasses("post-meta").withText((String) post.get("date")),
+            h2(
+                a().withClasses("post-link")
+                    .withHref(url).withText(title)),
+            p()
+        );
+    }
+
 
     private HtmlTag buildPostHtml(final Post post, final User user) {
         return html(
@@ -89,7 +124,8 @@ public class Renderer {
         );
     }
 
-    @Nullable private static MetaTag metaDescription(final MetaInfo post) {
+    @Nullable
+    private static MetaTag metaDescription(final MetaInfo post) {
         if (post.description() instanceof String description) {
             return meta().withName("description").withContent(description);
         } else {
@@ -98,44 +134,45 @@ public class Renderer {
     }
 
     private DomContent pageContent(final Post post) {
+        return wrappedContent(article()
+            .withClasses("post")
+            .attr("itemscope", "itemscope")
+            .attr("itemtype", "http://schema.org/BlogPosting")
+            .with(
+                header()
+                    .withClasses("post-header")
+                    .with(
+                        h1()
+                            .withClasses("post-title")
+                            .attr("itemprop", "name headline")
+                            .withText(post.title())
+                    )
+                    .with(
+                        p()
+                            .withClasses("post-meta")
+                            .with(
+                                time()
+                                    // TODO: this shouldn't necessarily be from the slug
+                                    .attr("datetime", post.slug().date().toString())
+                                    .attr("itemprop", "datePublished")
+                                    .withText(post.slug().date().toString())
+                            )
+                    )
+            )
+            .with(
+                div()
+                    .withClasses("post-content")
+                    .attr("itemprop", "articleBody")
+                    .with(rawHtml(post.htmlContent()))
+            ));
+    }
+
+    private static DivTag wrappedContent(final DomContent content) {
         return div()
             .withClasses("page-content")
             .with(
                 div()
                     .withClasses("wrapper")
-                    .with(
-                        article()
-                            .withClasses("post")
-                            .attr("itemscope", "itemscope")
-                            .attr("itemtype", "http://schema.org/BlogPosting")
-                            .with(
-                                header()
-                                    .withClasses("post-header")
-                                    .with(
-                                        h1()
-                                            .withClasses("post-title")
-                                            .attr("itemprop", "name headline")
-                                            .withText(post.title())
-                                    )
-                                    .with(
-                                        p()
-                                            .withClasses("post-meta")
-                                            .with(
-                                                time()
-                                                    // TODO: this shouldn't necessarily be from the slug
-                                                    .attr("datetime", post.slug().date().toString())
-                                                    .attr("itemprop", "datePublished")
-                                                    .withText(post.slug().date().toString())
-                                            )
-                                    )
-                            )
-                            .with(
-                                div()
-                                    .withClasses("post-content")
-                                    .attr("itemprop", "articleBody")
-                                    .with(rawHtml(post.htmlContent()))
-                            )
-                    )
-            );
+                    .with(content));
     }
 }
