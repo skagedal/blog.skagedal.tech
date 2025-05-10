@@ -13,11 +13,6 @@ import static org.assertj.core.api.Assertions.*;
 
 class AppTest {
     @Test
-    void failing() {
-        assertThat(true).isFalse();
-    }
-
-    @Test
     void indexPage() throws IOException, InterruptedException {
         final var testApp = TestApp.simple();
 
