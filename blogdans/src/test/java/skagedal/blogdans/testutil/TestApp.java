@@ -22,7 +22,7 @@ public record TestApp(
             final var config = AppConfig.builder()
                 .jekyllRoot(simpleSite)
                 .renderedPosts(simpleSite.resolve("rendered"))
-                .databaseConfig(DatabaseConfig.developmentConfig()) // should be testcontainer later
+                .databaseConfig(Containers.databaseConfig())
                 .build();
             final var app = new App(config);
             final var javalin = app.runServer();
