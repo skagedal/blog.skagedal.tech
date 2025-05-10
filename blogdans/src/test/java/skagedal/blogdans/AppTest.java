@@ -24,11 +24,11 @@ class AppTest {
         final var response = httpClient.send(request, BodyHandlers.ofString());
 
         assertThat(response.statusCode()).isEqualTo(200);
-        assertThat(response.body().strip()).isEqualTo("""
-            <html>Hello world</html>""");
+        assertThat(response.body())
+            .contains("First Post Title")
+            .doesNotContain("First Post Body");
     }
 
-    @Disabled("i changed everything")
     @Test
     void post() throws IOException, InterruptedException {
         final var testApp = TestApp.simple();
@@ -41,11 +41,8 @@ class AppTest {
         final var response = httpClient.send(request, BodyHandlers.ofString());
 
         assertThat(response.statusCode()).isEqualTo(200);
-        assertThat(response.body()).isEqualTo("""
-            <html>
-            <title>Inaugural post</title>
-            <body><p>First post!</p>
-            </body>
-            </html>""");
+        assertThat(response.body())
+            .contains("First Post Title")
+            .contains("First Post Body");
     }
 }

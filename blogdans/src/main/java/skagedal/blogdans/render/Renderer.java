@@ -35,7 +35,7 @@ public class Renderer {
         return renderToString(buildPostHtml(post, user));
     }
 
-    public String renderNextVersionIndexPage(final User user, final SiteContext siteContext) {
+    public String renderIndexPage(final User user, final SiteContext siteContext) {
         return renderToString(buildIndexPage(user, siteContext.posts()));
     }
 

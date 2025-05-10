@@ -1,5 +1,5 @@
 ---
-title: Inaugural post
+title: First Post Title
 layout: post
 ---
-First post!
+First Post Body!
