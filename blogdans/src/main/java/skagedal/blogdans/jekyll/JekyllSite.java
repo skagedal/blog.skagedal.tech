@@ -3,8 +3,6 @@ package skagedal.blogdans.jekyll;
 import liqp.Template;
 import liqp.TemplateContext;
 import liqp.TemplateParser;
-import liqp.antlr.CharStreamWithLocation;
-import liqp.antlr.NameResolver;
 import liqp.filters.Filter;
 import liqp.parser.Flavor;
 import org.jspecify.annotations.Nullable;
@@ -30,14 +28,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.Optional;
 import java.util.concurrent.atomic.AtomicReference;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 public class JekyllSite {
     private static final Logger log = LoggerFactory.getLogger(JekyllSite.class);
-    private final Path jekyllRoot;
+    private final Path contentRoot;
     private final Path renderedPostsRoot;
     private final AtomicReference<SiteContext> cachedSiteContext = new AtomicReference<>();
     private final MarkdownRenderer markdownRenderer = new MarkdownRenderer();
@@ -45,12 +41,6 @@ public class JekyllSite {
 
     private final TemplateParser templateParser = new TemplateParser.Builder()
         .withFlavor(Flavor.JEKYLL)
-        .withNameResolver(new NameResolver() {
-            @Override
-            public CharStreamWithLocation resolve(final String includeName) throws IOException {
-                return new CharStreamWithLocation(jekyllRoot.resolve("_includes").resolve(includeName));
-            }
-        })
         .withFilter(new Filter("markdownify") {
             @Override
             public Object apply(Object value, TemplateContext context, Object... params) {
@@ -95,8 +85,8 @@ public class JekyllSite {
         })
         .build();
 
-    public JekyllSite(final Path jekyllRoot, final Path renderedPostsRoot) {
-        this.jekyllRoot = jekyllRoot;
+    public JekyllSite(final Path contentRoot, final Path renderedPostsRoot) {
+        this.contentRoot = contentRoot;
         this.renderedPostsRoot = renderedPostsRoot;
     }
 
@@ -116,58 +106,20 @@ public class JekyllSite {
     }
 
     public Path postPath(final Slug slug) {
-        return jekyllRoot.resolve("_posts").resolve(slug + ".md");
-    }
-
-    public Path layoutsPath() {
-        return jekyllRoot.resolve("_layouts");
+        return contentRoot.resolve("posts").resolve(slug + ".md");
     }
 
     public String render(final Path path) {
-        return render(path, null);
-    }
-
-    public String render(final Path path, final @Nullable String defaultDate) {
         final var siteContext = getSiteContextAsMap();
         final var content = readFile(path);
-        return renderWithLayout(content, siteContext, defaultDate);
+        return renderWithLayout(content, siteContext);
     }
 
-    private String renderWithLayout(final ContentFile contentFile, final Map<String, Object> siteContext, final @Nullable String defaultDate) {
+    private String renderWithLayout(final ContentFile contentFile, final Map<String, Object> siteContext) {
         final var frontMatter = FrontMatterSeparated.split(contentFile.content());
         final var contentTemplate = readTemplate(frontMatter.content());
 
-        // Render the content with the site context
-        final var renderedContent = getRenderedContent(siteContext, contentFile.contentType(), contentTemplate);
-
-        Object page = Stream.of(
-            new PossibleEntry("title", frontMatter.frontMatter().title()),
-            new PossibleEntry("date", Optional.ofNullable(frontMatter.frontMatter().date()).orElse(defaultDate))
-        ).collect(EntryCollectors.nonNullEntriesToMap());
-
-        // Create context with rendered content
-        final var contentContext = siteContext.containsKey("content") ? siteContext : Stream.concat(
-            siteContext.entrySet().stream(),
-            Map.<String, Object>of(
-                "content", renderedContent,
-                "page", page
-            ).entrySet().stream()
-        ).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue));
-
-        // If no layout is specified, return the rendered content
-        if (frontMatter.frontMatter().layout() == null) {
-            return renderedContent;
-        }
-
-        // Otherwise, load the layout and recursively process it
-        final var layoutPath = layoutsPath().resolve(frontMatter.frontMatter().layout() + ".html");
-        try {
-            final var layoutContent = readFile(layoutPath);
-            return renderWithLayout(layoutContent, contentContext, defaultDate);
-        } catch (Exception e) {
-            log.error("Error rendering layout {}: {}", layoutPath, e.getMessage());
-            return "Error rendering layout: " + e.getMessage();
-        }
+        return getRenderedContent(siteContext, contentFile.contentType(), contentTemplate);
     }
 
     private String getRenderedContent(final Map<String, Object> siteContext, final ContentType contentType, final Template contentTemplate) {
@@ -188,7 +140,7 @@ public class JekyllSite {
     }
 
     private List<Map<String, Object>> posts() {
-        Path postsDirectory = jekyllRoot.resolve("_posts");
+        Path postsDirectory = contentRoot.resolve("posts");
         if (!Files.exists(postsDirectory) || !Files.isDirectory(postsDirectory)) {
             log.warn("Posts directory not found: {}", postsDirectory);
             return List.of();
@@ -218,7 +170,7 @@ public class JekyllSite {
     }
 
     public Path getFeedPath() {
-        return jekyllRoot.resolve("feed.xml");
+        return contentRoot.resolve("feed.xml");
     }
 
     private Stream<Map<String, Object>> processPostFiles(final Stream<Path> postFiles) {

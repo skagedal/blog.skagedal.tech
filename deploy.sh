@@ -8,10 +8,22 @@ else
     RSYNC_ARG=""
 fi
 
+echo "💁 Coppying content..."
+rsync \
+    --archive \
+    --compress \
+    --delete \
+    --info=progress2 \
+    $RSYNC_ARG \
+    content/ \
+    --rsh="ssh -i ${HOME}/.ssh/blogdans-key" \
+    blogdans@skagedal.tech:content
+
+cd rendered-posts
+
 echo "💁 Generating HTML using Jekyll"
 echo "💁 Installing dependencies..."
 
-cd rendered-posts
 bundle install $BUNDLE_INSTALL_ARG || exit 1
 
 echo "💁 Generating site..."
