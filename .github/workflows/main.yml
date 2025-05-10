@@ -43,10 +43,7 @@
           id: 'upload',
           name: 'Upload files',
           working-directory: 'blogdans',
-          run: '
-            scp target/blogdans-1.0-SNAPSHOT-jar-with-dependencies.jar blogdans:
-            scp server-scripts/*.sh blogdans:
-            '
+          run: './ci/upload-files.sh'
         }
 
         #        - name: Restart service
