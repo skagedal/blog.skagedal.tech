@@ -71,4 +71,4 @@ For all the fun, [see the source on Github](https://github.com/skagedal/SKRBatch
 
 ## Update
 
-Also see the [Tetris Diffing Competition](https://skagedal.github.io/2018/09/28/tetris-diffing-competition.html) for a comparison on how other frameworks handle this task.
+Also see the [Tetris Diffing Competition](/posts/2018-09-28-tetris-diffing-competition) for a comparison on how other frameworks handle this task.

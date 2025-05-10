@@ -5,7 +5,7 @@ title:  "Writing a habit tracker, part 13: Reading habits from the repository"
 
 In the [last post](/posts/2023-01-12-habit-tracker-making-habits-page-work) I wrote a `HabitsController` that put some static data in a model Map that gets inserted into our HTML page. Now I want to actually use the `HabitRepository` (whoa, inconsistent use of singular/plural in my class names here) that I created in [part six](/posts/2023-01-06-habit-tracker-records-and-other-improvements).
 
-Easy, just inject it the controller. At the very core of Spring is a Dependency Injection framework, which can even be used as a standalone thing (I explored it briefly [here](https://blog.skagedal.tech/2021/03/15/micronaut-and-graalvm.html)).  The least-amount-of-typing way is by using the `@Autowired` annotation (as I did [earlier](https://blog.skagedal.tech/2023/01/05/habit-tracker-repository.html) in test suite):
+Easy, just inject it the controller. At the very core of Spring is a Dependency Injection framework, which can even be used as a standalone thing (I explored it briefly [here](/posts/2021-03-15-micronaut-and-graalvm)).  The least-amount-of-typing way is by using the `@Autowired` annotation (as I did [earlier](/posts/2023-01-05-habit-tracker-repository) in test suite):
 
 ```java
 @Controller

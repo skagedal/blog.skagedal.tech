@@ -3,7 +3,7 @@ layout: post
 title:  "Next on next and a small argument regarding upgrading."
 ---
 
-Yesterday I told you about [next](https://blog.skagedal.tech/2020/06/29/next-the-digital-assistant.html), the digital assistant. Today's [task](https://github.com/skagedal/next/issues/4) will be to make it run a specific task on a specific interval. 
+Yesterday I told you about [next](/posts/2020-06-29-next-the-digital-assistant), the digital assistant. Today's [task](https://github.com/skagedal/next/issues/4) will be to make it run a specific task on a specific interval. 
 
 I'm writing really stupid and straightforward code. I intend to refactor it heavily as I discover what I'm actually building. You should, for example, probably be able to configure what things you want to run and when, but I'm not quite sure yet how. So I'm hardcoding stuff.
 

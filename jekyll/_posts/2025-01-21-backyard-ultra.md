@@ -66,7 +66,7 @@ I also needed to play some sounds. I did this in a small component that weirdly 
 
 ## Deployment
 
-I only needed a bunch of static HTML, so used the `output: "export"` option on Next.js. Then I just rsync those files onto my server and serve with nginx (as I now have this [wildcard certificate](https://blog.skagedal.tech/2023/02/13/deploying-normal-score-converter.html)). 
+I only needed a bunch of static HTML, so used the `output: "export"` option on Next.js. Then I just rsync those files onto my server and serve with nginx (as I now have this [wildcard certificate](/posts/2023-02-13-deploying-normal-score-converter)). 
 
 ## Features I want
 
