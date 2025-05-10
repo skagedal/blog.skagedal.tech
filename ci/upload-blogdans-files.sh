@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+
+scp blogdans/target/blogdans-1.0-SNAPSHOT-jar-with-dependencies.jar blogdans:
+scp blogdans/server-scripts/*.sh blogdans:

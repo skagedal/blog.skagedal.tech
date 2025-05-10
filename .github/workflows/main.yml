@@ -42,13 +42,13 @@
         {
           id: 'upload',
           name: 'Upload files',
-          working-directory: 'blogdans',
-          run: './ci/upload-files.sh'
+          run: './ci/upload-blogdans-files.sh'
+        },
+        {
+          id: 'restart',
+          name: 'Restart service',
+          run: 'ssh blogdans ./restart.sh'
         }
-
-        #        - name: Restart service
-        #          run: |
-        #            ssh bonband "pkill -TERM -f bonband-1.0-SNAPSHOT"
         #        - name: Claim success
         #          env:
         #            SLACK_WEBHOOK_URL: ${ { secrets.SLACK_HOOK_URL } }
