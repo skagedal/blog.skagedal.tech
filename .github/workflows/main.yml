@@ -55,7 +55,16 @@
           env: {
             SLACK_WEBHOOK_URL: '${{ secrets.SLACK_WEBHOOK_URL }}'
           },
-          run: './ci/report-success.sh'
+          run: './ci/report success'
+        },
+        {
+          id: 'report-failure',
+          name: 'Report failure',
+          if: '${{ failure() }}',
+          env: {
+            SLACK_WEBHOOK_URL: '${{ secrets.SLACK_WEBHOOK_URL }}'
+          },
+          run: './ci/report failure'
         }
       ]
     }
