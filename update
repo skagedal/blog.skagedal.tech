@@ -1,2 +1,8 @@
 #!/bin/sh
-cd blogdans && ./update
+set -e
+
+dir="$(pwd)"
+
+cd "$dir/blogdans" && ./update
+cd "$dir/rendered-posts" && ./update
+
