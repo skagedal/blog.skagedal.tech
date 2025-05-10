@@ -2,9 +2,11 @@ package skagedal.blogdans.render;
 
 import j2html.rendering.FlatHtml;
 import j2html.tags.DomContent;
+import j2html.tags.UnescapedText;
 import j2html.tags.specialized.DivTag;
 import j2html.tags.specialized.HtmlTag;
 import j2html.tags.specialized.MetaTag;
+import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.NullMarked;
 import org.jspecify.annotations.Nullable;
 import skagedal.blogdans.domain.MetaInfo;
@@ -58,12 +60,46 @@ public class Renderer {
             body(
                 rawHtml(site.header()),
                 postOverview(posts),
-                rawHtml(site.footer()),
+                siteFooter(),
                 userInfo(user)
             )
         );
     }
 
+private DomContent siteFooter() {
+    return footer().withClass("site-footer").with(
+        div().withClass("wrapper").with(
+            h2("skagedal.tech").withClass("footer-heading"),
+            div().withClass("footer-col-wrapper").with(
+                div().withClass("footer-col footer-col-1").with(
+                    ul().withClass("contact-list").with(
+                        li("Simon Kågedal Reimer"),
+                        li(a("skagedal@gmail.com").withHref("mailto:skagedal@gmail.com"))
+                    )
+                ),
+                div().withClass("footer-col footer-col-2").with(
+                    ul().withClass("social-media-list").with(
+                        li(
+                            a().withHref("https://github.com/skagedal").with(
+                                span().withClass("icon icon--github").with(rawHtml(Site.GITHUB_ICON_SVG)),
+                                span("skagedal").withClass("username")
+                            )
+                        ),
+                        li(
+                            a().withHref("https://bsky.app/profile/skagedal.tech").with(
+                                span().withClass("icon icon--bluesky").with(rawHtml(Site.BLUESKY_ICON_SVG)),
+                                span("skagedal.tech").withClass("username")
+                            )
+                        )
+                    )
+                ),
+                div().withClass("footer-col footer-col-3").with(
+                    p("Thoughts on programming and other things.")
+                )
+            )
+        )
+    );
+}
     private DomContent postOverview(final List<Map<String, Object>> posts) {
         return wrappedContent(div().withClasses("home")
             .with(
@@ -114,7 +150,7 @@ public class Renderer {
             body(
                 rawHtml(site.header()),
                 pageContent(post),
-                rawHtml(site.footer()),
+                siteFooter(),
                 userInfo(user)
             )
         );
@@ -122,7 +158,11 @@ public class Renderer {
 
     private DomContent userInfo(final User user) {
         return switch (user) {
-            case User.Anonymous ignored -> div();
+            case User.Anonymous ignored -> div()
+                .withClasses("user-info")
+                .with(a()
+                    .withHref("/oauth2/sign_in")
+                    .withText("Log in in with Google"));
             case User.Authenticated(String email) -> div()
                 .withClasses("user-info")
                 .withText("You are logged in as " + email);
