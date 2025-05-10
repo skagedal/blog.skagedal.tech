@@ -48,7 +48,7 @@ I struggled for a while with getting this to work, first finding out that it onl
 
 ## Time source
 
-My clock should consistently tick with each second. As many clocks do. I had recently read Dan Abramov's post [here](https://overreacted.io/making-setinterval-declarative-with-react-hooks/) about using `setInterval` in React by wrapping it in a custom hook, so I thought I'd used that – but as I thought about it, this approach would have some issues. I wrote about this separately [here](/2025/01/06/seconds-aligned-time-source-in-react.html).   
+My clock should consistently tick with each second. As many clocks do. I had recently read Dan Abramov's post [here](https://overreacted.io/making-setinterval-declarative-with-react-hooks/) about using `setInterval` in React by wrapping it in a custom hook, so I thought I'd used that – but as I thought about it, this approach would have some issues. I wrote about this separately [here](/posts/2025-01-06-seconds-aligned-time-source-in-react).   
 
 ## Time handling library
 

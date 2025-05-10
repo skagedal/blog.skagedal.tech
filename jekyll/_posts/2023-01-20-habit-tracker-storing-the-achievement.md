@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing a habit tracker, part 20: Saving stuff, Access Control"
 ---
-Ok, we that "achieve" button we added in the [last part](/2023/01/19/habit-tracker-achieving-some-habits.html) to actually do something, not just print in the console. That's easy, let's just inject the `AttachmentRepository` into the `HomeController` again and do this:
+Ok, we that "achieve" button we added in the [last part](/posts/2023-01-19-habit-tracker-achieving-some-habits) to actually do something, not just print in the console. That's easy, let's just inject the `AttachmentRepository` into the `HomeController` again and do this:
 
 ```java
 public class HomeController {
@@ -96,7 +96,7 @@ public class HomeController {
 
 Which seems to work well, but honestly this stuff should reeeally have some automated tests around it. I promise, later. Later, folks!
 
-_[Continue reading part twenty-one.](/2023/01/21/habit-tracker-building-a-jar.html)_
+_[Continue reading part twenty-one.](/posts/2023-01-21-habit-tracker-building-a-jar)_
 
 ### Notes
 

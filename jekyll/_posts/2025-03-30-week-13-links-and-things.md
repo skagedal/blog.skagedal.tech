@@ -4,7 +4,7 @@ title: "Week 13, 2025: Links and things"
 summary: "Another week of internet treasures and mini-musings on the meta-mechanics of our digital world!"
 ---
 
-Let's do another links and things! [Last week](/2025/03/23/week-12-links-and-things.html) was fun! Let's start with some Java stuff.
+Let's do another links and things! [Last week](/posts/2025-03-23-week-12-links-and-things) was fun! Let's start with some Java stuff.
 
 * I linked to a Gunnar Morling post last week as well. I would say he is one of the best Java bloggers out there. And this week he's doing my favorite kind of blog posts, a "let's take a look at..." post – about [Ahead-of-Time Class loading and Linking](https://www.morling.dev/blog/jep-483-aot-class-loading-linking/).  
 * Since I've mentioned gatherers for two weeks in a row, here's another one: [more-gatherers](https://github.com/pivovarit/more-gatherers) is a collection of gatherers, written by some guy called Grzegorz Piwowarek. 

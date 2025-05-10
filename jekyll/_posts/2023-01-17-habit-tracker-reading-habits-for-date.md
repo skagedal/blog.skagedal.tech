@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 17: Reading achievement data"
 ---
 
-Let's continue the work from [part sixteen](/2023/01/16/habit-tracker-listing-your-achievements.html) of the habit tracker series – listing our daily achievements.
+Let's continue the work from [part sixteen](/posts/2023-01-16-habit-tracker-listing-your-achievements) of the habit tracker series – listing our daily achievements.
 
 For each habit, on a certain date, we want to find the achievements for it. Since we can't add achievements yet, let's prepare some test data by going into the database and executing:
 
@@ -126,10 +126,10 @@ public interface HabitRepository extends CrudRepository<Habit, Long> {
 
 We have to help out a little bit by telling it what parameters in the query should be replaced by with arguments to the methods, using the `@Param` annotations. Apparently, according to error log message that shows when you don't include those, you can also "use the javac flag -parameters", but messing with compile flags feels unneccessary; I'd rather keep it simple. 
 
-So, here we go again with another language-in-the-language, in this case SQL. No one is escaping SQL, so that's fine – at least we have multiline strings in Java now. Similarly to our discussion with HTML in the [previous post](/2023/01/16/habit-tracker-listing-your-achievements.html), we could consider options for building SQL queries with type-safe, compile checked Java code – I'm curious to play with [jOOQ](https://www.jooq.org/) at some point. But not today. 
+So, here we go again with another language-in-the-language, in this case SQL. No one is escaping SQL, so that's fine – at least we have multiline strings in Java now. Similarly to our discussion with HTML in the [previous post](/posts/2023-01-16-habit-tracker-listing-your-achievements), we could consider options for building SQL queries with type-safe, compile checked Java code – I'm curious to play with [jOOQ](https://www.jooq.org/) at some point. But not today. 
 
 At least Java's got multiline strings now! Cause for celebration!
 
 I'll just go with this for now, although it feels like I'm not really doing things how they're meant to be done (for one thing, it's a bit odd that this method is placed in the `HabitRepository` when it has nothing to do with the generic types used in this repository). But whatever, it works. 
 
-_[Continue reading part eighteen.](/2023/01/18/habit-tracker-getting-the-users-date.html)_
+_[Continue reading part eighteen.](/posts/2023-01-18-habit-tracker-getting-the-users-date)_

@@ -4,7 +4,7 @@ title: "Week 14, 2025: Links and things"
 summary: "I, for one, am feeling extremely conflicted about our new insect overlords."
 ---
 
-Following [Week 13, 2025: Links and things](/2025/03/30/week-13-links-and-things.html), here comes Week 14, 25: Links and things! Although it is already the monday of Week 15.
+Following [Week 13, 2025: Links and things](/posts/2025-03-30-week-13-links-and-things), here comes Week 14, 25: Links and things! Although it is already the monday of Week 15.
 
 Let's kick off with some AI stuff:
 

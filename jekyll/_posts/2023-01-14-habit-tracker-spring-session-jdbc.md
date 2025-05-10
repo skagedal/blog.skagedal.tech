@@ -3,11 +3,11 @@ layout: post
 title:  "Writing a habit tracker, part 14: Storing sessions"
 ---
 
-Before I continue on the habit management, I want to fix a little annoyance. Readers who pay close attention will remember that in [part three](/2023/01/03/habit-tracker-part-three-making-it-run.html), I wrote:
+Before I continue on the habit management, I want to fix a little annoyance. Readers who pay close attention will remember that in [part three](/posts/2023-01-03-habit-tracker-part-three-making-it-run), I wrote:
 
 > I’m going to start with getting the test suite work, because that’s where I want to work most of the time.
 
-And then, since [part eight](/2023/01/08/habit-tracker-serving-some-web.html), I have been testing things only by running the app. I do find it I rather satisfying to work test-driven, but in some situations, testing things by running can be much more simple and direct. I do however hope to come back to the topic of how to test this stuff soon. 
+And then, since [part eight](/posts/2023-01-08-habit-tracker-serving-some-web), I have been testing things only by running the app. I do find it I rather satisfying to work test-driven, but in some situations, testing things by running can be much more simple and direct. I do however hope to come back to the topic of how to test this stuff soon. 
 
 But now, as I work by writing some code and then restarting the app, there is something really annoying that I'd like to fix, and that is that I keep getting logged out every time I start the app again. Very annoying. 
 
@@ -31,7 +31,7 @@ spring.session.jdbc.schema=classpath:org/springframework/session/jdbc/schema-@@p
 spring.session.jdbc.table-name=SPRING_SESSION # Name of the database table used to store sessions.
 ```
 
-But that seems uncool to me. I want all my schema to be created by Flyway (as I described [here](/2023/01/04/habit-tracker-functionality-and-first-migration.html)). So I'm in a situation ([again](/2023/01/10/habit-tracker-securing-things-2.html)) where I need to figure out what schema to expect. Fortunately, unlike last time, I could find the [authoritative schemas](https://github.com/spring-projects/spring-session/tree/06eb768721f0deb31d90acc9b5f70bd508dc0ab3/spring-session-jdbc/src/main/resources/org/springframework/session/jdbc) for various SQL dialects and can drop the [PostgreSQL one](https://github.com/spring-projects/spring-session/blob/06eb768721f0deb31d90acc9b5f70bd508dc0ab3/spring-session-jdbc/src/main/resources/org/springframework/session/jdbc/schema-postgresql.sql) into my Flyway resources.
+But that seems uncool to me. I want all my schema to be created by Flyway (as I described [here](/posts/2023-01-04-habit-tracker-functionality-and-first-migration)). So I'm in a situation ([again](/posts/2023-01-10-habit-tracker-securing-things-2)) where I need to figure out what schema to expect. Fortunately, unlike last time, I could find the [authoritative schemas](https://github.com/spring-projects/spring-session/tree/06eb768721f0deb31d90acc9b5f70bd508dc0ab3/spring-session-jdbc/src/main/resources/org/springframework/session/jdbc) for various SQL dialects and can drop the [PostgreSQL one](https://github.com/spring-projects/spring-session/blob/06eb768721f0deb31d90acc9b5f70bd508dc0ab3/spring-session-jdbc/src/main/resources/org/springframework/session/jdbc/schema-postgresql.sql) into my Flyway resources.
 
 And it worked! 
 
@@ -50,4 +50,4 @@ ALTER TABLE SPRING_SESSION_ATTRIBUTES SET UNLOGGED;
 
 Allright everyone, check back in for tomorrow's episode of Simon writes a Habit Tracker!
 
-_[Continue reading part fifteen.](/2023/01/15/habit-tracker-add-new-habit.html)_
+_[Continue reading part fifteen.](/posts/2023-01-15-habit-tracker-add-new-habit)_

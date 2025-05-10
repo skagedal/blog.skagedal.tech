@@ -2,7 +2,7 @@
 layout: post
 title:  "The DOCKER_CONTEXT environment variable and testing"
 ---
-Allright, so let's continue on the pull request for supporting docker context that I discussed in [this post](/2023/01/31/test-containers-and-docker-context.html). 
+Allright, so let's continue on the pull request for supporting docker context that I discussed in [this post](/posts/2023-01-31-test-containers-and-docker-context). 
 
 I wanted to support the `DOCKER_CONTEXT` environment variable. I also wanted to improve testing. 
 
@@ -134,7 +134,7 @@ I copy a `meta.json` file from my own local `~/.docker/contexts/meta/.../` into 
 }
 ```
 
-Now, let's make a test that we actually expect to be green already, because of the functionality we implemented [earlier](/2023/01/31/test-containers-and-docker-context.html): 
+Now, let's make a test that we actually expect to be green already, because of the functionality we implemented [earlier](/posts/2023-01-31-test-containers-and-docker-context): 
 
 ```java
 class DefaultDockerClientConfigTest {
@@ -187,4 +187,4 @@ class DefaultDockerClientConfigTest {
 
 And it properly fails! Good! Let's go to bed!
 
-_Continue reading about [implementing DOCKER_CONTEXT and bisecting a bug](/2023/02/03/docker-host-env-var-part-2.html)_
+_Continue reading about [implementing DOCKER_CONTEXT and bisecting a bug](/posts/2023-02-03-docker-host-env-var-part-2)_

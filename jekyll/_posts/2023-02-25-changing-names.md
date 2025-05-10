@@ -11,11 +11,11 @@ At other times, you do find what seems to be a good name. But then requirements 
 
 Then there are times when you're just stupid.
 
-Back in [part seven](/2023/01/07/habit-tracker-achievements.html) of the "Writing a habit tracker", I needed a name for the thing you do every day in the application with your habits, you know when you... you complete them... you _achieve_ them, perhaps? That's the best I came up with. But it never felt quite right. 
+Back in [part seven](/posts/2023-01-07-habit-tracker-achievements) of the "Writing a habit tracker", I needed a name for the thing you do every day in the application with your habits, you know when you... you complete them... you _achieve_ them, perhaps? That's the best I came up with. But it never felt quite right. 
 
 Well.
 
-As I noted in [part thirty-eight](/2023/02/23/finish-up-the-api.html), how about just... tracking? I mean, that's what you do. You track your habits. It's a "habit tracker". The name is right there. 
+As I noted in [part thirty-eight](/posts/2023-02-23-finish-up-the-api), how about just... tracking? I mean, that's what you do. You track your habits. It's a "habit tracker". The name is right there. 
 
 In verb form, it's clear to me that "track" is the word we want. The noun is perhaps a bit more non-obvious, but I think "tracking" will do. You track a tracking. 
 
@@ -47,4 +47,4 @@ And we're good.
 
 For some reason the Marge Simpsons quote "at least they're wearing clean underwear" comes to mind ([YouTube link](https://www.youtube.com/watch?v=jHkhexAQXLA)). So that concludes this post. 
 
-_[Continue to part fourty-one.](/2023/02/26/adding-openapi.html)_
+_[Continue to part fourty-one.](/posts/2023-02-26-adding-openapi)_

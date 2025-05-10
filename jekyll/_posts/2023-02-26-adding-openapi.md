@@ -4,7 +4,7 @@ title: "Adding an OpenAPI spec"
 summary: "I'd like to have a few different clients for the Habit Tracker API, and so I'm adding an OpenAPI spec to generate them from."
 ---
 
-In a [few](/2023/02/21/adding-apis.html) [recent](/2023/02/23/finish-up-the-api.html) [posts](/2023/02/24/finishing-apis.html), we have added a little API to track habits. Now I'd like to have some clients for this. And there's actually a couple of things I have in mind. I want a command line tool, and I am unsure of which language I want to implement it in – maybe Java, maybe Rust. I want an iOS app, and I might want a React app. 
+In a [few](/posts/2023-02-21-adding-apis) [recent](/posts/2023-02-23-finish-up-the-api) [posts](/posts/2023-02-24-finishing-apis), we have added a little API to track habits. Now I'd like to have some clients for this. And there's actually a couple of things I have in mind. I want a command line tool, and I am unsure of which language I want to implement it in – maybe Java, maybe Rust. I want an iOS app, and I might want a React app. 
 
 So there's a couple of different clients. It would be sweet to be able to generate them from a single source of truth. So I'm thinking, it would be fun to write an OpenAPI spec and play around with [openapi-generator](https://github.com/OpenAPITools/openapi-generator) to generate the clients. Let's do that. 
 

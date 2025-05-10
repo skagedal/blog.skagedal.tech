@@ -2,7 +2,7 @@
 layout: post
 title:  "The test data with invalid Base64"
 ---
-Good morning! Let's continue on the work from [yesterday](/2023/02/03/docker-host-env-var-part-2.html)! I'm curious about what I did in that commit that caused other tests to fail. 
+Good morning! Let's continue on the work from [yesterday](/posts/2023-02-03-docker-host-env-var-part-2)! I'm curious about what I did in that commit that caused other tests to fail. 
 
 It's [this commit](https://github.com/skagedal/docker-java/commit/d4963d2ceac6affe1298e719ad78220d5bb09860), where I change where in the sequence the Docker `config.json` file is read. 
 
@@ -150,4 +150,4 @@ That, of course, does not in itself mean that we have done the right thing. Ther
 
 For now, I'm happy with this though. However, we still have some other failures in some other tests in the test class. I'll look at them tomorrow.
 
-_[Continue reading about the green again test suite](/2023/02/05/the-finally-green-again-test-suite.html)_
+_[Continue reading about the green again test suite](/posts/2023-02-05-the-finally-green-again-test-suite)_

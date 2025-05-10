@@ -3,7 +3,7 @@ layout: post
 title: "HTTP clients for testing! Which one?"
 summary: "As I continue the implementation and testing of the habits API, I realize I need a HTTP client with JSON support, discuss various alternatives and end up sticking with HttpClient, using a `BodyPublisher`/`BodyHandler` pair to deal with the JSON."
 ---
-We ended the [previous post](/2023/02/21/adding-apis.html) with a failing test for the "create habit" API. Let me now first just make that test green by creating that request handler, introducing a little `HabitsApiController`[^1]:
+We ended the [previous post](/posts/2023-02-21-adding-apis) with a failing test for the "create habit" API. Let me now first just make that test green by creating that request handler, introducing a little `HabitsApiController`[^1]:
 
 ```java
 @RestController
@@ -267,7 +267,7 @@ public class HabitsApiController {
 
 Test coverage is stable at 90.3394%! 
 
-_[Continue to part thirty-eight.](/2023/02/23/finish-up-the-api.html)_
+_[Continue to part thirty-eight.](/posts/2023-02-23-finish-up-the-api)_
 
 ### Notes
 

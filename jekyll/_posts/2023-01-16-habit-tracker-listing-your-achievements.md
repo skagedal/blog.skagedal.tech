@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 16: Listing your achievements"
 ---
 
-This is part sixteen of my Habit Tracker series, which started [here](/2023/01/01/writing-a-habit-tracker.html). I parts [eleven](/2023/01/11/habit-tracker-the-habits-page.html), [twelve](/2023/01/12/habit-tracker-making-habits-page-work.html), [thirteen](/2023/01/13/habit-tracker-reading-from-repository.html) and [fifteen](/2023/01/15/habit-tracker-add-new-habit.html) we worked on the page where we can list our habits and add new ones. There are more things we could do regarding this management, like deleting and editing habits, and handling errors, but I'm eager to soon get going with the part where we actually _achieve_ (as we called it, if you remember from [part seven](/2023/01/07/habit-tracker-achievements.html)) our daily habits!  
+This is part sixteen of my Habit Tracker series, which started [here](/posts/2023-01-01-writing-a-habit-tracker). I parts [eleven](/posts/2023-01-11-habit-tracker-the-habits-page), [twelve](/posts/2023-01-12-habit-tracker-making-habits-page-work), [thirteen](/posts/2023-01-13-habit-tracker-reading-from-repository) and [fifteen](/posts/2023-01-15-habit-tracker-add-new-habit) we worked on the page where we can list our habits and add new ones. There are more things we could do regarding this management, like deleting and editing habits, and handling errors, but I'm eager to soon get going with the part where we actually _achieve_ (as we called it, if you remember from [part seven](/posts/2023-01-07-habit-tracker-achievements)) our daily habits!  
 
 This is going to be in the main "home" screen of app, as it is what you will do most often. It'll show the current date, to just kind of clarify what day we are "achieving". It will list your habits and, if they have been achieved for this day, display a green checkmark. If not, present a way to achieve them. 
 
@@ -85,4 +85,4 @@ Also, I'm now removing the `MvcConfig` class where we did programmatic setup of 
 
 Let's read from the repository tomorrow.
 
-_[Continue reading part seventeen.](/2023/01/17/habit-tracker-reading-habits-for-date.html)_
+_[Continue reading part seventeen.](/posts/2023-01-17-habit-tracker-reading-habits-for-date)_

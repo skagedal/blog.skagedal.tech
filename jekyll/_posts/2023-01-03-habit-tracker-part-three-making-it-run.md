@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 3: Setting up Testcontainers"
 ---
 
-Here is part three of my little series on writing a habit tracker in Java with Spring Boot. In the [first part](/2023/01/01/writing-a-habit-tracker.html), I set up some infrastructure on my server, and in the [second part](/2023/01/02/habit-tracker-part-two-spring-boot.html) I created a skeleton app in Spring Boot. 
+Here is part three of my little series on writing a habit tracker in Java with Spring Boot. In the [first part](/posts/2023-01-01-writing-a-habit-tracker), I set up some infrastructure on my server, and in the [second part](/posts/2023-01-02-habit-tracker-part-two-spring-boot) I created a skeleton app in Spring Boot. 
 
 Now I'd like to just make this skeleton app work! Success criteria is to successfully do nothing.  
 
@@ -116,4 +116,4 @@ WARN o.f.core.internal.command.DbValidate     : No migrations found. Are your lo
 
 Nice. 
 
-_[Continue reading part four.](/2023/01/04/habit-tracker-functionality-and-first-migration.html)_
+_[Continue reading part four.](/posts/2023-01-04-habit-tracker-functionality-and-first-migration)_

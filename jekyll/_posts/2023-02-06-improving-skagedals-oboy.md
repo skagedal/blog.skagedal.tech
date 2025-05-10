@@ -2,7 +2,7 @@
 layout: post
 title:  "Improving skagedal's oboy"
 ---
-So far during 2023, I have blogged about two software projects. First a series of writing a habit tracker ([summarized here](/2023/01/29/habit-tracker-so-far.html)), and then a little investigation on Testcontainers ([starting here](/2023/01/30/test-containers-and-colima.html)). I plan more posts in both series, but right now I'd like to turn my attention to another project: this blog. 
+So far during 2023, I have blogged about two software projects. First a series of writing a habit tracker ([summarized here](/posts/2023-01-29-habit-tracker-so-far)), and then a little investigation on Testcontainers ([starting here](/posts/2023-01-30-test-containers-and-colima)). I plan more posts in both series, but right now I'd like to turn my attention to another project: this blog. 
 
 Obviously, there is no tech blog like this that doesn't at some point start to discuss itself and the software that manages it. Sooner or later, you start writing your own custom blog software.
 
@@ -28,4 +28,4 @@ Most of all, I'd like to improve some things about the current blog. I'm pretty 
 
 Let's see where this goes!
 
-_[Continue reading about repairing the current blog tool](/2023/02/08/fixing-my-blog.html)_
+_[Continue reading about repairing the current blog tool](/posts/2023-02-08-fixing-my-blog)_

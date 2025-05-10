@@ -33,9 +33,9 @@ public class MvcConfig implements WebMvcConfigurer {
 
 And then, supposedly, I should be able to run the app and get myself some HTML web pages locally! 
 
-Oh, but I can't run the app though – we still get the "APPLICATION FAILED TO START" I mentioned in [part three](/2023/01/03/habit-tracker-part-three-making-it-run.html). I only fixed that for the test suite (with Testcontainers), I didn't set up a way to run the app locally. 
+Oh, but I can't run the app though – we still get the "APPLICATION FAILED TO START" I mentioned in [part three](/posts/2023-01-03-habit-tracker-part-three-making-it-run). I only fixed that for the test suite (with Testcontainers), I didn't set up a way to run the app locally. 
 
-I could install PostgreSQL locally, just like I did on my Linux server [in part one](/2023/01/01/writing-a-habit-tracker.html), but with Homebrew since I'm running on a Mac. Or I could run it using a Dockerized approach. Both methods are fun. But I'll go with the latter one for now. 
+I could install PostgreSQL locally, just like I did on my Linux server [in part one](/posts/2023-01-01-writing-a-habit-tracker), but with Homebrew since I'm running on a Mac. Or I could run it using a Dockerized approach. Both methods are fun. But I'll go with the latter one for now. 
 
 I'm creating a `docker-compose.yml` file like this:
 
@@ -70,7 +70,7 @@ spring.datasource.password=postgres
 
 Now the app starts! And the logs claim that it has started up a web server at port 8080. So let's go to `http://localhost:8080`, where I should expect to see that "home" template. 
 
-But hey, no, I actually see a login form, asking me for username and password! I haven't even gotten that far into the tutorial yet, how can it... ohh right, I added Spring Security to the project already in [part 2](/2023/01/02/habit-tracker-part-two-spring-boot.html), and of course everything just gets automatically configured. 
+But hey, no, I actually see a login form, asking me for username and password! I haven't even gotten that far into the tutorial yet, how can it... ohh right, I added Spring Security to the project already in [part 2](/posts/2023-01-02-habit-tracker-part-two-spring-boot), and of course everything just gets automatically configured. 
 
 Let's try to comment out the relevant line in `build.gradle`:
 
@@ -87,4 +87,4 @@ Yepsidoodle, now the `localhost.se:8080` page shows the unprotected "home" templ
 
 In tomorrow's episode, I think we will... add Spring Security back again!  
 
-_[Continue reading part nine.](/2023/01/09/habit-tracker-securing-things.html)_
+_[Continue reading part nine.](/posts/2023-01-09-habit-tracker-securing-things)_

@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 15: Adding a new habit"
 ---
 
-In [part 13](/2023/01/13/habit-tracker-reading-from-repository.html), we implemented the listing of our habits from the database. But we can't yet add any new habits. There's an "Add" button there, but it doesn't do anything. Let's make it do something. 
+In [part 13](/posts/2023-01-13-habit-tracker-reading-from-repository), we implemented the listing of our habits from the database. But we can't yet add any new habits. There's an "Add" button there, but it doesn't do anything. Let's make it do something. 
 
 The common thing to do these days is to have a REST API that you post things to. That however requires Javascript on the web page, and I'm trying to not have that yet, for simplicity. Good old forms are still legal, let's use those! We already have, actually – the login form. We [removed](https://github.com/skagedal/hahabit/commit/e8960e3ba06fcff9c4ca46d564317a81538f4366) the custom one and replaced it with the default Spring Boot one, but we could take inspiration from it on how to build a Thymeleaf-enabled form. Let's do it like:
 
@@ -109,13 +109,13 @@ Anyway, I'm gonna just refactor a bit to not repeat that whole ModelAndView-bloc
 
 There is a potential problem here I thought I should mention. So, first we save some stuff to the database, and then we read some stuff to the database. Since we're using Spring Data JDBC, our `save`  and `find...` methods always represent actual queries to the database, not some in-memory cache. One common approach to handle scale when applications get big is to use database replicas for read operations, so that we spread the work a bit and don't let the slower writes hog the database connections for quicker reads. In such a setup, we might find that when we read our habits with `habits.findAllByOwnedBy(...)`, we're reading from a database that does not just yet have this new `habits` row we just inserted, and so it'll look stupid for the user. 
 
-There are various ways around this, one of which I guess would be to use something like Spring Data JPA instead, which if I understand the passage I quoted [in part six](/2023/01/06/habit-tracker-records-and-other-improvements.html) of this series handles this kind of stuff for us, at the cost of some more conceptual complexity.
+There are various ways around this, one of which I guess would be to use something like Spring Data JPA instead, which if I understand the passage I quoted [in part six](/posts/2023-01-06-habit-tracker-records-and-other-improvements) of this series handles this kind of stuff for us, at the cost of some more conceptual complexity.
 
 For now, I am very happy with just using my single PostgreSQL server for this "this could have been a text file" use case, and am going to leave it at that. 
 
 ### Notes
 
 [^1]: As a side node – when we use `repository.save(habit)`, we get a new object returned, and that will have the `id`, but not the `createdAt` filled in. How does it even get the id...? I should investigate that at some point.
-[^2]: While this works, a better pattern to use here is Post/Redirect/Get, as discussed in [part nineteen](/2023/01/19/habit-tracker-achieving-some-habits.html), as you avoid the annoying "resubmit form data?" popup when reloading.  
+[^2]: While this works, a better pattern to use here is Post/Redirect/Get, as discussed in [part nineteen](/posts/2023-01-19-habit-tracker-achieving-some-habits), as you avoid the annoying "resubmit form data?" popup when reloading.  
 
-_[Continue reading part sixteen.](/2023/01/16/habit-tracker-listing-your-achievements.html)_
+_[Continue reading part sixteen.](/posts/2023-01-16-habit-tracker-listing-your-achievements)_

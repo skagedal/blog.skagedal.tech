@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 2: A skeleton Spring Boot app"
 ---
 
-Welcome to part two of my blog series on writing a habit tracker! In [part one](/2023/01/01/writing-a-habit-tracker.html), I described the project and set up some tools on my server where I eventually hope to deploy this. Today I'll create a skeleton Spring Boot app.  
+Welcome to part two of my blog series on writing a habit tracker! In [part one](/posts/2023-01-01-writing-a-habit-tracker), I described the project and set up some tools on my server where I eventually hope to deploy this. Today I'll create a skeleton Spring Boot app.  
 
 ## Creating a Spring Boot app
 
@@ -27,7 +27,7 @@ Great, now we just press "Generate" and have ourselves a little skeleton app! Bu
 
 That'll be the cliffhanger for today's post – today I'm going to sit all day in a car, driving home from the ski resort. But I expect to pause somewhere to charge the car, and then I hope to get my 30 minutes of outdoors.  
 
-_[Continue reading part three.](/2023/01/03/habit-tracker-part-three-making-it-run.html)_
+_[Continue reading part three.](/posts/2023-01-03-habit-tracker-part-three-making-it-run)_
 
 ### Notes
-[^1]: I realized I did write something along the lines of what I had in mind here back in 2020, [read here](/2020/06/27/new-words.html)! 
+[^1]: I realized I did write something along the lines of what I had in mind here back in 2020, [read here](/posts/2020-06-27-new-words)! 

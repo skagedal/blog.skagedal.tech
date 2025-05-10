@@ -78,4 +78,4 @@ The problem here is that Testcontainers for Java does not know about Docker Cont
 
 Let's try to fix that! 
 
-_[Continue reading about supporting Docker contexts in docker-java](/2023/01/31/test-containers-and-docker-context.html)_
+_[Continue reading about supporting Docker contexts in docker-java](/posts/2023-01-31-test-containers-and-docker-context)_

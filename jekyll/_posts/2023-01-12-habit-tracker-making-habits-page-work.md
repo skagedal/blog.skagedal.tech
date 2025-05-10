@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 12: Connecting the model"
 ---
 
-In the [previous post](/2023/01/11/habit-tracker-the-habits-page.html), I created an HTML template with Thymeleaf, and now we want to inject some actual data from our app into that.  
+In the [previous post](/posts/2023-01-11-habit-tracker-the-habits-page), I created an HTML template with Thymeleaf, and now we want to inject some actual data from our app into that.  
 
 I spent way too much time trying to figure out how that works, by haphazardly googling around and looking at examples, until I read found the appropriate chapter in the [Spring Framework Reference](https://docs.spring.io/spring-framework/docs/current/reference/html/web.html#mvc-controller). 
 
@@ -97,4 +97,4 @@ Great, it looks nice – we get a list with two items, "Do thing" and "Do other 
 
 Should we also add the actual reading from the repository today, or should that wait until tomorrow? It can wait until tomorrow. We will do it tomorrow. 
 
-_[Continue reading part thirteen.](/2023/01/13/habit-tracker-reading-from-repository.html)_
+_[Continue reading part thirteen.](/posts/2023-01-13-habit-tracker-reading-from-repository)_

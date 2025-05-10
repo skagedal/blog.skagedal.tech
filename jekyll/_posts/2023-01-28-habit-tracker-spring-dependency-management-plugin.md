@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing a habit tracker, part 28: More on Spring dependency management"
 ---
-Here's an update on the Spring Dependency Management plugin that we talked about in the [previous post](/2023/01/27/habit-tracker-updating-dependencies.html).
+Here's an update on the Spring Dependency Management plugin that we talked about in the [previous post](/posts/2023-01-27-habit-tracker-updating-dependencies).
 
 I linked my blog post in the [Gradle Community Slack](https://discuss.gradle.org/t/introducing-gradle-community-slack/26731) and [asked](https://linen.dev/s/gradle-community/t/8566143/i-guess-this-channel-fits-for-this-i-m-writing-a-little-blog) for comments. It turns out that this plugin really is not needed at all. Quoting Björn Kautler who goes by the name of Vampire:
 
@@ -40,4 +40,4 @@ So Spring Boot plugin stays. It also provides some other things I think I'll wan
 
 I also noticed that the [Spring Boot Gradle Plugin Reference Guide](https://docs.spring.io/spring-boot/docs/current/gradle-plugin/reference/htmlsingle/) covers all of this stuff regarding whether to use the Dependency Management plugin or not. Of course it does.
 
-_[Continue reading part twenty-nine.](/2023/01/29/habit-tracker-so-far.html)_
+_[Continue reading part twenty-nine.](/posts/2023-01-29-habit-tracker-so-far)_

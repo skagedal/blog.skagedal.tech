@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing a habit tracker, part 11: The habits page"
 ---
-Allright! Here's part eleven! Of the habit tracker series! Which started [here](/2023/01/01/writing-a-habit-tracker.html), for those of you just joining! 
+Allright! Here's part eleven! Of the habit tracker series! Which started [here](/posts/2023-01-01-writing-a-habit-tracker), for those of you just joining! 
 
 We've set up a little Spring Web MVC service, serving web through Thymeleaf templates, and now I thought we'd start building the real pages a little bit.
 
@@ -63,4 +63,4 @@ But anyway. The page still looks the same when we run the app. We haven't yet ho
 
 But I will let that wait for tomorrow. This is too much to take in for one day. HTML stands for Hypertext Markup Language and was created by Tim Berners–Lee in 1989, and then all kinds of crazy things happened. Ok, bye.  
 
-_[Continue reading part twelve.](/2023/01/12/habit-tracker-making-habits-page-work.html)_
+_[Continue reading part twelve.](/posts/2023-01-12-habit-tracker-making-habits-page-work)_

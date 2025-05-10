@@ -3,14 +3,14 @@ layout: post
 title:  "Setting up a wildcard certificate for skagedal.tech"
 summary: "Since I now have three subdomains that need certificates, it's time to set up a wildcard certificate."
 ---
-Here at skagedal's oboy, we don't just talk about writing code, but also about the mundane details of getting it deployed. For example, with the habit tracker, I wrote about [uploading it to the server](/2023/01/22/habit-tracker-deploying-the-jar.html) and [exposing the service](/2023/01/25/habit-tracker-exposing-it.html) to the Internet. 
+Here at skagedal's oboy, we don't just talk about writing code, but also about the mundane details of getting it deployed. For example, with the habit tracker, I wrote about [uploading it to the server](/posts/2023-01-22-habit-tracker-deploying-the-jar) and [exposing the service](/posts/2023-01-25-habit-tracker-exposing-it) to the Internet. 
 
-Now it's time to deploy the Normal Score converter, an old project which I managed to get building in the [previous post](/2023/02/12/building-normal-score-converter.html). First of all, it should have its own subdomain, and it should be protected by HTTPS.  
+Now it's time to deploy the Normal Score converter, an old project which I managed to get building in the [previous post](/posts/2023-02-12-building-normal-score-converter). First of all, it should have its own subdomain, and it should be protected by HTTPS.  
 Previously, I've set up certbot to get and renew certificates for each domain, `skagedal.tech`, `blog.skagedal.tech` and `hahabit.skagedal.tech`. Now I want to also set up `normalscore.skagedal.tech`. It gets a bit tedious – wouldn't it be sweet if I could just have one certificate for all of them, and future needs?  
 
 [This answer](https://serverfault.com/a/566433) on Stack Exchange explains that this is indeed possible using something called a wildcard certificate. Let's Encrypt, the free Certificate Authority that I use, confirms in [their FAQ](https://letsencrypt.org/docs/faq/) that they do support such certificates, and [this guide](https://www.digitalocean.com/community/tutorials/how-to-create-let-s-encrypt-wildcard-certificates-with-certbot) from Digital Ocean tells me how to set it up. Let's give it a shot. 
 
-The first step in the guide, "Setting up a Wildcard DNS", is something I've already taken care of, as I also discussed in [this post](/2023/01/25/habit-tracker-exposing-it.html). Here is what my DNS setup looks like (viewing it in the DigitalOcean console):
+The first step in the guide, "Setting up a Wildcard DNS", is something I've already taken care of, as I also discussed in [this post](/posts/2023-01-25-habit-tracker-exposing-it). Here is what my DNS setup looks like (viewing it in the DigitalOcean console):
 
 
 | Type | Hostname        | Value                          | TTL (seconds) |
@@ -176,4 +176,4 @@ Another thing I need to do is to make sure that nginx gets restarted properly wh
 
 But anyway, as I said, let's forget about tomorrow. I am now ready to put the real Normal Score Converter content in the new site! Tomorrow! Which I just said I would forget about! 
 
-_[Continue reading the final installment of this short series](/2023/02/14/deploying-and-fixing-chrome-bug.html)_
+_[Continue reading the final installment of this short series](/posts/2023-02-14-deploying-and-fixing-chrome-bug)_

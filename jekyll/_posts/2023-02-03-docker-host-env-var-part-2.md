@@ -3,9 +3,9 @@ layout: post
 title:  "Implementing DOCKER_CONTEXT and bisecting a bug"
 ---
 
-Allright, I've got around 30 minutes – let's see if we can get this `DOCKER_HOST` environment variable that we set up a test for in the [last post](/2023/02/02/docker-context-environment-variable.html) done! 
+Allright, I've got around 30 minutes – let's see if we can get this `DOCKER_HOST` environment variable that we set up a test for in the [last post](/posts/2023-02-02-docker-context-environment-variable) done! 
 
-And all of a sudden – maybe because I was just out drinking beer and eating great food with Bobben, who you might remember from the [Habit Tracker Part Four](/2023/01/04/habit-tracker-functionality-and-first-migration.html) blog post –  I no longer feel the urge to blog about every minor step, I'm just gonna implement that shit! [Here it is](https://github.com/skagedal/docker-java/commit/d6162d005b86fe18ce6b7596ea695fa50e0582c2)! 
+And all of a sudden – maybe because I was just out drinking beer and eating great food with Bobben, who you might remember from the [Habit Tracker Part Four](/posts/2023-01-04-habit-tracker-functionality-and-first-migration) blog post –  I no longer feel the urge to blog about every minor step, I'm just gonna implement that shit! [Here it is](https://github.com/skagedal/docker-java/commit/d6162d005b86fe18ce6b7596ea695fa50e0582c2)! 
 
 It works in the sense that the test is green. Buuuut – I also just noticed that some other tests in that class (`DefaultDockerClientConfigTest`) are _not_ green when I run them in IntelliJ IDEA. 
 
@@ -124,4 +124,4 @@ Date:   Wed Nov 30 08:29:58 2022 +0100
 
 Allright! We have pinned down the commit that introduced the bad stuff. Let's look at that tomorrow.
 
-_[Continue reading about the invalid Base64](/2023/02/04/test-data-with-invalid-base64.html)_
+_[Continue reading about the invalid Base64](/posts/2023-02-04-test-data-with-invalid-base64)_

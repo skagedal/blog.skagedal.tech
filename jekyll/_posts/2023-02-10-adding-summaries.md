@@ -3,7 +3,7 @@ layout: post
 title:  "Adding summaries"
 summary: "While exploring my current Jekyll theme, I discover the `excerpt` variable, and finally decide to instead use a custom `summary` variable as a blurb for each post."
 ---
-So I'm [trying out Zola](/2023/02/09/testing-zola.html) now, and slowly trying to convert the Jekyll templates for this blog to Zola ones. I could just as well start a-fresh from some nice Zola theme, but I'm thinking that I will learn more if I do it this way.
+So I'm [trying out Zola](/posts/2023-02-09-testing-zola) now, and slowly trying to convert the Jekyll templates for this blog to Zola ones. I could just as well start a-fresh from some nice Zola theme, but I'm thinking that I will learn more if I do it this way.
 
 I also learn more about Jekyll! Maybe in the end I will choose to stick with that?
 
@@ -13,7 +13,7 @@ One thing I noticed is that in the `head.html` templatee, it was using a `page.e
 <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
 ```
 
-Interesting! As I noted in the [introductory post](/2023/02/06/improving-skagedals-oboy.html) on this series, I would like to have a little blurb on the main page that briefly describes each post, beyond the title of it. Maybe this points to some already existing standard support for this in Jekyll?
+Interesting! As I noted in the [introductory post](/posts/2023-02-06-improving-skagedals-oboy) on this series, I would like to have a little blurb on the main page that briefly describes each post, beyond the title of it. Maybe this points to some already existing standard support for this in Jekyll?
 
 I'm gonna try using this on the main page, where we list all the posts:
 

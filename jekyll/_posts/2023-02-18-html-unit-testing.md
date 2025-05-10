@@ -4,7 +4,7 @@ title:  "Testing with HtmlUnit"
 summary: "I add the HtmlUnit library and use it to test the form login in the habit tracker, and touch upon things like the deprecation of the `java.net.URL` constructors and whether I like HtmlUnit's approach with generic return types or not."
 ---
 
-Continuing on the testing adventures from [yesterday](/2023/02/17/spring-boot-test-with-random-port.html)! I'd like to actually test this as if I were clicking around on the web page, or as close as possible. I know of [Selenium](https://www.selenium.dev/) and things like that, but that's too heavy. I'd like to still stay within the comfy Java world of Junit 5. 
+Continuing on the testing adventures from [yesterday](/posts/2023-02-17-spring-boot-test-with-random-port)! I'd like to actually test this as if I were clicking around on the web page, or as close as possible. I know of [Selenium](https://www.selenium.dev/) and things like that, but that's too heavy. I'd like to still stay within the comfy Java world of Junit 5. 
 
 So I found [HtmlUnit](http://htmlunit.sourceforge.net/), which is a Java library that can load HTML and even do things like execute JavaScript. Spring Testing also integrates with it, so you can use it for the MockMvc style of tests, which is cool. I'm still doing real-server tests for now. 
 
@@ -114,7 +114,7 @@ public class WebTests {
 }
 ```
 
-Whee, that gets us our logged-in Hahabit start page! The `admin` user is [set up by my Flyway migration scripts](/2023/01/10/habit-tracker-securing-things-2.html), so it's there by default.
+Whee, that gets us our logged-in Hahabit start page! The `admin` user is [set up by my Flyway migration scripts](/posts/2023-01-10-habit-tracker-securing-things-2), so it's there by default.
 
 Just gonna replace that `System.out.println` with some kind of assertion, for now I'll just go with checking for the existence of the text "Manage my habits" which should be there:
 
@@ -145,5 +145,5 @@ Coverage: 46.0967%
 
 Sweet. 
 
-_[Continue reading part thirty-four.](/2023/02/19/creating-random-test-users.html
+_[Continue reading part thirty-four.](/posts/2023-02-19-creating-random-test-users
 )_

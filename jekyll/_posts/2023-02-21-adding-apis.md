@@ -3,7 +3,7 @@ layout: post
 title:  "Let's start looking at API:s"
 summary: "I want to add some JSON REST API:s to the habit tracker, and begin with writing a first failing test. Then I figure out some authentication details, add Basic Auth and disable CSRF."
 ---
-I'm pretty happy with the test coverage now that we have worked on that for a few posts – [here's](/2023/02/20/more-html-unit.html) the last one. I looked at what those remaining 10% consisted of, and did not deem them interesting enough to spend time writing tests for. Let's continue with other stuff.  
+I'm pretty happy with the test coverage now that we have worked on that for a few posts – [here's](/posts/2023-02-20-more-html-unit) the last one. I looked at what those remaining 10% consisted of, and did not deem them interesting enough to spend time writing tests for. Let's continue with other stuff.  
 
 I want to eventually add some new kinds of user experiences for Hahabit. I'm not all that happy with the server-generated HTML, and might after all want to move to a frontend app written in React or similar, eventually. Or, I might consider writing an iOS app. Actually, for myself, most of all I want a nice CLI! 
 
@@ -176,9 +176,9 @@ public class WebTests {
 }
 ```
 
-We no longer get a 302 here, but a 401. However, as I test the app locally and connect through the browser, I can confirm that the redirect is working as expected there. This is exactly the behavior I described [back in part nine](/2023/01/09/habit-tracker-securing-things.html). I still want to know what it is that causes this difference between browsers and straight HTTP calls. It seems that also HtmlUnit is getting the redirect, so it's doing whatever browsers are doing.  
+We no longer get a 302 here, but a 401. However, as I test the app locally and connect through the browser, I can confirm that the redirect is working as expected there. This is exactly the behavior I described [back in part nine](/posts/2023-01-09-habit-tracker-securing-things). I still want to know what it is that causes this difference between browsers and straight HTTP calls. It seems that also HtmlUnit is getting the redirect, so it's doing whatever browsers are doing.  
 
-I went so far as to [write a question on Stack Overflow](https://stackoverflow.com/questions/75511353/how-does-spring-determine-whether-to-redirect-to-form-login/75511354#75511354), and then, when I was writing the question I took a look again at the headers that the browsers were sending (again, see [part nine](/2023/01/09/habit-tracker-securing-things.html)) and had a face-palm moment. I had overlooked a very basic thing: the `Accept` header. So, with `Accept: text/html`, we get the redirect; with `Accept: */*`, we get the 401. 
+I went so far as to [write a question on Stack Overflow](https://stackoverflow.com/questions/75511353/how-does-spring-determine-whether-to-redirect-to-form-login/75511354#75511354), and then, when I was writing the question I took a look again at the headers that the browsers were sending (again, see [part nine](/posts/2023-01-09-habit-tracker-securing-things)) and had a face-palm moment. I had overlooked a very basic thing: the `Accept` header. So, with `Accept: text/html`, we get the redirect; with `Accept: */*`, we get the 401. 
 
 Rubberducking for the win. 
 
@@ -218,7 +218,7 @@ Cool! I mean, actually, not sure this is the behavior I want – I'd like to jus
 
 Let's continue with making our new `create_habit` test green tomorrow!  
 
-_[Continue reading part thirty-seven.](/2023/02/22/continue-adding-apis.html)_
+_[Continue reading part thirty-seven.](/posts/2023-02-22-continue-adding-apis)_
 
 ### Notes
 

@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 26: Making it somewhat usable"
 ---
 
-Allright, hahabit is [now online](/2023/01/25/habit-tracker-exposing-it.html), and as the first user I must say... **it's pretty terrible,** usability-wise. On desktop, it's kinda minimalistic cute, but on the phone, where I'd like to mostly track my habits please, it's a disaster. I have to zoom in just to click a button. 
+Allright, hahabit is [now online](/posts/2023-01-25-habit-tracker-exposing-it), and as the first user I must say... **it's pretty terrible,** usability-wise. On desktop, it's kinda minimalistic cute, but on the phone, where I'd like to mostly track my habits please, it's a disaster. I have to zoom in just to click a button. 
 
 
 I'd love to embed a screen recording here of just how hilariously bad it is, but I'm not sure I'm going to spend my time on that.
@@ -36,4 +36,4 @@ Allright then, you get a screenshot.
 
 (Yeah, "done" is visualized as "disabled". Not very reinforcing, perhaps.)
 
-_[Continue reading part twenty-seven.](/2023/01/27/habit-tracker-updating-dependencies.html)_
+_[Continue reading part twenty-seven.](/posts/2023-01-27-habit-tracker-updating-dependencies)_

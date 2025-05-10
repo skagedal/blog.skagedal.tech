@@ -2,7 +2,7 @@
 layout: post
 title:  "docker-java and Docker Context"
 ---
-In the [previous post](/2023/01/30/test-containers-and-colima.html), I talked about why I want Testcontainers to know about Docker Contexts.  
+In the [previous post](/posts/2023-01-30-test-containers-and-colima), I talked about why I want Testcontainers to know about Docker Contexts.  
 
 Now, Testcontainers doesn't talk to Docker by itself. It uses a library called docker-java for this, which basically is a Java implementation of the Docker protocol and everything needed to talk to a Docker environment. 
 
@@ -100,4 +100,4 @@ Then I've not quite been able to find the time to finish this up. I should get t
 
 But that's where I'm at today! I just thought I'd get started by blogging a bit about it to remember where I left off, and motivate myself a little to continue! 
 
-_Continue reading [next post](/2023/02/01/submitting-a-bug-to-testcontainers.html), which is randomly about reporting a different Testcontainers bug, or [the one ofter that](/2023/02/02/docker-context-environment-variable.html) which continues the story arc of supporting Docker contexts_
+_Continue reading [next post](/posts/2023-02-01-submitting-a-bug-to-testcontainers), which is randomly about reporting a different Testcontainers bug, or [the one ofter that](/posts/2023-02-02-docker-context-environment-variable) which continues the story arc of supporting Docker contexts_

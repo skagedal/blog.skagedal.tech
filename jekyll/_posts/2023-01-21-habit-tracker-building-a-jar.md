@@ -2,9 +2,9 @@
 layout: post
 title:  "Writing a habit tracker, part 21: Building a JAR"
 ---
-You know what? We have a habit tracker now! As of the [previous post](/2023/01/20/habit-tracker-storing-the-achievement.html), I can definitely track some habits! But only with the server running on my own machine. That's not how I want it. I want it accessible from [FidoNet](https://en.wikipedia.org/wiki/FidoNet). Or, allright, the Internet. 
+You know what? We have a habit tracker now! As of the [previous post](/posts/2023-01-20-habit-tracker-storing-the-achievement), I can definitely track some habits! But only with the server running on my own machine. That's not how I want it. I want it accessible from [FidoNet](https://en.wikipedia.org/wiki/FidoNet). Or, allright, the Internet. 
 
-So, we're going to deploy things to the Ubuntu machine we installed some software on [in part one](/2023/01/01/writing-a-habit-tracker.html), and the thing we're going to deploy is going to be a JAR file, as we discussed [in part two](https://blog.skagedal.tech/2023/01/02/habit-tracker-part-two-spring-boot.html). It's going to be not just a simple JAR file, but a _fat_ JAR file – one that includes all the dependencies, like all of the Spring code. 
+So, we're going to deploy things to the Ubuntu machine we installed some software on [in part one](/posts/2023-01-01-writing-a-habit-tracker), and the thing we're going to deploy is going to be a JAR file, as we discussed [in part two](https://blog.skagedal.tech/2023/01/02/habit-tracker-part-two-spring-boot.html). It's going to be not just a simple JAR file, but a _fat_ JAR file – one that includes all the dependencies, like all of the Spring code. 
 
 Spring Boot gives us some tools to do that, wrapped in its Gradle plugin (or Maven plugin, if that's what you're using). We can check it out like this:
 
@@ -107,4 +107,4 @@ It seems like this is an instance of [this bug](https://github.com/spring-projec
 
 But I think we're ready to try to upload that little guy to the server! Let's do that in next post! 
 
-_[Continue reading part twenty-two.](/2023/01/22/habit-tracker-deploying-the-jar.html)_
+_[Continue reading part twenty-two.](/posts/2023-01-22-habit-tracker-deploying-the-jar)_

@@ -100,4 +100,4 @@ public class ApiTests {
 
 The test is failing as expected, as the endpoints are not implemented.
 
-_[Continue to part thirty-nine.](/2023/02/24/finishing-apis.html)_
+_[Continue to part thirty-nine.](/posts/2023-02-24-finishing-apis)_

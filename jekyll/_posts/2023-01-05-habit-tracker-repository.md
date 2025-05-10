@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 5: A repository"
 ---
 
-Continuing on the habit tracker. [Yesterday](/2023/01/04/habit-tracker-functionality-and-first-migration.html) we set up a schema for users, and we asked ChatGPT on how to create that schema. That was fun. Let's continue on that path.
+Continuing on the habit tracker. [Yesterday](/posts/2023-01-04-habit-tracker-functionality-and-first-migration) we set up a schema for users, and we asked ChatGPT on how to create that schema. That was fun. Let's continue on that path.
 
 So, in the same conversation as where I asked it to create the schema for me, I asked:
 
@@ -210,8 +210,8 @@ Now, we can just need to kill the running container to quickly reset the databas
 
 Now I can run the test! And again! And again!
 
-_[Continue reading part six.](/2023/01/06/habit-tracker-records-and-other-improvements.html)_
+_[Continue reading part six.](/posts/2023-01-06-habit-tracker-records-and-other-improvements)_
 
 ### Notes
 
-[^1]: I was wrong, it does! See [next post](/2023/01/06/habit-tracker-records-and-other-improvements.html). 
+[^1]: I was wrong, it does! See [next post](/posts/2023-01-06-habit-tracker-records-and-other-improvements). 

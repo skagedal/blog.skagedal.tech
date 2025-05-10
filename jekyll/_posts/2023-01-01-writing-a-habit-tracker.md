@@ -128,11 +128,11 @@ Yes, it is working! Now, it's time to create a little Java app using Spring Boot
 
 Oh, and yes, I did spend more than 30 minutes outside today, snowboarding the wonderful slopes of Hamra, Tänndalen. And I wrote a blog post! 
 
-_[Continue reading part two.](/2023/01/02/habit-tracker-part-two-spring-boot.html)_
+_[Continue reading part two.](/posts/2023-01-02-habit-tracker-part-two-spring-boot)_
 
 ### Notes
 
-[^1]: But see [part twenty-two](/2023/01/22/habit-tracker-deploying-the-jar.html) for a better way!
+[^1]: But see [part twenty-two](/posts/2023-01-22-habit-tracker-deploying-the-jar) for a better way!
 [^2]: The release process of JDK 21 in the fall of 2023 made me feel a bit less confident in this choice. It took much longer for Temurin to get this milestone release out than other distributions, apparently having to do with Oracle holding back on the TCK. Don't know what the politics are here exactly. I've switched to using Zulu for my local machine. 
 [^3]: As I follow this process to update to JDK 21, I'm noticing this warning while doing `sudo apt-get update`:
     

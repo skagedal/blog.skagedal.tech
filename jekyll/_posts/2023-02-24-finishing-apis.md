@@ -6,7 +6,7 @@ summary: "We discuss how we can use the IDE:s refactoring tools to move logic fr
 
 Finally, let's add those last API:s that we added tests for in the previous post. 
 
-This will be an API-ification of the "achievement" functionality that we already have in the web app, as described in parts [sixteen](/2023/01/16/habit-tracker-listing-your-achievements.html) through twenty. So, we have the logic for this already, but it lives in the `HomeController`. We need to refactor a bit. 
+This will be an API-ification of the "achievement" functionality that we already have in the web app, as described in parts [sixteen](/posts/2023-01-16-habit-tracker-listing-your-achievements) through twenty. So, we have the logic for this already, but it lives in the `HomeController`. We need to refactor a bit. 
 
 The recommended architecture for Spring Boot is to have a _controller_ for each entity, and then have the controller call a _service_ for the more business logic related stuff. So, we'll do that.
 
@@ -134,4 +134,4 @@ public class HabitsApiController {
 
 And we're done! Tests are now green. And test coverage has risen to 92.74%.
 
-_[Continue to part fourty.](/2023/02/25/changing-names.html)_
+_[Continue to part fourty.](/posts/2023-02-25-changing-names)_

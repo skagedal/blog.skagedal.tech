@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing a habit tracker, part 23: Running it on the server"
 ---
-We [built a JAR](/2023/01/21/habit-tracker-building-a-jar.html) and we [uploaded it](/2023/01/22/habit-tracker-deploying-the-jar.html) to the server! Great, can we run it?
+We [built a JAR](/posts/2023-01-21-habit-tracker-building-a-jar) and we [uploaded it](/posts/2023-01-22-habit-tracker-deploying-the-jar) to the server! Great, can we run it?
 
 ```shell
 $ ssh hahabit@skagedal.tech
@@ -15,7 +15,7 @@ $ java -jar hahabit-0.0.1-SNAPSHOT.jar
 org.postgresql.util.PSQLException: FATAL: password authentication failed for user "postgres"
 ```
 
-Ah, right - it's configured to run things like on my local machine, trying to get into PostgreSQL with a simple password. Back in the [first blog post](/2023/01/01/writing-a-habit-tracker.html) of the series, where I set up PostgreSQL, I noted that:
+Ah, right - it's configured to run things like on my local machine, trying to get into PostgreSQL with a simple password. Back in the [first blog post](/posts/2023-01-01-writing-a-habit-tracker) of the series, where I set up PostgreSQL, I noted that:
 
 > Apparently, Postgres’ default user management system is coupled to the user authentication system on the system. This seems nice enough for our purposes – I plan to just run everything on this machine, not deal with any Docker stuff.
 
@@ -42,7 +42,7 @@ $ java -jar hahabit-0.0.1-SNAPSHOT.jar
 
 **And it runs!** It connects to the database and runs some migrations! And then serves requests – I can open up a separate `ssh` session to my machine and test it with `curl -v localhost:8080`. It challenges me with some Basic Auth,  so I give it a `-u admin:admin` and get my home page HTML!
 
-This reminds me that I have to change the admin password that I set up with a migration in [part ten](/2023/01/10/habit-tracker-securing-things-2.html). Better do that before I forget, and suddenly make this thing available from the outside. And then blog about it. 
+This reminds me that I have to change the admin password that I set up with a migration in [part ten](/posts/2023-01-10-habit-tracker-securing-things-2). Better do that before I forget, and suddenly make this thing available from the outside. And then blog about it. 
 
 To generate a new password, I again use my password manager. Then it needs to be encrypted in the format that Spring likes it. I can use the `spring` command line tool for this, which I have installed on my Mac:
 
@@ -67,4 +67,4 @@ UPDATE users SET password = '{bcrypt}SOMEENCRYPTEDSTUFF' WHERE username = 'admin
 
 I then confirm that I can no longer authenticate with the test password. All good.
 
-_[Continue reading part twenty-four.](/2023/01/24/habit-tracker-always-running-it.html)_
+_[Continue reading part twenty-four.](/posts/2023-01-24-habit-tracker-always-running-it)_

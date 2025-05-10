@@ -184,8 +184,8 @@ Set-Cookie: JSESSIONID=A0A8B589732A7DDE0CBDBA58A6901218; Path=/; HttpOnly
 
 But not now, when authenticated. I wonder why. Oh well.
 
-_[Continue reading part ten.](/2023/01/10/habit-tracker-securing-things-2.html)_
+_[Continue reading part ten.](/posts/2023-01-10-habit-tracker-securing-things-2)_
 
 ### Notes
 
-[^1]: In [part thirty-six](/2023/02/21/adding-apis.html), I figure out this mystery! 
+[^1]: In [part thirty-six](/posts/2023-02-21-adding-apis), I figure out this mystery! 

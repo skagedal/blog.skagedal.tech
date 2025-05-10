@@ -4,7 +4,7 @@ title:  "Writing a habit tracker, part 10: Continued Spring Security"
 ---
 Welcome to part ten of the habit tracker series!
 
-In [part eight](/2023/01/08/habit-tracker-serving-some-web.html), I started following a tutorial, [Securing a Web Application](https://spring.io/guides/gs/securing-web/), and then I explored some details on Basic Auth in [part nine](/2023/01/09/habit-tracker-securing-things.html). I now [completed](https://github.com/skagedal/hahabit/commit/c968ce4d2c5e839444a9b77a8435a963e01eceab) that tutorial. (After all, it's supposed to take 15 minutes. But it takes a bit more when you keep trying to blog about it, and pause to investigate stuff with `curl` and stuff.) 
+In [part eight](/posts/2023-01-08-habit-tracker-serving-some-web), I started following a tutorial, [Securing a Web Application](https://spring.io/guides/gs/securing-web/), and then I explored some details on Basic Auth in [part nine](/posts/2023-01-09-habit-tracker-securing-things). I now [completed](https://github.com/skagedal/hahabit/commit/c968ce4d2c5e839444a9b77a8435a963e01eceab) that tutorial. (After all, it's supposed to take 15 minutes. But it takes a bit more when you keep trying to blog about it, and pause to investigate stuff with `curl` and stuff.) 
 
 Now there's a form-based login system in place, on every page except the `home` and `login` pages.  In this system, we give our credentials in a HTML form, and then our session – identified with the `JSESSIONID` cookie – gets tied to this authenticated identity.
 
@@ -16,7 +16,7 @@ We can read more about form-based login system [here](https://docs.spring.io/spr
 
 I'm doing that instead. 
 
-But what I need to figure out now is how to make this use our actual user repository we set up earlier – you know, the one that ChatGPT helped out with in [part five](/2023/01/05/habit-tracker-repository.html).
+But what I need to figure out now is how to make this use our actual user repository we set up earlier – you know, the one that ChatGPT helped out with in [part five](/posts/2023-01-05-habit-tracker-repository).
 
 Now, as it turns out, Spring Security [has a way](https://docs.spring.io/spring-security/reference/servlet/authentication/passwords/jdbc.html) of handling all that by itself, if you just make your data source comply to a specific schema. Of course it has. 
 
@@ -59,4 +59,4 @@ But despite all this, I think I'll go with the schema suggested by Spring Securi
 
 Tomorrow, I think we'll look more at Spring MVC and Thymeleaf.
 
-_[Continue reading part eleven.](/2023/01/11/habit-tracker-the-habits-page.html)_
+_[Continue reading part eleven.](/posts/2023-01-11-habit-tracker-the-habits-page)_

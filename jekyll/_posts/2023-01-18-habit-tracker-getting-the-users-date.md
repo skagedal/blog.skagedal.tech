@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing a habit tracker, part 18: Getting the user's date"
 ---
-In the [last post](/2023/01/17/habit-tracker-reading-habits-for-date.html), we hard coded the date as 2023-01-13. But in the real world, the date is not always 2023-01-13. Most days, it's not. We'd like to show, and act upon, the current date. 
+In the [last post](/posts/2023-01-17-habit-tracker-reading-habits-for-date), we hard coded the date as 2023-01-13. But in the real world, the date is not always 2023-01-13. Most days, it's not. We'd like to show, and act upon, the current date. 
 
 So, `LocalDate.now()`, right? No. That gives us the current date of whatever the timezone the server is configured to. We want the date it is at wherever the user is. 
 
@@ -92,4 +92,4 @@ I'm adding this to the bottom of the page as well to just kind of remind me of t
     <p>Timezone ID: <span th:text="${zoneId}">Unknown</span></p>
 ```
 
-_[Continue reading part nineteen.](/2023/01/19/habit-tracker-achieving-some-habits.html)_
+_[Continue reading part nineteen.](/posts/2023-01-19-habit-tracker-achieving-some-habits)_

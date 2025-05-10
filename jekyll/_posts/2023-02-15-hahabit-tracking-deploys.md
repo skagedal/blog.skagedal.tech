@@ -3,7 +3,7 @@ layout: post
 title:  "Hahabit: Setting up Spring Actuator"
 summary: "I discuss setting up Spring Actuator for the habit tracker, and how to make sure that the expected version comes online."
 --- 
-I'm in the mood for continuing on my habit tracker! We left off [here](/2023/01/29/habit-tracker-so-far.html). I do use it every day, you know. I click those buttons. It feels good because I built it. I'm proud of it. I'm proud of myself. I'm proud of you. I'm proud of us. I'm proud of the world. I'm proud of the universe. I'm proud of the multiverse.
+I'm in the mood for continuing on my habit tracker! We left off [here](/posts/2023-01-29-habit-tracker-so-far). I do use it every day, you know. I click those buttons. It feels good because I built it. I'm proud of it. I'm proud of myself. I'm proud of you. I'm proud of us. I'm proud of the world. I'm proud of the universe. I'm proud of the multiverse.
 
 (The sentences from "I'm proud of it" on were added by Github Copilot; and I could not resist.)
 
@@ -165,4 +165,4 @@ Waiting...
 Done!
 ```
 
-_[Continue reading part thirty-one.](/2023/02/16/setting-up-jacoco.html)_
+_[Continue reading part thirty-one.](/posts/2023-02-16-setting-up-jacoco)_

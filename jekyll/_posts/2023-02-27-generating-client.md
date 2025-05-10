@@ -4,7 +4,7 @@ title: "Failing at configuring CORS"
 summary: "I want to test my API from Swagger UI, but failing at CORS. Finally I find a way to disable it altogether in Chrome." 
 ---
 
-So we [now](/2023/02/26/adding-openapi.html) have an OpenAPI spec, and we have a way to preview it by spinning up a Swagger UI Docker image. 
+So we [now](/posts/2023-02-26-adding-openapi) have an OpenAPI spec, and we have a way to preview it by spinning up a Swagger UI Docker image. 
 
 I'm annoyed though, because I can't get the functionality where you can test the spec and run API calls directly in the Swagger UI browser interface to work. 
 

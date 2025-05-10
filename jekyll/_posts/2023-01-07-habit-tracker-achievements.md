@@ -24,4 +24,4 @@ I also debated a bit with myself whether I want to have that `UNIQUE` constraint
 
 So, I created an AchievementRepository as well, and I think this is going to be it for the store layer for now!
 
-_[Continue reading part eight.](/2023/01/08/habit-tracker-serving-some-web.html)_
+_[Continue reading part eight.](/posts/2023-01-08-habit-tracker-serving-some-web)_

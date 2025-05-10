@@ -3,7 +3,7 @@ layout: post
 title:  "Making Normal Score Converter build again"
 summary: "Code necromancing the Normal Score Converter build system, updating some Python code to Python 3 and installing a JavaScript minifier."
 ---
-I was [asking on Mastodon](https://mastodon.social/@skagedal/109850568196541644) for a catchy term for the act of bringing old code up to date. So far crickets, as I don't have a lot of followers, but so far I think my favorite is just "code necromancy". I also considered "repomancy", as in code repository. Anyway, that's what I'm dealing with today – bringing build code for  the Normal Score Converter that I discussed in the [previous post](/2023/02/11/normal-score-converter.html) back to life.
+I was [asking on Mastodon](https://mastodon.social/@skagedal/109850568196541644) for a catchy term for the act of bringing old code up to date. So far crickets, as I don't have a lot of followers, but so far I think my favorite is just "code necromancy". I also considered "repomancy", as in code repository. Anyway, that's what I'm dealing with today – bringing build code for  the Normal Score Converter that I discussed in the [previous post](/posts/2023-02-11-normal-score-converter) back to life.
 
 So, as I mentioned, instead of a modern JavaScript build tool like Yarn, I have a Python script, [build.py](https://github.com/skagedal/normalscore/blob/5b512f2302083479ed25c80bd8ff6b93cef7b839/build.py) to put all the stuff together. Let's try running it.
 
@@ -41,7 +41,7 @@ Traceback (most recent call last):
 AttributeError: 'dict' object has no attribute 'has_key'```
 ```
 
-Ah, seems that one was [deprecated](https://portingguide.readthedocs.io/en/latest/dicts.html#:~:text=has_key()%20method%2C%20long%20deprecated,longer%20available%20in%20Python%203.) with Python 3, and you should now use the `in` operator instead. There's also a `python-modernize` tool that can do this for you – I love such tools, remember the nice sass-migrator [from the other day](/2023/02/08/fixing-my-blog.html)? – but I think I'll just do this change myself. Now, next thing:
+Ah, seems that one was [deprecated](https://portingguide.readthedocs.io/en/latest/dicts.html#:~:text=has_key()%20method%2C%20long%20deprecated,longer%20available%20in%20Python%203.) with Python 3, and you should now use the `in` operator instead. There's also a `python-modernize` tool that can do this for you – I love such tools, remember the nice sass-migrator [from the other day](/posts/2023-02-08-fixing-my-blog)? – but I think I'll just do this change myself. Now, next thing:
 
 ```
 $ python3 build.py
@@ -83,4 +83,4 @@ Yeah! This opens up my single-page app, if we want to call it that, in Safari �
 
 Next thing will be to get this thing deployed here on skagedal.tech!  
 
-_[Continue to the next part](/2023/02/13/deploying-normal-score-converter.html)_
+_[Continue to the next part](/posts/2023-02-13-deploying-normal-score-converter)_

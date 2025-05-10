@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 27: Updating dependencies"
 ---
 
-Welcome to the twenty-seventh part of the "Writing a Habit Tracker" series, which started [here](/2023/01/01/writing-a-habit-tracker.html).
+Welcome to the twenty-seventh part of the "Writing a Habit Tracker" series, which started [here](/posts/2023-01-01-writing-a-habit-tracker).
 
 I got a first external contribution to `hahabit`! A nice little [pull request](https://github.com/skagedal/hahabit/pull/1) from a friendly Github account called Dependabot, updating the version of Spring Boot from 3.0.1 to 3.0.2. Thank you, little friend! 
 
@@ -18,7 +18,7 @@ There are currently two workaround things in `build.gradle`. One has been there 
 
 I think I noted before that I got some issues when this was not included. But I don't remember what it was, and don't seem to get any issues now when removing. So. Maybe fixed? Or maybe I no longer have the relevant code. I'll remove it. I filed a [small issue](https://github.com/spring-guides/gs-securing-web/issues/72) against that tutorial to include a reference.
 
- Another thing was mentioned in [part twenty-one](/2023/01/21/habit-tracker-building-a-jar.html), I had to explicitly add a dependency on some findbugs annotations:
+ Another thing was mentioned in [part twenty-one](/posts/2023-01-21-habit-tracker-building-a-jar), I had to explicitly add a dependency on some findbugs annotations:
 
 ```
     // Because of https://github.com/spring-projects/spring-framework/issues/25095
@@ -143,8 +143,8 @@ Can I even remove the Spring dependency management plugin altogether? No, I can'
 
 I'll leave it at that. Enough of unsorted dependency management ramblings for today.  
 
-_[Continue reading part twenty-eight.](/2023/01/28/habit-tracker-spring-dependency-management-plugin.html)_
+_[Continue reading part twenty-eight.](/posts/2023-01-28-habit-tracker-spring-dependency-management-plugin)_
 
 ### Notes
 
-[^1]: Yes, I can! Read the [next part](/2023/01/28/habit-tracker-spring-dependency-management-plugin.html) for a continued investigation.
+[^1]: Yes, I can! Read the [next part](/posts/2023-01-28-habit-tracker-spring-dependency-management-plugin) for a continued investigation.

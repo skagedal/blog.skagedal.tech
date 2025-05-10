@@ -7,7 +7,7 @@ People have a lot of opinions about unit testing and throw around things like "t
 
 A great talk on this subject is [TDD, Where Did It All Go Wrong](https://www.youtube.com/watch?v=EZ05e7EMOLM) by Ian Cooper. Go watch it, it's quite inspiring. 
 
-This also means that I think tests should test as realistic a scenario as possible. This is often contrasted against tests being quick and stable. I do agree that tests should run quickly, but I think there's a good balance to be found. Testcontainers – especially when [set up for reuse](/2023/01/03/habit-tracker-part-three-making-it-run.html) – is a great way to get a realistic environment for your tests, without paying too big of a price in terms of time.
+This also means that I think tests should test as realistic a scenario as possible. This is often contrasted against tests being quick and stable. I do agree that tests should run quickly, but I think there's a good balance to be found. Testcontainers – especially when [set up for reuse](/posts/2023-01-03-habit-tracker-part-three-making-it-run) – is a great way to get a realistic environment for your tests, without paying too big of a price in terms of time.
 
 Spring Boot comes with a set of tools for testing various slices of the app. I am not against that at all, it's awesome to have different tools in the box and I'm looking forward to learn more about it. But to begin with, I'm going to start with some tests that test the whole Spring Boot app, spun up as a real HTTP-listening service.
 
@@ -25,7 +25,7 @@ public class WebTests {
 
 `WebEnvironment.RANDOM_PORT` triggers the mode where it starts up a real server and listens to a port.  
 
-But that test fails to start up, because it can't load the Application Context. We need to set up the dynamic property sources to hook up the Testcontainers database, just like we did back in [part three](/2023/01/03/habit-tracker-part-three-making-it-run.html):
+But that test fails to start up, because it can't load the Application Context. We need to set up the dynamic property sources to hook up the Testcontainers database, just like we did back in [part three](/posts/2023-01-03-habit-tracker-part-three-making-it-run):
 
 ```java
 public class WebTests {
@@ -141,4 +141,4 @@ But did we at least reach our stated goal of testing the behavior, not the imple
 
 But we had fun! And we prepared a bit for the next things to come! 
 
-_[Continue reading part thirty-three.](/2023/02/18/html-unit-testing.html)_
+_[Continue reading part thirty-three.](/posts/2023-02-18-html-unit-testing)_

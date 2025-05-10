@@ -2,12 +2,12 @@
 layout: post
 title:  "Writing a habit tracker, part 22: Uploading that JAR"
 ---
-In the [previous post](/2023/01/21/habit-tracker-building-a-jar.html), we built a JAR file! It was big! Now we want to upload it to the server. 
+In the [previous post](/posts/2023-01-21-habit-tracker-building-a-jar), we built a JAR file! It was big! Now we want to upload it to the server. 
 
 It would be really cool if our app was continuously deployed on each push to Github. But,
  – patience you must have, young padawan. First, how to deploy manually, you must learn. Later, automate it you can. (Is that what Yoda would say? Or would it be like "First, learn how to deploy manually, you must"?)
 
-I'd like to upload this to the Unix account[^1] that we created for this purpose in [part one](/2023/01/01/writing-a-habit-tracker.html), the one that force me to decide on a name for this project, and then I chose the name `hahabit`. Good times. 
+I'd like to upload this to the Unix account[^1] that we created for this purpose in [part one](/posts/2023-01-01-writing-a-habit-tracker), the one that force me to decide on a name for this project, and then I chose the name `hahabit`. Good times. 
 
 By the way – I mentioned in that part about how silly it is that you have to go through a bunch of questions like "room number" to create a Unix account. I just found in my `skagedal.tech` setup notes that there is, of course, a better way:
 
@@ -50,7 +50,7 @@ scp -i ~/.ssh/hahabit-key build/libs/hahabit-0.0.1-SNAPSHOT.jar hahabit@skagedal
 
 Very good! Bits are flying through the wires! 
 
-_[Continue reading part twenty-three.](/2023/01/23/habit-tracker-running-it-on-the-server.html)_
+_[Continue reading part twenty-three.](/posts/2023-01-23-habit-tracker-running-it-on-the-server)_
 
 
 ### Notes

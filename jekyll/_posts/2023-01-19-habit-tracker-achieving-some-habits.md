@@ -2,7 +2,7 @@
 layout: post
 title:  "Writing a habit tracker, part 19: A button to achieve a habit"
 ---
-In [part eighteen](/2023/01/18/habit-tracker-getting-the-users-date.html), we figured out what date it is, to know what daily achievements to show and act on. Now, finally, let's add the actual button you can push to mark a habit as having been achieved.
+In [part eighteen](/posts/2023-01-18-habit-tracker-getting-the-users-date), we figured out what date it is, to know what daily achievements to show and act on. Now, finally, let's add the actual button you can push to mark a habit as having been achieved.
 
 In the `home.html` template, we build our habits list like this instead:
 
@@ -66,7 +66,7 @@ Oh well. Still kinda nice I guess, and the handler works just the same, just hav
     }
 ```
 
-I redirect back to the home screen rather than keeping the URL as `/achieve` because that looks a bit weird – and also, if the user tries to reload, they will get an annoying "do you want to sent form input again?" popup. This is called the [Post/Redirect/Get](https://en.wikipedia.org/wiki/Post/Redirect/Get) pattern, and I should have also used it in [part fifteen](/2023/01/15/habit-tracker-add-new-habit.html) when we saved new habits. 
+I redirect back to the home screen rather than keeping the URL as `/achieve` because that looks a bit weird – and also, if the user tries to reload, they will get an annoying "do you want to sent form input again?" popup. This is called the [Post/Redirect/Get](https://en.wikipedia.org/wiki/Post/Redirect/Get) pattern, and I should have also used it in [part fifteen](/posts/2023-01-15-habit-tracker-add-new-habit) when we saved new habits. 
 
 The way I send this redirect is by returning `View` directly, which happens to be a `RedirectView`. Simple and clean, I feel? The well-known Java site Baeldung, however, [thinks differently](https://www.baeldung.com/spring-redirect-and-forward):
 
@@ -94,6 +94,6 @@ But I could of course sort of perhaps identify the feeling that it would be a bi
     }
 ```
 
-Sure, let's do that. I'm fine with that. That also helps if we want to add some query parameters or such to the redirect URL, instead of using that _ghastly_ method that Baeldung also uses here and that I ranted about in [part twelve](/2023/01/12/habit-tracker-making-habits-page-work.html), where you get some kind of Model object as input to the handler and then call setters on that. It's just really, really weird.
+Sure, let's do that. I'm fine with that. That also helps if we want to add some query parameters or such to the redirect URL, instead of using that _ghastly_ method that Baeldung also uses here and that I ranted about in [part twelve](/posts/2023-01-12-habit-tracker-making-habits-page-work), where you get some kind of Model object as input to the handler and then call setters on that. It's just really, really weird.
 
-_[Continue reading part twenty.](/2023/01/20/habit-tracker-storing-the-achievement.html)_
+_[Continue reading part twenty.](/posts/2023-01-20-habit-tracker-storing-the-achievement)_

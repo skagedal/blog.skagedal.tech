@@ -3,7 +3,7 @@ layout: post
 title:  "Creating a random user"
 summary: "In order to start tests from a clean slate, since we can't use the Spring framework's `@Transactional` annotation in full-server tests, I set up a way to create a random user for each test. And ask myself how to inject beans from the test package."
 ---
-[Yesterday](/2023/02/18/html-unit-testing.html), we set up HtmlUnit and managed to log in from the test suite. Next, we want to test the actual functionality: add a habit and track it.
+[Yesterday](/posts/2023-02-18-html-unit-testing), we set up HtmlUnit and managed to log in from the test suite. Next, we want to test the actual functionality: add a habit and track it.
 
 As this would change the state of the database, we need to think a bit about that, so that the tests run independently. 
 
@@ -107,4 +107,4 @@ public class WebTests {
 
 Allright, that's it for today, and coverage remains at 46.0967%, but we've done some useful refactorings for the continued work!
 
-_[Continue reading part thirty-five.](/2023/02/20/more-html-unit.html)_
+_[Continue reading part thirty-five.](/posts/2023-02-20-more-html-unit)_

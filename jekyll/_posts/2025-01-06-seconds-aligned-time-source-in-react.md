@@ -158,4 +158,4 @@ If you have any experience on this topic, or anything else you'd like to comment
 
 ---
 
-[^1]: I have now – see [The backyard ultra timer](/2025/01/21/backyard-ultra.html)
+[^1]: I have now – see [The backyard ultra timer](/posts/2025-01-21-backyard-ultra)

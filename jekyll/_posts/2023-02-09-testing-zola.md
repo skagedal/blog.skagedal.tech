@@ -3,9 +3,9 @@ layout: post
 title:  "Testing Zola"
 ---
 
-It does feel nice to have a clean deploy script again, after [yesterday's fixes](/2023/02/08/fixing-my-blog.html)!
+It does feel nice to have a clean deploy script again, after [yesterday's fixes](/posts/2023-02-08-fixing-my-blog)!
 
-One thing that I wanted to do before in this blog is to have little custom blocks of content. So, for example, in [this post](/2023/01/04/habit-tracker-functionality-and-first-migration.html) I had a little conversation with ChatGPT. I was thinking that it would be really neat if I could wrap that whole ChatGPT response in a little div, and then style it with some CSS to make it look kind of like it does in the ChatGPT user interface.
+One thing that I wanted to do before in this blog is to have little custom blocks of content. So, for example, in [this post](/posts/2023-01-04-habit-tracker-functionality-and-first-migration) I had a little conversation with ChatGPT. I was thinking that it would be really neat if I could wrap that whole ChatGPT response in a little div, and then style it with some CSS to make it look kind of like it does in the ChatGPT user interface.
 
 So, I thought maybe I could mix in a little bit of HTML in my Markdown, like:
 
@@ -55,4 +55,4 @@ The `zola init` really sets up an empty site for me. I'm following the guide and
 
 So now I feel encouraged to continue the experiment. Obviously, I'll have to find a way to move over all of my existing content and not break incoming links. But I'm feeling optimistic!
 
-_[Continue reading about exceprts](/2023/02/10/adding-summaries.html)_
+_[Continue reading about exceprts](/posts/2023-02-10-adding-summaries)_

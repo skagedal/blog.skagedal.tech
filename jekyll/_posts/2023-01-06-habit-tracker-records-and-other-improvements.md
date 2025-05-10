@@ -3,7 +3,7 @@ layout: post
 title:  "Writing a habit tracker, part 6: Records and other repository improvements"
 ---
 
-In the [previous post](/2023/01/05/habit-tracker-repository.html) in my habit tracker series, I wrote:
+In the [previous post](/posts/2023-01-05-habit-tracker-repository) in my habit tracker series, I wrote:
 
 > I'd really like the `User` class to be a `record` – the new thing from Java 14, an immutable data type with accessors and default implementation of things like `hashCode` and `equals`. But I doubt Spring Data supports that. Let's try it later perhaps. 
 
@@ -100,4 +100,4 @@ I also changed my `users` schema similarly. Normally, this would of course have 
 
 Let's continue tomorrow with the `completions` table, and I think we will call it `achievements` instead.
 
-_[Continue reading part seven.](/2023/01/07/habit-tracker-achievements.html)_
+_[Continue reading part seven.](/posts/2023-01-07-habit-tracker-achievements)_

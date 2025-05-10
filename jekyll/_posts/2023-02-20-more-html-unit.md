@@ -3,7 +3,7 @@ layout: post
 title:  "More HTML unit"
 summary: "I continue covering the functionality of the Habit Tracker with tests using the HtmlUnit framework, deal with missing support of the ECMAScript Internationalization API and get my test coverage up to 90%."
 ---
-We now have a nice testing setup for our HTML-serving Spring Boot App, using [HtmlUnit](/2023/02/18/html-unit-testing.html) and using a [randomly created user](/2023/02/19/creating-random-test-users.html). 
+We now have a nice testing setup for our HTML-serving Spring Boot App, using [HtmlUnit](/posts/2023-02-18-html-unit-testing) and using a [randomly created user](/posts/2023-02-19-creating-random-test-users). 
 
 Now I'm going to try to just flesh out the whole flow so far as tests. Every here and there, I need to add little things to the production code and HTML templates to make the tests easier to write, such as adding id:s to elements. That's fine. More than fine, I think.
 
@@ -86,7 +86,7 @@ java.time.zone.ZoneRulesException: Unknown time-zone ID: undefined
        <lots and lots of stack trace>
 ```
 
-That rings a bell. Frequent readers of the "Writing a Habit Tracker" series will remember that in [part eighteen: Getting the user's date](/2023/01/18/habit-tracker-getting-the-users-date.html), we found that the best way to get the user's time zone was through JavaScript. I put a little snippet like this in the `home.html` file:
+That rings a bell. Frequent readers of the "Writing a Habit Tracker" series will remember that in [part eighteen: Getting the user's date](/posts/2023-01-18-habit-tracker-getting-the-users-date), we found that the best way to get the user's time zone was through JavaScript. I put a little snippet like this in the `home.html` file:
 
 ```javascript
 document.cookie = 'zoneId=' + Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -145,4 +145,4 @@ Coverage: 90.7063%
 
 That's pretty good!  
 
-_[Continue reading part thirty-six.](/2023/02/21/adding-apis.html)_
+_[Continue reading part thirty-six.](/posts/2023-02-21-adding-apis)_
