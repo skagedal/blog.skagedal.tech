@@ -7,7 +7,6 @@ import liqp.antlr.CharStreamWithLocation;
 import liqp.antlr.NameResolver;
 import liqp.filters.Filter;
 import liqp.parser.Flavor;
-import org.jetbrains.annotations.NotNull;
 import org.jspecify.annotations.Nullable;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -99,10 +98,6 @@ public class JekyllSite {
     public JekyllSite(final Path jekyllRoot, final Path renderedPostsRoot) {
         this.jekyllRoot = jekyllRoot;
         this.renderedPostsRoot = renderedPostsRoot;
-    }
-
-    public Path indexPath() {
-        return jekyllRoot.resolve("index.html");
     }
 
     public Post readPost(final Slug slug) {

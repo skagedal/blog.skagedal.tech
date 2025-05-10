@@ -54,15 +54,15 @@ public class App {
 
     public Javalin runServer() {
         final var database = new Database(appConfig.databaseConfig());
-        final var jekyllRoot = appConfig.jekyllRoot();
+        final var contentRoot = appConfig.contentRoot();
         final var port = appConfig.port();
-        final var jekyllSite = new JekyllSite(jekyllRoot, appConfig.renderedPosts());
+        final var jekyllSite = new JekyllSite(contentRoot, appConfig.renderedPosts());
         final var indexPageHandler = new IndexPageHandler(SITE, jekyllSite);
         final var postPageHandler = new PostPageHandler(SITE, jekyllSite);
 
         database.runMigrations();
 
-        final var javalin = Javalin.create(javalinConfig(jekyllRoot))
+        final var javalin = Javalin.create(javalinConfig(contentRoot))
             .before(new BeforeRequestHandler())
             .get("/", indexPageHandler)
             .get("/posts/{slug}", postPageHandler)
@@ -72,17 +72,17 @@ public class App {
         return javalin;
     }
 
-    private static Consumer<JavalinConfig> javalinConfig(final Path jekyllRoot) {
+    private static Consumer<JavalinConfig> javalinConfig(final Path contentRoot) {
         return config -> {
             config.showJavalinBanner = false;
             config.staticFiles.add(staticConfig -> {;
                 staticConfig.hostedPath = "/images";
-                staticConfig.directory = jekyllRoot.resolve("images").toString();
+                staticConfig.directory = contentRoot.resolve("images").toString();
                 staticConfig.location = Location.EXTERNAL;
             });
             config.staticFiles.add(staticConfig -> {
                 staticConfig.hostedPath = "/css";
-                staticConfig.directory = jekyllRoot.resolve("_site").resolve("css").toString();
+                staticConfig.directory = contentRoot.resolve("css").toString();
                 staticConfig.location = Location.EXTERNAL;
             });
 

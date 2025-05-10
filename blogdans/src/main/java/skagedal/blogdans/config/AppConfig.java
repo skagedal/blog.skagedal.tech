@@ -5,7 +5,7 @@ import org.jspecify.annotations.Nullable;
 import java.nio.file.Path;
 
 public record AppConfig(
-    Path jekyllRoot,
+    Path contentRoot,
     Path renderedPosts,
     int port,
     DatabaseConfig databaseConfig
@@ -23,7 +23,7 @@ public record AppConfig(
 
     private static AppConfig developmentConfig() {
         return builder()
-            .jekyllRoot(Path.of("../jekyll"))
+            .jekyllRoot(Path.of("../content"))
             .renderedPosts(Path.of("../rendered-posts/_site"))
             .port(8081)
             .databaseConfig(DatabaseConfig.developmentConfig())

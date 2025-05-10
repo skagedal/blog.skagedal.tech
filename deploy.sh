@@ -8,41 +8,13 @@ else
     RSYNC_ARG=""
 fi
 
-cd jekyll
+echo "💁 Generating HTML using Jekyll"
+echo "💁 Installing dependencies..."
 
-echo "💁 Installing Jekyll dependencies..."
+cd rendered-posts
 bundle install $BUNDLE_INSTALL_ARG || exit 1
 
-echo "💁 Generating site with Jekyll..."
-bundle exec jekyll build || exit 1
-
-echo "💁 Uploading..."
-rsync \
-    --archive \
-    --compress \
-    --delete \
-    --info=progress2 \
-    $RSYNC_ARG \
-    _site/ \
-    simon@skagedal.tech:blog
-
-echo "💁 Uploading to blogdans..."
-rsync \
-    --archive \
-    --compress \
-    --delete \
-    --info=progress2 \
-    $RSYNC_ARG \
-    ./ \
-    --rsh="ssh -i ${HOME}/.ssh/blogdans-key" \
-    blogdans@skagedal.tech:content
-
-echo "💁 Raw version: installing dependencies..."
-
-cd .. && cd rendered-posts
-bundle install $BUNDLE_INSTALL_ARG || exit 1
-
-echo "💁 Raw version: generating site..."
+echo "💁 Generating site..."
 bundle exec jekyll build || exit 1
 
 echo "💁 Uploading to blogdans..."
@@ -55,6 +27,5 @@ rsync \
     _site/ \
     --rsh="ssh -i ${HOME}/.ssh/blogdans-key" \
     blogdans@skagedal.tech:rawposts
-
 
 echo "💁 Done!"
