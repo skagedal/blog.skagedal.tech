@@ -5,7 +5,7 @@
 mkdir -p ~/.ssh/
 echo "$SSH_KEY" > ~/.ssh/blogdans.key
 echo "$SSH_KNOWN_HOSTS" > ~/.ssh/known_hosts
-cp ./ci/ssh-config ~/.ssh/config
+cp ./ci/ssh.config ~/.ssh/config
 
 chmod 600 ~/.ssh/blogdans.key ~/.ssh/known_hosts ~/.ssh/config
 

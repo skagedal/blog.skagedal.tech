@@ -25,24 +25,55 @@
           }
         },
         {
+          id: 'pnpm',
+          name: 'Set up pnpm',
+          uses: 'pnpm/action-setup@v4',
+        },
+        {
+          id: 'node',
+          name: 'Set up Node.js',
+          uses: 'actions/setup-node@v4',
+          with: {
+            node-version-file: 'comments/.nvmrc',
+            cache: 'pnpm'
+          }
+        },
+        {
           id: 'ssh',
           name: 'Set up SSH',
           env: {
             SSH_KEY: '${{ secrets.SSH_KEY }}',
             SSH_KNOWN_HOSTS: '${{ secrets.SSH_KNOWN_HOSTS }}'
           },
-          run: './ci/setup-ssh.sh'
+          run: './ci/setup-ssh'
         },
         {
-          id: 'build',
+          id: 'build-maven',
           name: 'Build with Maven',
           working-directory: 'blogdans',
           run: 'mvn -B package assembly:single --file pom.xml'
         },
         {
+          id: 'install-npm',
+          name: 'Install Node packages',
+          working-directory: 'comments',
+          run: 'pnpm install'
+        },
+        {
+          id: 'build-node',
+          name: 'Build Node package',
+          working-directory: 'comments',
+          run: 'pnpm build'
+        },
+        {
+          id: 'package-nextjs-app',
+          name: 'Package Next.js files',
+          run: './ci/package-nextjs-app'
+        },
+        {
           id: 'upload',
           name: 'Upload files',
-          run: './ci/upload-blogdans-files.sh'
+          run: './ci/upload-blogdans-files'
         },
         {
           id: 'restart',
