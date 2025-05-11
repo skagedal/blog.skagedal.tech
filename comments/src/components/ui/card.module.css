@@ -1,0 +1,39 @@
+.card {
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  border-width: 1px;
+  box-shadow: 0 0 #0000, 0 0 #0000, 0 1px 2px 0 rgb(0, 0, 0, 0.05);
+}
+
+.cardheader {
+  display: flex;
+  flex-direction: column;
+  /* these two are interesting... comes from space-y-1.5 */
+  margin-top: calc(0.375rem * calc(1 - 0));
+  margin-bottom: calc(0.375rem * 0);
+  padding: 1.5rem;
+}
+
+.cardtitle {
+  font-size: 1.5rem;
+  line-height: 1;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.carddescription {
+  font-size: 0.875rem;
+  line-height: 1.25rem;
+}
+
+.cardcontent {
+  padding: 1.5rem;
+  padding-top: 0px;
+}
+
+.cardfooter {
+  display: flex;
+  align-items: center;
+  padding: 1.5rem;
+  padding-top: 0px;
+}
