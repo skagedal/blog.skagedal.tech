@@ -38,6 +38,7 @@
           uses: 'actions/setup-node@v4',
           with: {
             node-version-file: 'comments/.nvmrc',
+            cache-dependency-path: 'comments/pnpm-lock.yaml',
             cache: 'pnpm'
           }
         },
