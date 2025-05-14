@@ -1,3 +1,5 @@
+import { ReactNode } from "react";
+
 export function ExampleFooter() {
   return (
     <footer className="site-footer">
@@ -61,6 +63,72 @@ export function ExampleFooter() {
   );
 }
 
+export function ExampleBlogPostContent() {
+  return (
+    <>
+      <p>
+        Following{" "}
+        <a href="/posts/2025-03-30-week-13-links-and-things">
+          Week 13, 2025: Links and things
+        </a>
+        , here comes Week 14, 25: Links and things! Although it is already the
+        monday of Week 15.
+      </p>
+      <p>Let’s kick off with some AI stuff:</p>
+      <ul>
+        <li>
+          <a href="https://ai-2027.com/">AI 2027</a>
+          is a nauseating read: “We predict that the impact of superhuman AI
+          over the next decade will be enormous, exceeding that of the
+          Industrial Revolution.”{" "}
+          <a href="https://www.astralcodexten.com/p/introducing-ai-2027">
+            Astral Codex Ten: Introducing AI 2027
+          </a>
+          introduces the project here, and I hope to also listen to – or maybe
+          even watch – this{" "}
+          <a href="https://youtu.be/htOvH12T7mU">podcast episode</a>. Also see{" "}
+          <a href="https://haggstrom.blogspot.com/2025/04/recommending-ai-2027-report-by.html">
+            this post by Olle Häggström
+          </a>
+          .
+        </li>
+      </ul>
+      <p>
+        Finally, I bought a very cool domain name:{" "}
+        <a href="https://ournewinsectoverlords.com">
+          ournewinsectoverlords.com
+        </a>
+        . I’m thinking about what to do with it. Possibly just moving this blog
+        there.
+      </p>
+    </>
+  );
+}
+
+export interface BlogPostProps {
+  title: string;
+  date: string; // TODO - that nice new date type?
+  content: ReactNode | ReactNode[];
+}
+
+export function BlogPost({ title, date, content }: BlogPostProps) {
+  return (
+    <div className="page-content">
+      <div className="wrapper">
+        <article className="post">
+          <header className="post-header">
+            <h1 className="post-title">Week 14, 2025: Links and things</h1>
+            <p className="post-meta">
+              <time>2025-04-07</time>
+            </p>
+          </header>
+          <div className="post-content">{content}</div>
+        </article>
+      </div>
+    </div>
+  );
+}
+
 export function ExampleBlogPost() {
   return (
     <div className="page-content">
@@ -73,42 +141,7 @@ export function ExampleBlogPost() {
             </p>
           </header>
           <div className="post-content">
-            <p>
-              Following{" "}
-              <a href="/posts/2025-03-30-week-13-links-and-things">
-                Week 13, 2025: Links and things
-              </a>
-              , here comes Week 14, 25: Links and things! Although it is already
-              the monday of Week 15.
-            </p>
-            <p>Let’s kick off with some AI stuff:</p>
-            <ul>
-              <li>
-                <a href="https://ai-2027.com/">AI 2027</a>
-                is a nauseating read: “We predict that the impact of superhuman
-                AI over the next decade will be enormous, exceeding that of the
-                Industrial Revolution.”{" "}
-                <a href="https://www.astralcodexten.com/p/introducing-ai-2027">
-                  Astral Codex Ten: Introducing AI 2027
-                </a>
-                introduces the project here, and I hope to also listen to – or
-                maybe even watch – this{" "}
-                <a href="https://youtu.be/htOvH12T7mU">podcast episode</a>. Also
-                see{" "}
-                <a href="https://haggstrom.blogspot.com/2025/04/recommending-ai-2027-report-by.html">
-                  this post by Olle Häggström
-                </a>
-                .
-              </li>
-            </ul>
-            <p>
-              Finally, I bought a very cool domain name:{" "}
-              <a href="https://ournewinsectoverlords.com">
-                ournewinsectoverlords.com
-              </a>
-              . I’m thinking about what to do with it. Possibly just moving this
-              blog there.
-            </p>
+            <ExampleBlogPostContent />
           </div>
         </article>
       </div>
