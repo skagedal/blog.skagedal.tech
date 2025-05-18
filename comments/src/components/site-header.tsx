@@ -1,5 +1,4 @@
-import { LucideHamburger, LucideMenu } from "lucide-react";
-import Link from "next/link";
+import { LucideMenu } from "lucide-react";
 
 export interface PageLinkProps {
   title: string;
@@ -14,7 +13,11 @@ function PageLink({ title, href }: PageLinkProps) {
   );
 }
 
-export function SiteHeader() {
+export function SiteHeader({
+  includeAbout = false,
+}: {
+  includeAbout?: boolean;
+}) {
   return (
     <header className="site-header">
       <div className="wrapper">
@@ -25,7 +28,7 @@ export function SiteHeader() {
           <a href="#" className="menu-icon">
             <LucideMenu />
           </a>
-          {/* <PageLink title="About" href="/about/" /> */}
+          {includeAbout && <PageLink title="About" href="/about/" />}
         </nav>
       </div>
     </header>
