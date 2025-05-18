@@ -1,4 +1,4 @@
 #!/bin/sh
 
 cd comments || exit 1
-zip ../nextjs-comments.zip -r .next package.json package-lock.json public next.config.js
+zip ../nextjs-comments.zip -r .next # package.json pnpm-lock.yaml public next.config.ts
