@@ -2,5 +2,11 @@
 
 scp blogdans/target/blogdans-1.0-SNAPSHOT-jar-with-dependencies.jar blogdans:
 scp blogdans/server-scripts/*.sh blogdans:
-scp nextjs-comments.zip blogdans:
+
+
+current_sha=$(git rev-parse HEAD)
+zip="nextjs-$current_sha.zip"
+scp "$zip" blogdans:
+ssh blogdans "ln -sfn $zip nextjs-latest.zip"
+
 scp run-nextjs.sh blogdans:

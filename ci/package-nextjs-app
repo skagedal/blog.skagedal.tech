@@ -1,4 +1,10 @@
 #!/bin/sh
 
+set -e 
+
 cd comments || exit 1
-zip ../nextjs-comments.zip -r .next # package.json pnpm-lock.yaml public next.config.ts
+current_sha=$(git rev-parse HEAD)
+dir="../nextjs-$current_sha"
+zip="../nextjs-$current_sha.zip"
+pnpm --filter . --prod deploy "$dir" 
+zip "$zip" -r $dir  #  .next # package.json pnpm-lock.yaml public next.config.ts
