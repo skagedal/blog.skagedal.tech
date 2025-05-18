@@ -7,4 +7,5 @@ current_sha=$(git rev-parse HEAD)
 dir="../nextjs-$current_sha"
 zip="../nextjs-$current_sha.zip"
 pnpm --filter . --prod deploy "$dir" 
+cp -r .next next.config.ts "$dir"
 zip "$zip" -r $dir  #  .next # package.json pnpm-lock.yaml public next.config.ts
