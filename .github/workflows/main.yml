@@ -1,10 +1,9 @@
 {
   name: 'Main CI job',
   on: {
-# Disabled
-#    push: {
-#      branches: [ "main" ]
-#    }
+    push: {
+      branches: [ "main" ]
+    }
   },
   jobs: {
     build: {
